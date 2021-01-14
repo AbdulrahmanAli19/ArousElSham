@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.arouselsham.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_about"
+            app:destination="@id/navigation_about" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_search"
+            app:destination="@id/navigation_search" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.example.arouselsham.ui.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/about_fragment"/>
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.arouselsham.ui.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/search_fragment"/>
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.arouselsham.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/settings_fragment"/>
+
+    <fragment
+        android:id="@+id/navigation_offers"
+        android:name="com.example.arouselsham.ui.offers.OffersFragment"
+        android:label="@string/title_offers"
+        tools:layout="@layout/fragment_offers" />
+
+    <fragment
+        android:id="@+id/navigation_orders"
+        android:name="com.example.arouselsham.ui.orders.OrdersFragment"
+        android:label="@string/title_orders"
+        tools:layout="@layout/fragment_offers" />
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.example.arouselsham.ui.user.UserFragment"
+        android:label="@string/title_user"
+        tools:layout="@layout/fragment_offers" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.arouselsham.ui.auth.AuthFragment"
+        android:label="auth_fragment"
+        tools:layout="@layout/auth_fragment" />
+</navigation>

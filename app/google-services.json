@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "412400397061",
+    "project_id": "arous-el-sham",
+    "storage_bucket": "arous-el-sham.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412400397061:android:74c986bc0444d9a9efa56c",
+        "android_client_info": {
+          "package_name": "com.example.arouselsham"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412400397061-0aj7r8sr6er19so0rng2nq84q4ql5glo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.arouselsham",
+            "certificate_hash": "fea29c7e71ef76bb06c97973c664e806112179cd"
+          }
+        },
+        {
+          "client_id": "412400397061-njp3747qgt8mbpfp122t701hnrc2hddr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBixnIA7PtTmeVKe1AtlHzu-FIp45ESqJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412400397061-njp3747qgt8mbpfp122t701hnrc2hddr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
