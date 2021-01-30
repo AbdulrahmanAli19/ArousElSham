@@ -7,7 +7,6 @@ public class CustomerInfoModel {
     private String phoneNumber ;
     private String birthDay;
     //TODO: get the gender from Strings.xml
-    private final String[] gender = {"Male", "Female"};
 
     public String getFirstName() {
         return firstName;
@@ -49,7 +48,4 @@ public class CustomerInfoModel {
         this.birthDay = birthDay;
     }
 
-    public String[] getGender() {
-        return gender;
-    }
 }

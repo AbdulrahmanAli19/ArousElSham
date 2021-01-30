@@ -60,5 +60,5 @@
         android:id="@+id/authFragment"
         android:name="com.example.arouselsham.ui.auth.AuthFragment"
         android:label="auth_fragment"
-        tools:layout="@layout/auth_fragment" />
+        tools:layout="@layout/auth_layout" />
 </navigation>
