@@ -27,6 +27,7 @@
         android:label="@string/about"
         tools:layout="@layout/about_fragment"/>
 
+
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.arouselsham.ui.search.SearchFragment"

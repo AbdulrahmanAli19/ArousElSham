@@ -11,10 +11,12 @@ public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
+
     public HomeViewModel() {
         FirebaseUser user = auth.getCurrentUser();
         mText = new MutableLiveData<>();
-        mText.setValue("Good Evening! "+user.getDisplayName());
+        if (user != null)
+            mText.setValue("Good Evening! " + user.getDisplayName());
     }
 
     public LiveData<String> getText() {

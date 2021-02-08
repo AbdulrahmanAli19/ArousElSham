@@ -20,4 +20,7 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_phone">Sign in with phone</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_a_new_meal">Add A New Meal</string>
 </resources>

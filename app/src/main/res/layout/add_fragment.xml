@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <Spinner
+        android:id="@+id/add_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_name_ar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Arabic Name"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_name_en"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="English Name"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Price"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_sori_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Sori Price"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_french_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="French priceByOne"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_saro5_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Saro5 priceByOne"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_kg_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Kg"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_half_kg_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Half Kg"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_quarter_kg_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Quarter Kg"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_tomn_kg_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Tomn Kg"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_medium_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Medium size"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_big_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Big size"
+                android:inputType="number"
+                android:visibility="gone" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

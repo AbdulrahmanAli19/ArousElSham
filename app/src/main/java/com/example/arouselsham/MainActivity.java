@@ -223,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
             IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                checkUserFromDatabase();
             } else {
                 Snackbar.make(findViewById(android.R.id.content),
                         "ERROR: " + idpResponse.getError().getMessage(), Snackbar.LENGTH_SHORT)
@@ -238,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().show();
         navView.setVisibility(View.VISIBLE);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user)
+                R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user, R.id.navigation_add)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setupActionBarWithNavController(this, navController, appBarConfiguration);
