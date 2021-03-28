@@ -31,13 +31,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/imd_category"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:padding="16dp"
+                        tools:src="@drawable/burger" />
+                    <ProgressBar
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/menu_progress_par"
+                        android:layout_width="30dp"
+                        android:layout_height="70dp"/>
+                </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/imd_category"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:padding="16dp"
-                    tools:src="@drawable/burger" />
             </androidx.cardview.widget.CardView>
 
             <TextView

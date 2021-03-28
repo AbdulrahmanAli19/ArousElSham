@@ -20,14 +20,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.ui.add.AddDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
+    private List<String> meals, images;
 
     @BindView(R.id.txt_good_evening)
     TextView goodEveningTxt;
@@ -49,11 +57,23 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        CategoriesAdapter adapter = new CategoriesAdapter(getActivity());
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        categoryRecycler.setLayoutManager(layoutManager);
-        categoryRecycler.setAdapter(adapter);
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document("MenuMainTags")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                        meals = (List<String>) task.getResult().get("enTags");
+                        images = (List<String>) task.getResult().get("images");
+                        CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), meals, images);
+                        LinearLayoutManager layoutManager
+                                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                        categoryRecycler.setLayoutManager(layoutManager);
+                        categoryRecycler.setAdapter(adapter);
+                    }
+                });
+
 
         return root;
     }
