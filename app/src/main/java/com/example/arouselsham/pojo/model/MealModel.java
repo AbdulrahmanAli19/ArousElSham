@@ -1,16 +1,17 @@
 package com.example.arouselsham.pojo.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MealModel {
 
-    private ArrayList<String> tags;
+    private List<Tags> tags;
     private String arName;
     private String enName;
     private PriceByBreadTypes priceByBreadTypes;
     private PriceByOne priceByOne;
     private PriceBySize priceBySize;
     private PriceByKilogram priceByKilogram;
+    private List<Topping> toppings;
 
 
     public MealModel() {
@@ -19,71 +20,90 @@ public class MealModel {
 
     /**
      * Sandwich constructor
-     * */
-    public MealModel(ArrayList<String> tags, String arName, String enName,
-                     PriceByBreadTypes priceByBreadTypes) {
+     */
+    public MealModel(List<Tags> tags, String arName, String enName,
+                     PriceByBreadTypes priceByBreadTypes, List<Topping> toppings) {
         this.tags = tags;
         this.arName = arName;
         this.enName = enName;
         this.priceByBreadTypes = priceByBreadTypes;
+        this.toppings = toppings;
     }
 
     /**
      * constructor for the things that can be seal by peace
-     * */
+     */
 
-    public MealModel(ArrayList<String> tags, String arName, String enName, PriceByOne priceByOne) {
+    public MealModel(List<Tags> tags, String arName, String enName, PriceByOne priceByOne, List<Topping> toppings) {
         this.tags = tags;
         this.arName = arName;
         this.enName = enName;
         this.priceByOne = priceByOne;
+        this.toppings = toppings;
     }
 
     /**
      * constructor for the meals that could be sold by size
-     * */
+     */
 
-    public MealModel(ArrayList<String> tags, String arName, String enName, PriceBySize priceBySize) {
+    public MealModel(List<Tags> tags, String arName, String enName, PriceBySize priceBySize, List<Topping> toppings) {
         this.tags = tags;
         this.arName = arName;
         this.enName = enName;
         this.priceBySize = priceBySize;
+        this.toppings = toppings;
     }
 
     /**
      * constructor for the meals that could be sold by KiloGram
-     * */
+     */
 
-    public MealModel(ArrayList<String> tags, String arName, String enName, PriceByKilogram priceByKilogram) {
+    public MealModel(List<Tags> tags, String arName, String enName, PriceByKilogram priceByKilogram, List<Topping> toppings) {
         this.tags = tags;
         this.arName = arName;
         this.enName = enName;
         this.priceByKilogram = priceByKilogram;
+        this.toppings = toppings;
     }
 
-    public class Topping {
-        private String toppingName;
-        private double toppingNumber;
+    public static class Topping {
+        private String toppingArName;
+        private String toppingEnName;
+        private Double toppingPrice;
 
-        public String getToppingName() {
-            return toppingName;
+        public Topping(String toppingArName, String toppingEnName, Double toppingPrice) {
+            this.toppingArName = toppingArName;
+            this.toppingEnName = toppingEnName;
+            this.toppingPrice = toppingPrice;
         }
 
-        public void setToppingName(String toppingName) {
-            this.toppingName = toppingName;
+        public String getToppingArName() {
+            return toppingArName;
         }
 
-        public double getToppingNumber() {
-            return toppingNumber;
+        public void setToppingArName(String toppingArName) {
+            this.toppingArName = toppingArName;
         }
 
-        public void setToppingNumber(double toppingNumber) {
-            this.toppingNumber = toppingNumber;
+        public String getToppingEnName() {
+            return toppingEnName;
+        }
+
+        public void setToppingEnName(String toppingEnName) {
+            this.toppingEnName = toppingEnName;
+        }
+
+        public Double getToppingPrice() {
+            return toppingPrice;
+        }
+
+        public void setToppingPrice(Double toppingPrice) {
+            this.toppingPrice = toppingPrice;
         }
     }
 
     public static class PriceByBreadTypes {
-        private Topping topping;
+
         private double syrianPrice;
         private double frenchPrice;
         private double saro5Price;
@@ -118,17 +138,9 @@ public class MealModel {
             this.saro5Price = saro5Price;
         }
 
-        public Topping getTopping() {
-            return topping;
-        }
-
-        public void setTopping(Topping topping) {
-            this.topping = topping;
-        }
     }
 
     public static class PriceByOne {
-        private Topping topping;
         private double price;
 
         public PriceByOne(double price) {
@@ -143,13 +155,7 @@ public class MealModel {
             this.price = price;
         }
 
-        public Topping getTopping() {
-            return topping;
-        }
 
-        public void setTopping(Topping topping) {
-            this.topping = topping;
-        }
     }
 
     public static class PriceBySize {
@@ -178,54 +184,76 @@ public class MealModel {
         }
     }
 
-    public static class PriceByKilogram {
-        private double kilograms;
-        private double halfKilograms;
-        private double quarterKilograms;
-        private double tomnKilograms;
+    public static class Tags {
+        private String enName;
+        private String arName;
 
-        public PriceByKilogram(double kilograms, double halfKilograms, double quarterKilograms, double tomnKilograms) {
-            this.kilograms = kilograms;
-            this.halfKilograms = halfKilograms;
-            this.quarterKilograms = quarterKilograms;
-            this.tomnKilograms = tomnKilograms;
+        public Tags(String enName, String arName) {
+            this.enName = enName;
+            this.arName = arName;
         }
 
-        public double getKilograms() {
-            return kilograms;
+        public String getEnName() {
+            return enName;
         }
 
-        public double getHalfKilograms() {
-            return halfKilograms;
+        public void setEnName(String enName) {
+            this.enName = enName;
         }
 
-        public double getQuarterKilograms() {
-            return quarterKilograms;
+        public String getArName() {
+            return arName;
         }
 
-        public double getTomnKilograms() {
-            return tomnKilograms;
-        }
-
-        public void setKilograms(double kilograms) {
-            this.kilograms = kilograms;
-        }
-
-        public void setHalfKilograms(double halfKilograms) {
-            this.halfKilograms = halfKilograms;
-        }
-
-        public void setQuarterKilograms(double quarterKilograms) {
-            this.quarterKilograms = quarterKilograms;
-        }
-
-        public void setTomnKilograms(double tomnKilograms) {
-            this.tomnKilograms = tomnKilograms;
+        public void setArName(String arName) {
+            this.arName = arName;
         }
     }
 
-    public ArrayList<String> getTags() {
-        return tags;
+    public static class PriceByKilogram {
+        private Double kilograms;
+        private Double halfKilograms;
+        private Double quarterKilograms;
+        private Double tomnKilograms;
+
+        public PriceByKilogram(Double kilograms, Double halfKilograms, Double quarterKilograms, Double tomnKilograms) {
+            this.kilograms = kilograms;
+            this.halfKilograms = halfKilograms;
+            this.quarterKilograms = quarterKilograms;
+            this.tomnKilograms = tomnKilograms;
+        }
+
+        public Double getKilograms() {
+            return kilograms;
+        }
+
+        public void setKilograms(Double kilograms) {
+            this.kilograms = kilograms;
+        }
+
+        public Double getHalfKilograms() {
+            return halfKilograms;
+        }
+
+        public void setHalfKilograms(Double halfKilograms) {
+            this.halfKilograms = halfKilograms;
+        }
+
+        public Double getQuarterKilograms() {
+            return quarterKilograms;
+        }
+
+        public void setQuarterKilograms(Double quarterKilograms) {
+            this.quarterKilograms = quarterKilograms;
+        }
+
+        public Double getTomnKilograms() {
+            return tomnKilograms;
+        }
+
+        public void setTomnKilograms(Double tomnKilograms) {
+            this.tomnKilograms = tomnKilograms;
+        }
     }
 
     public String getArName() {
@@ -248,13 +276,6 @@ public class MealModel {
         return priceBySize;
     }
 
-    public PriceByKilogram getPriceByByKilogram() {
-        return priceByKilogram;
-    }
-
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
-    }
 
     public void setArName(String arName) {
         this.arName = arName;
@@ -276,8 +297,28 @@ public class MealModel {
         this.priceBySize = priceBySize;
     }
 
-    public void setPriceByByKilogram(PriceByKilogram priceByKilogram) {
+
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(List<Topping> toppings) {
+        this.toppings = toppings;
+    }
+
+    public PriceByKilogram getPriceByKilogram() {
+        return priceByKilogram;
+    }
+
+    public void setPriceByKilogram(PriceByKilogram priceByKilogram) {
         this.priceByKilogram = priceByKilogram;
     }
 
+    public List<Tags> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tags> tags) {
+        this.tags = tags;
+    }
 }
