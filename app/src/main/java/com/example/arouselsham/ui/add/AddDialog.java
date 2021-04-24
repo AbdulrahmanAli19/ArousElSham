@@ -17,8 +17,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.pojo.model.MealModel;
 import com.example.arouselsham.pojo.model.MenuClass;
+import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.example.arouselsham.pojo.model.maleModels.MenuTags;
+import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
+import com.example.arouselsham.pojo.model.maleModels.PriceByOne;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
@@ -137,7 +140,6 @@ public class AddDialog extends DialogFragment {
                 .setPositiveButton(R.string.add, (dialog, which) -> {
                     addToFireBase();
                 });
-
         return builder.create();
     }
 
@@ -248,176 +250,117 @@ public class AddDialog extends DialogFragment {
         List<String> enNames = new ArrayList<>();
         List<String> arNames = new ArrayList<>();
 
-        List<MealModel.PriceByBreadTypes> priceByBreadTypes = new ArrayList<>();
+        //List<MealModel.PriceByBreadTypes> priceByBreadTypes = new ArrayList<>();
+        //List<MealModel.PriceByPiece> priceByPieces = new ArrayList<>();
         //List<MealModel.PriceByKilogram> priceByKilograms = new ArrayList<>();
-        //List<MealModel.PriceByOne> priceByOnes = new ArrayList<>();
+        List<PriceByOne> priceByOnes = new ArrayList<>();
+        //List<MealModel.PriceBySize> priceBySizes = new ArrayList<>();
 
 
-        List<List<MealModel.Tags>> tags = new ArrayList<>();
+        List<List<MenuTags>> tags = new ArrayList<>();
 
-        List<MealModel.Topping> toppings = new ArrayList<>();
-        toppings.add(new MealModel.Topping("حار", "Spicyy", 0.0));
+        List<MenuTopping> menuToppings = new ArrayList<>();
 
-        arNames.add("فاهيتا فراخ");
-        enNames.add("Fajita chicken");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(25.0, 30.0, 20.0));
+        /*arNames.add("حواوشي لحمه");
+        enNames.add("Beef Hawawshi");
         List<MealModel.Tags> tags1 = new ArrayList<>();
-        tags1.add(new MealModel.Tags("Sandwiches Al-Arous", "سندوتشات العروس"));
-        tags1.add(new MealModel.Tags("Fajita", "فاهيتا"));
-        tags1.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
-        tags1.add(new MealModel.Tags("chicken", "فراخ"));
-        tags1.add(new MealModel.Tags("Savory ", "حادق"));
-        tags1.add(new MealModel.Tags("lunch", "غداء"));
+        priceByOnes.add(new MealModel.PriceByOne(30.0));
+        tags1.add(new MealModel.Tags("Hawawshi", "الحواوشي"));
+        tags1.add(new MealModel.Tags("Savory", "حادق"));
+        tags1.add(new MealModel.Tags("Beef", "لحم"));
         tags.add(tags1);
 
-        arNames.add("ميكسيكانو فراخ");
-        enNames.add("Mexican Chicken");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(22.0, 30.0, 20.0));
+        arNames.add("حواوشي سجق");
+        enNames.add("Sausage Hawawshi");
         List<MealModel.Tags> tags2 = new ArrayList<>();
-        tags2.add(new MealModel.Tags("Sandwiches Al-Arous", "سندوتشات العروس"));
-        tags2.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
-        tags2.add(new MealModel.Tags("Mexican ", "ميكسيكانو"));
-        tags2.add(new MealModel.Tags("chicken", "فراخ"));
-        tags2.add(new MealModel.Tags("Savory ", "حادق"));
-        tags2.add(new MealModel.Tags("lunch", "غداء"));
+        priceByOnes.add(new MealModel.PriceByOne(30.0));
+        tags2.add(new MealModel.Tags("Hawawshi", "الحواوشي"));
+        tags2.add(new MealModel.Tags("Savory", "حادق"));
+        tags2.add(new MealModel.Tags("sausage", "سجق"));
         tags.add(tags2);
 
-        arNames.add("كبده فراخ");
-        enNames.add("Chicken liver");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(22.0, 25.0, 15.0));
+        arNames.add("حواوشي بسطرمة");
+        enNames.add("Pastrami Hawawshi");
         List<MealModel.Tags> tags3 = new ArrayList<>();
-        tags3.add(new MealModel.Tags("Sandwiches Al-Arous", "سندوتشات العروس"));
-        tags3.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
-        tags3.add(new MealModel.Tags("liver", "كبده"));
-        tags3.add(new MealModel.Tags("chicken", "فراخ"));
-        tags3.add(new MealModel.Tags("Savory ", "حادق"));
-        tags3.add(new MealModel.Tags("lunch", "غداء"));
+        priceByOnes.add(new MealModel.PriceByOne(35.0));
+        tags3.add(new MealModel.Tags("Hawawshi", "الحواوشي"));
+        tags3.add(new MealModel.Tags("Savory", "حادق"));
+        tags3.add(new MealModel.Tags("Pastrami", "بسطرمة"));
         tags.add(tags3);
 
-        arNames.add("كفته بلدي");
-        enNames.add("Kebab");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(20.0, 0.0, 15.0));
+        arNames.add("حواوشي شاورما فراخ");
+        enNames.add("Chicken Shawarma Hawawshi");
         List<MealModel.Tags> tags4 = new ArrayList<>();
-        tags4.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags4.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
-        tags4.add(new MealModel.Tags("Beef", "لحم"));
-        tags4.add(new MealModel.Tags("Kebab", "كفته"));
-        tags4.add(new MealModel.Tags("Savory ", "حادق"));
-        tags4.add(new MealModel.Tags("lunch", "غداء"));
+        priceByOnes.add(new MealModel.PriceByOne(40.0));
+        tags4.add(new MealModel.Tags("Hawawshi", "الحواوشي"));
+        tags4.add(new MealModel.Tags("Savory", "حادق"));
+        tags4.add(new MealModel.Tags("Chicken", "فراخ"));
+        tags4.add(new MealModel.Tags("Shawarma", "شاورما"));
         tags.add(tags4);
 
-        arNames.add("كباب ضاني");
-        enNames.add("Lamb kebab");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(0.0, 0.0, 30.0));
+        arNames.add("حواوشي شاورما لحم");
+        enNames.add("Beef Shawarma Hawawshi");
         List<MealModel.Tags> tags5 = new ArrayList<>();
-        tags5.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags5.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
+        priceByOnes.add(new MealModel.PriceByOne(45.0));
+        tags5.add(new MealModel.Tags("Hawawshi", "الحواوشي"));
+        tags5.add(new MealModel.Tags("Savory", "حادق"));
         tags5.add(new MealModel.Tags("Beef", "لحم"));
-        tags5.add(new MealModel.Tags("Kebab", "كباب"));
-        tags5.add(new MealModel.Tags("Lamb", "ضاني"));
-        tags5.add(new MealModel.Tags("Savory ", "حادق"));
-        tags5.add(new MealModel.Tags("lunch", "غداء"));
+        tags5.add(new MealModel.Tags("Shawarma", "شاورما"));
         tags.add(tags5);
 
-        arNames.add("شيش طاووق");
-        enNames.add("Chicken Grill");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(24.0, 32.0, 22.0));
+
+        arNames.add("طبق كول سلو");
+        enNames.add("Coleslaw");
         List<MealModel.Tags> tags6 = new ArrayList<>();
-        tags6.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags6.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
-        tags6.add(new MealModel.Tags("Grill", "شيش"));
-        tags6.add(new MealModel.Tags("chicken", "فراخ"));
-        tags6.add(new MealModel.Tags("Savory ", "حادق"));
-        tags6.add(new MealModel.Tags("lunch", "غداء"));
+        priceByOnes.add(new MealModel.PriceByOne(10.0));
+        tags6.add(new MealModel.Tags("Topping", "إضافات"));
         tags.add(tags6);
 
-        arNames.add("بانية");
-        enNames.add("Baneh");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(22.0, 30.0, 20.0));
+        arNames.add("طبق تومية");
+        enNames.add("Tomiya");
         List<MealModel.Tags> tags7 = new ArrayList<>();
-        tags7.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags7.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
-        tags7.add(new MealModel.Tags("chicken", "فراخ"));
-        tags7.add(new MealModel.Tags("Savory ", "حادق"));
-        tags7.add(new MealModel.Tags("lunch", "غداء"));
+        priceByOnes.add(new MealModel.PriceByOne(10));
+        tags7.add(new MealModel.Tags("Topping", "إضافات"));
         tags.add(tags7);
 
-        arNames.add("فراخ كرسبي");
-        enNames.add("Crispy Chicken");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(22.0, 30.0, 20.0));
-        List<MealModel.Tags> tags8 = new ArrayList<>();
-        tags8.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags8.add(new MealModel.Tags("Sandwiches", "سندوتشات"));
-        tags8.add(new MealModel.Tags("Crispy", "كرسبي"));
-        tags8.add(new MealModel.Tags("chicken", "فراخ"));
-        tags8.add(new MealModel.Tags("Savory ", "حادق"));
-        tags8.add(new MealModel.Tags("lunch", "غداء"));
-        tags.add(tags8);
-
-        arNames.add("زنجر");
-        enNames.add("Zinger");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(20.0, 22.0, 30.0));
-        List<MealModel.Tags> tags9 = new ArrayList<>();
-        tags9.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags9.add(new MealModel.Tags("Burger", "برجر"));
-        tags9.add(new MealModel.Tags("chicken", "فراخ"));
-        tags9.add(new MealModel.Tags("Savory ", "حادق"));
-        tags9.add(new MealModel.Tags("lunch", "غداء"));
-        tags.add(tags9);
-
-        arNames.add("تشيز برجر لحم");
-        enNames.add("Beef cheese burger");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(0.0, 30.0, 0.0));
-        List<MealModel.Tags> tags10 = new ArrayList<>();
-        tags10.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags10.add(new MealModel.Tags("Burger", "برجر"));
-        tags10.add(new MealModel.Tags("beef", "لحم"));
-        tags10.add(new MealModel.Tags("cheese", "تشيز"));
-        tags10.add(new MealModel.Tags("Savory ", "حادق"));
-        tags10.add(new MealModel.Tags("lunch", "غداء"));
-        tags.add(tags10);
-
-        arNames.add("برجر فراخ");
-        enNames.add("Chicken burger");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes(0.0, 25.0, 0.0));
-        List<MealModel.Tags> tags11 = new ArrayList<>();
-        tags11.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags11.add(new MealModel.Tags("Burger", "برجر"));
-        tags11.add(new MealModel.Tags("Chicken", "فراخ"));
-        tags11.add(new MealModel.Tags("Savory ", "حادق"));
-        tags11.add(new MealModel.Tags("lunch", "غداء"));
-        tags.add(tags11);
-
-        arNames.add("برجر فراخ رومانو");
-        enNames.add("Romano Chicken Burger");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes());
+        arNames.add("طبق مخلل");
+        enNames.add("Pickles");
         List<MealModel.Tags> tags12 = new ArrayList<>();
-        tags12.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags12.add(new MealModel.Tags("Burger", "برجر"));
-        tags12.add(new MealModel.Tags("Chicken", "فراخ"));
-        tags12.add(new MealModel.Tags("Romano", "رومانو"));
-        tags12.add(new MealModel.Tags("Savory ", "حادق"));
-        tags12.add(new MealModel.Tags("lunch", "غداء"));
+        priceByOnes.add(new MealModel.PriceByOne(5));
+        tags12.add(new MealModel.Tags("Topping", "إضافات"));
         tags.add(tags12);
 
-        arNames.add("فلافل عربي");
-        enNames.add("Falafel Arabic");
-        priceByBreadTypes.add(new MealModel.PriceByBreadTypes());
-        List<MealModel.Tags> tags13 = new ArrayList<>();
-        tags13.add(new MealModel.Tags("Meals Al-Arous", "وجبات العروس"));
-        tags13.add(new MealModel.Tags("Falafel", "فلافل"));
-        tags13.add(new MealModel.Tags("vegan", "نباتي"));
-        tags13.add(new MealModel.Tags("Savory ", "حادق"));
-        tags13.add(new MealModel.Tags("Breakfast", "فطار"));
-        tags.add(tags13);
+        arNames.add("طبق أرز بسمتي");
+        enNames.add("Basmati rice dish");
+        List<MealModel.Tags> tags8 = new ArrayList<>();
+        priceByOnes.add(new MealModel.PriceByOne(12));
+        tags8.add(new MealModel.Tags("Topping", "إضافات"));
+        tags.add(tags8);
+
+        arNames.add("فلافل");
+        enNames.add("Falafel");
+        List<MealModel.Tags> tags9 = new ArrayList<>();
+        priceByOnes.add(new MealModel.PriceByOne(.50));
+        tags9.add(new MealModel.Tags("Topping", "إضافات"));
+        tags.add(tags9);
+
+        arNames.add("طبق بطاطس");
+        enNames.add("French Fries");
+        List<MealModel.Tags> tags11 = new ArrayList<>();
+        priceByOnes.add(new MealModel.PriceByOne(10));
+        tags11.add(new MealModel.Tags("Topping", "إضافات"));
+        tags.add(tags11);
+
+
+
 
 
         MealModel mealModel;
         for (int i = 0; i < enNames.size(); i++) {
 
-            mealModel = new MealModel(tags.get(i), arNames.get(i), enNames.get(i), priceByBreadTypes.get(i), toppings);
+            mealModel = new MealModel(tags.get(i), arNames.get(i), enNames.get(i), priceByOnes.get(i), toppings);
             uploadData(enNames.get(i), tags.get(i).get(0).getEnName(), mealModel);
-        }
+        }*/
 
     }
 
@@ -433,6 +376,15 @@ public class AddDialog extends DialogFragment {
                         Log.d(TAG, "onSuccess: done"))
                 .addOnFailureListener(e ->
                         Log.d(TAG, "onFailure: " + e.getMessage()));
+    }
+
+    private void removeData(String names, String tag) {
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document(tag)
+                .collection("MenuItems")
+                .document(names)
+                .delete();
     }
 
     private void logic() {

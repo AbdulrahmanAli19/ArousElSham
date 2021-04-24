@@ -97,6 +97,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         holder.mainCard.setOnClickListener(v -> {
             selectedPosition = position;
+            HomeFragment.selectedMeal = position ;
+
             notifyDataSetChanged();
 
         });
