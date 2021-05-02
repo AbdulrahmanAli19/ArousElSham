@@ -1,6 +1,8 @@
 package com.example.arouselsham.pojo.model.maleModels;
 
-public class PriceByKilogram {
+import java.io.Serializable;
+
+public class PriceByKilogram implements Serializable {
     private Double kilograms;
     private Double halfKilograms;
     private Double quarterKilograms;

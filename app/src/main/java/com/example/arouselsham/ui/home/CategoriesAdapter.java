@@ -1,9 +1,8 @@
 package com.example.arouselsham.ui.home;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,29 +10,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
+import com.example.arouselsham.SecondActivity;
+import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
-
+public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> implements Serializable {
 
     private static final String TAG = "CategoriesAdapter";
     private Context mContext;
     private List<String> images;
     private List<String> meals;
-    private int selectedPosition = -1;
-    private boolean isPosition0Changed = false;
 
     public CategoriesAdapter(Context mContext, List<String> meals, List<String> images) {
         this.mContext = mContext;
@@ -56,6 +59,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         String image = images.get(position);
         String meal = meals.get(position);
         holder.textView.setText(meal);
+
         Picasso.get().load(image).into(holder.imageView, new Callback() {
             @Override
             public void onSuccess() {
@@ -69,38 +73,24 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             }
         });
 
-        if (position == 0 && !isPosition0Changed) {
-            holder.mainCard.setCardBackgroundColor(mContext.getColor(R.color.gold));
-            isPosition0Changed = true;
-
-        } else if (selectedPosition == position) {
-
-            int colorFrom = mContext.getResources().getColor(R.color.white);
-            int colorTo = mContext.getResources().getColor(R.color.gold);
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-            colorAnimation.setDuration(150); // milliseconds
-            colorAnimation.addUpdateListener(animator -> holder.mainCard.setCardBackgroundColor((int) animator.getAnimatedValue()));
-            colorAnimation.start();
-
-        } else if (holder.mainCard.getCardBackgroundColor().getDefaultColor() == mContext.getResources().getColor(R.color.white)) {
-
-            Log.d(TAG, "onBindViewHolder: getDefaultColor() = white");
-        } else {
-
-            int colorFrom = mContext.getResources().getColor(R.color.gold);
-            int colorTo = mContext.getResources().getColor(R.color.white);
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-            colorAnimation.setDuration(150); // milliseconds
-            colorAnimation.addUpdateListener(animator -> holder.mainCard.setCardBackgroundColor((int) animator.getAnimatedValue()));
-            colorAnimation.start();
-        }
-
         holder.mainCard.setOnClickListener(v -> {
-            selectedPosition = position;
-            HomeFragment.selectedMeal = position ;
+            FirebaseFirestore.getInstance()
+                    .collection("Menu")
+                    .document(meal)
+                    .collection("MenuItems")
+                    .get()
+                    .addOnCompleteListener(task1 -> {
+                        List<MealModel> mealModels = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task1.getResult()) {
+                            mealModels.add(document.toObject(MealModel.class));
+                            Log.d(TAG, "onComplete: called");
+                        }
 
-            notifyDataSetChanged();
-
+                        Intent intent = new Intent(mContext, SecondActivity.class);
+                        intent.putExtra("Meals", (Serializable) mealModels);
+                        mContext.startActivity(intent);
+                        Toast.makeText(mContext, "" + mealModels.size(), Toast.LENGTH_SHORT).show();
+                    });
         });
 
     }
@@ -111,7 +101,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
 
-    class CategoriesViewHolder extends RecyclerView.ViewHolder {
+    static class CategoriesViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView textView;
         private CardView mainCard;

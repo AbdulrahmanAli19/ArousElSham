@@ -1,6 +1,8 @@
 package com.example.arouselsham.pojo.model.maleModels;
 
-public class PriceByOne {
+import java.io.Serializable;
+
+public class PriceByOne implements Serializable {
 
     private Double price;
 
