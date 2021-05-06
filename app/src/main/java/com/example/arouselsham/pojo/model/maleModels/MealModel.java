@@ -12,7 +12,7 @@ public class MealModel {
     private PriceByKilogram priceByKilogram;
     private List<MenuTopping> menuToppings;
     private List<MenuTags> tags;
-
+    private boolean isExpanded = false;
 
      MealModel() {
 
@@ -165,6 +165,14 @@ public class MealModel {
 
     public void setMenuToppings(List<MenuTopping> menuToppings) {
         this.menuToppings = menuToppings;
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 
     @Override

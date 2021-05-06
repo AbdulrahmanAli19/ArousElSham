@@ -11,17 +11,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
+import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,6 +52,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public CategoriesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.categori_layout, parent, false);
         CategoriesViewHolder viewHolder = new CategoriesViewHolder(view);
+
         return viewHolder;
     }
 
@@ -98,7 +104,24 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         holder.mainCard.setOnClickListener(v -> {
             selectedPosition = position;
             HomeFragment.selectedMeal = position ;
+            FirebaseFirestore.getInstance()
+                    .collection("Menu")
+                    .document(meals.get(position))
+                    .collection("MenuItems")
+                    .get()
+                    .addOnCompleteListener(task1 -> {
+                        List<MealModel> mealModels = new ArrayList<>();
 
+                        for (QueryDocumentSnapshot document : task1.getResult()) {
+                            mealModels.add(document.toObject(MealModel.class));
+                            Log.d(TAG, "onComplete: called");
+                        }
+
+                        for (int i = 0; i < mealModels.size(); i++) {
+                            Log.d(TAG, "onComplete: \n" + mealModels.get(i).getArName() + "\n");
+                        }
+                        Toast.makeText(mContext, "" + mealModels.size(), Toast.LENGTH_SHORT).show();
+                    });
             notifyDataSetChanged();
 
         });
@@ -110,8 +133,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         return images.size();
     }
 
-
     class CategoriesViewHolder extends RecyclerView.ViewHolder {
+
         private ImageView imageView;
         private TextView textView;
         private CardView mainCard;

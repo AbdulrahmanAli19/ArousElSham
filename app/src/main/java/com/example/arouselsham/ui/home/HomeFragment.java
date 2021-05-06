@@ -68,29 +68,11 @@ public class HomeFragment extends Fragment {
                     images = (List<String>) task.getResult().get("images");
                     CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), meals, images);
                     LinearLayoutManager layoutManager
-                            = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                            = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
                     categoryRecycler.setLayoutManager(layoutManager);
                     categoryRecycler.setAdapter(adapter);
-                    FirebaseFirestore.getInstance()
-                            .collection("Menu")
-                            .document(meals.get(selectedMeal))
-                            .collection("MenuItems")
-                            .get()
-                            .addOnCompleteListener(task1 -> {
-                                List<MealModel> mealModels = new ArrayList<>();
-
-                                for (QueryDocumentSnapshot document : task1.getResult()) {
-                                    mealModels.add(document.toObject(MealModel.class));
-                                    Log.d(TAG, "onComplete: called");
-                                }
-
-                                for (int i = 0; i < mealModels.size(); i++) {
-                                    Log.d(TAG, "onComplete: \n"+mealModels.get(i).getArName()+"\n");
-                                }
-                                Toast.makeText(getActivity(), ""+mealModels.size(), Toast.LENGTH_SHORT).show();
-                            });
                 });
-
 
 
         return root;
