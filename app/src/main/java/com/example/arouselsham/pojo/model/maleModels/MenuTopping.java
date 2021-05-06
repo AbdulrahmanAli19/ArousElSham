@@ -1,6 +1,8 @@
 package com.example.arouselsham.pojo.model.maleModels;
 
-public class MenuTopping {
+import java.io.Serializable;
+
+public class MenuTopping implements Serializable {
     private String toppingArName;
     private String toppingEnName;
     private double toppingPrice;

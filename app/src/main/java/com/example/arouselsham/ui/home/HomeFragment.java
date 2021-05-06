@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +38,6 @@ import butterknife.ButterKnife;
 public class HomeFragment extends Fragment {
     private static final String TAG = "Cannot invoke method length() on null object";
     private HomeViewModel homeViewModel;
-    public static int selectedMeal = 0;
     private List<String> meals, images;
 
     @BindView(R.id.txt_good_evening)
@@ -67,12 +68,13 @@ public class HomeFragment extends Fragment {
                     meals = (List<String>) task.getResult().get("enTags");
                     images = (List<String>) task.getResult().get("images");
                     CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), meals, images);
-                    LinearLayoutManager layoutManager
-                            = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
-                    categoryRecycler.setLayoutManager(layoutManager);
+                    GridLayoutManager  gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                    gridLayoutManager.setSpanCount(2);
+                    categoryRecycler.setLayoutManager(gridLayoutManager);
                     categoryRecycler.setAdapter(adapter);
+
                 });
+
 
 
         return root;

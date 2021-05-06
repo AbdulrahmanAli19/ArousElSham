@@ -6,7 +6,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha14'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha15'
         classpath 'com.google.gms:google-services:4.3.5'
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
 
@@ -19,6 +19,9 @@ allprojects {
     repositories {
         google()
         maven { url "https://oss.jfrog.org/libs-snapshot" }
+        maven { url "https://jitpack.io" }
+
+
     }
 }
 

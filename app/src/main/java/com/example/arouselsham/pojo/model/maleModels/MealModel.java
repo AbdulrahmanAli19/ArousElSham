@@ -1,8 +1,9 @@
 package com.example.arouselsham.pojo.model.maleModels;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MealModel {
+public class MealModel implements Serializable {
     private String arName;
     private String enName;
     private PriceByPiece priceByPiece;

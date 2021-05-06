@@ -1,6 +1,8 @@
 package com.example.arouselsham.pojo.model.maleModels;
 
-public class MenuTags {
+import java.io.Serializable;
+
+public class MenuTags implements Serializable {
 
     private String enName;
     private String arName;

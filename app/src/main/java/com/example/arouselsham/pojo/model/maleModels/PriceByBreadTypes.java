@@ -1,6 +1,8 @@
 package com.example.arouselsham.pojo.model.maleModels;
 
-public class PriceByBreadTypes {
+import java.io.Serializable;
+
+public class PriceByBreadTypes implements Serializable {
 
     private double syrianPrice;
     private double frenchPrice;
