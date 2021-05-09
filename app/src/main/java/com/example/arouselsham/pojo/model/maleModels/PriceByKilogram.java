@@ -8,7 +8,7 @@ public class PriceByKilogram implements Serializable {
     private Double quarterKilograms;
     private Double tomnKilograms;
 
-    public PriceByKilogram() {
+    PriceByKilogram() {
     }
 
     public PriceByKilogram(Double kilograms, Double halfKilograms, Double quarterKilograms, Double tomnKilograms) {

@@ -8,7 +8,7 @@ public class PriceByPiece implements Serializable {
     private Double halfChicken ;
     private Double quarterChicken ;
 
-    public PriceByPiece() {
+    PriceByPiece() {
     }
 
     public PriceByPiece(Double holeChicken, Double halfChicken, Double quarterChicken) {

@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp">
 
     <ImageView
         android:id="@+id/iv_meal_image"
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_margin="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/burger" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/burger" />
 
-    <com.like.LikeButton
+    <androidx.cardview.widget.CardView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:cardCornerRadius="5dp"
+        android:backgroundTint="@color/black"
+        android:layout_alignBottom="@+id/iv_meal_image"
+        android:layout_alignParentEnd="true">
+        <ImageView
+            android:src="@drawable/ic_baseline_add_24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
         android:id="@+id/like_btn"
-        app:icon_type="Heart"
-        app:like_drawable="@drawable/heart_on"
-        app:unlike_drawable="@drawable/heart_off"
-        app:icon_size="10dp"
-        app:liked="false"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_meal_image"
-        app:layout_constraintTop_toTopOf="@+id/iv_meal_image" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp" />
 
-    <TextView
-        android:id="@+id/txt_meal_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_meal_image"
-        app:layout_constraintStart_toStartOf="@+id/iv_meal_image"
-        app:layout_constraintTop_toBottomOf="@+id/iv_meal_image"
-        tools:text="Burger" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_meal_image"
+        android:background="#3BFFEB3B">
 
-    <TextView
-        android:id="@+id/txt_meal_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/txt_meal_name"
-        app:layout_constraintStart_toStartOf="@+id/txt_meal_name"
-        app:layout_constraintTop_toBottomOf="@+id/txt_meal_name"
-        tools:text="220.0 EGP" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txt_meal_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            tools:text="Burger" />
+
+        <TextView
+            android:id="@+id/txt_meal_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_meal_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp"
+            tools:text="220.0 EGP" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -11,7 +11,7 @@ public class PriceBySize implements Serializable {
         this.bigSizePrice = bigSizePrice;
     }
 
-    public PriceBySize() {
+    PriceBySize() {
     }
 
     public double getMediumSizePrice() {

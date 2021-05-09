@@ -8,7 +8,7 @@ public class PriceByBreadTypes implements Serializable {
     private double frenchPrice;
     private double saro5Price;
 
-    public PriceByBreadTypes() {
+    PriceByBreadTypes() {
     }
 
     public PriceByBreadTypes(double syrianPrice, double frenchPrice, double saro5Price) {

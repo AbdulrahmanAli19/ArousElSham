@@ -6,7 +6,7 @@ public class PriceByOne implements Serializable {
 
     private Double price;
 
-    public PriceByOne() {
+    PriceByOne() {
     }
 
     public PriceByOne(Double price) {

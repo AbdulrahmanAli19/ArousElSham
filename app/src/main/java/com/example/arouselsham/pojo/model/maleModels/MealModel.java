@@ -13,7 +13,7 @@ public class MealModel implements Serializable {
     private PriceByKilogram priceByKilogram;
     private List<MenuTopping> menuToppings;
     private List<MenuTags> tags;
-    private boolean isExpanded = false;
+    private boolean isLiked = false;
 
      MealModel() {
 
@@ -168,12 +168,12 @@ public class MealModel implements Serializable {
         this.menuToppings = menuToppings;
     }
 
-    public boolean isExpanded() {
-        return isExpanded;
+    public boolean isLiked() {
+        return isLiked;
     }
 
-    public void setExpanded(boolean expanded) {
-        isExpanded = expanded;
+    public void setLiked(boolean liked) {
+        isLiked = liked;
     }
 
     @Override
