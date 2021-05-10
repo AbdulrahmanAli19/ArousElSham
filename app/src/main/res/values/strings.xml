@@ -25,4 +25,5 @@
     <string name="add_a_new_meal">Add A New Meal</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="price_by_selection">Price by selection</string>
 </resources>

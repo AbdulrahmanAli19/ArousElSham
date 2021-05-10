@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 public class HomeFragment extends Fragment {
     private static final String TAG = "Cannot invoke method length() on null object";
     private HomeViewModel homeViewModel;
-    private List<String> meals, images;
+    private List<String> enNames, arNames, images;
     private Handler sliderHandler = new Handler();
 
     @BindView(R.id.offers_viewpager)
@@ -59,21 +59,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        FirebaseFirestore.getInstance()
-                .collection("Menu")
-                .document("MenuMainTags")
-                .get()
-                .addOnCompleteListener(task -> {
-                    meals = (List<String>) task.getResult().get("enTags");
-                    images = (List<String>) task.getResult().get("images");
-                    CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), meals, images);
-                    GridLayoutManager  gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-                    gridLayoutManager.setSpanCount(2);
-                    categoryRecycler.setLayoutManager(gridLayoutManager);
-                    categoryRecycler.setAdapter(adapter);
+        init();
 
-                });
-        setUpViewPager();
         return root;
     }
 
@@ -104,6 +91,26 @@ public class HomeFragment extends Fragment {
                 sliderHandler.postDelayed(sliderRunable, 2000);
             }
         });
+    }
+
+    private void init () {
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document("MenuMainTags")
+                .get()
+                .addOnCompleteListener(task -> {
+                    enNames = (List<String>) task.getResult().get("enTags");
+                    arNames = (List<String>) task.getResult().get("arTags");
+                    images = (List<String>) task.getResult().get("images");
+
+                    CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), enNames, arNames, images);
+                    GridLayoutManager  gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                    gridLayoutManager.setSpanCount(2);
+                    categoryRecycler.setLayoutManager(gridLayoutManager);
+                    categoryRecycler.setAdapter(adapter);
+
+                });
+        setUpViewPager();
     }
 
     private Runnable sliderRunable = new Runnable() {

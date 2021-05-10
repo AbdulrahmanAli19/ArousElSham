@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -36,11 +35,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private static final String TAG = "CategoriesAdapter";
     private Context mContext;
     private List<String> images;
-    private List<String> meals;
+    private List<String> enNames, arNames;
 
-    public CategoriesAdapter(Context mContext, List<String> meals, List<String> images) {
+    public CategoriesAdapter(Context mContext, List<String> enNames,List<String> arNames, List<String> images) {
         this.mContext = mContext;
-        this.meals = meals;
+        this.enNames = enNames;
+        this.arNames = arNames;
         this.images = images;
     }
 
@@ -57,8 +57,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @Override
     public void onBindViewHolder(@NonNull @NotNull CategoriesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String image = images.get(position);
-        String meal = meals.get(position);
-        holder.textView.setText(meal);
+        String enName = enNames.get(position);
+        holder.textView.setText(arNames.get(position));
 
         Picasso.get().load(image).into(holder.imageView, new Callback() {
             @Override
@@ -74,25 +74,29 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         });
 
         holder.mainCard.setOnClickListener(v -> {
-            FirebaseFirestore.getInstance()
-                    .collection("Menu")
-                    .document(meal)
-                    .collection("MenuItems")
-                    .get()
-                    .addOnCompleteListener(task1 -> {
-                        List<MealModel> mealModels = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : task1.getResult()) {
-                            mealModels.add(document.toObject(MealModel.class));
-                            Log.d(TAG, "onComplete: called");
-                        }
-
-                        Intent intent = new Intent(mContext, SecondActivity.class);
-                        intent.putExtra("Meals", (Serializable) mealModels);
-                        mContext.startActivity(intent);
-                        Toast.makeText(mContext, "" + mealModels.size(), Toast.LENGTH_SHORT).show();
-                    });
+            getDataFromFirebase(enName);
         });
 
+    }
+
+    private void getDataFromFirebase(String selectedItem) {
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document(selectedItem)
+                .collection("MenuItems")
+                .get()
+                .addOnCompleteListener(task1 -> {
+                    List<MealModel> mealModels = new ArrayList<>();
+
+                    for (QueryDocumentSnapshot document : task1.getResult()) {
+                        mealModels.add(document.toObject(MealModel.class));
+                        Log.d(TAG, "onComplete: called");
+                    }
+
+                    Intent intent = new Intent(mContext, SecondActivity.class);
+                    intent.putExtra("Meals", (Serializable) mealModels);
+                    mContext.startActivity(intent);
+                });
     }
 
     @Override
@@ -102,10 +106,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
 
     static class CategoriesViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
-        private TextView textView;
-        private CardView mainCard;
-        private ProgressBar progressBar;
+        private final ImageView imageView;
+        private final TextView textView;
+        private final CardView mainCard;
+        private final ProgressBar progressBar;
 
         public CategoriesViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

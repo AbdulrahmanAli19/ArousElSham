@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        navView.setItemIconTintList(null);
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         customerInfoRef = database.getReference(Common.CUSTOMER_INFO_REFERENCE);
