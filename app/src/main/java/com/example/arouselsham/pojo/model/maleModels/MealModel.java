@@ -11,7 +11,8 @@ public class MealModel implements Serializable {
     private PriceByOne priceByOne;
     private PriceBySize priceBySize;
     private PriceByKilogram priceByKilogram;
-    private List<MenuTopping> menuToppings;
+
+    private List<MenuTopping> toppings;
     private List<MenuTags> tags;
     private boolean isLiked = false;
 
@@ -31,7 +32,7 @@ public class MealModel implements Serializable {
         this.priceByOne = priceByOne;
         this.priceBySize = priceBySize;
         this.priceByKilogram = priceByKilogram;
-        this.menuToppings = menuToppings;
+        this.toppings = menuToppings;
     }
 
     /**
@@ -44,7 +45,7 @@ public class MealModel implements Serializable {
         this.arName = arName;
         this.enName = enName;
         this.priceByBreadTypes = priceByBreadTypes;
-        this.menuToppings = menuToppings;
+        this.toppings = menuToppings;
     }
 
     /**
@@ -57,7 +58,7 @@ public class MealModel implements Serializable {
         this.arName = arName;
         this.enName = enName;
         this.priceByPiece = priceByPiece;
-        this.menuToppings = menuToppings;
+        this.toppings = menuToppings;
     }
 
     /**
@@ -69,7 +70,7 @@ public class MealModel implements Serializable {
         this.arName = arName;
         this.enName = enName;
         this.priceByOne = priceByOne;
-        this.menuToppings = menuToppings;
+        this.toppings = menuToppings;
     }
 
     /**
@@ -81,7 +82,7 @@ public class MealModel implements Serializable {
         this.arName = arName;
         this.enName = enName;
         this.priceBySize = priceBySize;
-        this.menuToppings = menuToppings;
+        this.toppings = menuToppings;
     }
 
     /**
@@ -93,7 +94,7 @@ public class MealModel implements Serializable {
         this.arName = arName;
         this.enName = enName;
         this.priceByKilogram = priceByKilogram;
-        this.menuToppings = menuToppings;
+        this.toppings = menuToppings;
     }
 
     public List<MenuTags> getTags() {
@@ -160,12 +161,12 @@ public class MealModel implements Serializable {
         this.priceByKilogram = priceByKilogram;
     }
 
-    public List<MenuTopping> getMenuToppings() {
-        return menuToppings;
+    public List<MenuTopping> getToppings() {
+        return toppings;
     }
 
-    public void setMenuToppings(List<MenuTopping> menuToppings) {
-        this.menuToppings = menuToppings;
+    public void setToppings(List<MenuTopping> toppings) {
+        this.toppings = toppings;
     }
 
     public boolean isLiked() {
@@ -187,7 +188,7 @@ public class MealModel implements Serializable {
                 ", priceByOne=" + priceByOne +
                 ", priceBySize=" + priceBySize +
                 ", priceByKilogram=" + priceByKilogram +
-                ", menuToppings=" + menuToppings +
+                ", menuToppings=" + toppings +
                 '}';
     }
 }

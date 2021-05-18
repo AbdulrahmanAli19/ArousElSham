@@ -2,6 +2,7 @@ package com.example.arouselsham.ui.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arouselsham.DetailsActivity;
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.model.maleModels.MealModel;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHolder> {
+public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHolder> implements Serializable {
 
     private Context mContext;
     private List<MealModel> meals;
@@ -46,6 +49,12 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
         }else {
             holder.txtFrechPrice.setText(mealModel.getPriceByOne().getPrice()+" EGP");
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, DetailsActivity.class);
+            intent.putExtra("Meal", (Serializable) mealModel);
+            mContext.startActivity(intent);
+        });
     }
 
     @Override

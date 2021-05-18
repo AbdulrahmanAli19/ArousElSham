@@ -3,5 +3,5 @@
     <item android:state_pressed="true"
         android:color="@color/gold" /> <!-- pressed -->
 
-    <item android:color="#FFFFFF" /> <!-- default -->
+    <item android:color="@color/black" /> <!-- default -->
 </selector>

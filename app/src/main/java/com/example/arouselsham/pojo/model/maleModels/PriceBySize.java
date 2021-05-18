@@ -14,11 +14,11 @@ public class PriceBySize implements Serializable {
     PriceBySize() {
     }
 
-    public double getMediumSizePrice() {
+    public Double getMediumSizePrice() {
         return mediumSizePrice;
     }
 
-    public double getBigSizePrice() {
+    public Double getBigSizePrice() {
         return bigSizePrice;
     }
 

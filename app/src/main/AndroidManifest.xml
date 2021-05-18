@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArousElSham">
         <activity
+            android:name=".DetailsActivity"
+            android:exported="true" />
+        <activity
             android:name=".SecondActivity"
             android:exported="true" />
 

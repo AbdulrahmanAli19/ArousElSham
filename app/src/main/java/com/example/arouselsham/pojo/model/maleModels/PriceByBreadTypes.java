@@ -21,7 +21,7 @@ public class PriceByBreadTypes implements Serializable {
         return syrianPrice;
     }
 
-    public double getFrenchPrice() {
+    public Double getFrenchPrice() {
         return frenchPrice;
     }
 
