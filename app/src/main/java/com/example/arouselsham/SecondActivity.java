@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.ui.home.MealAdapter;
 
 import java.util.List;
@@ -19,11 +19,11 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        List<MealModel> mealModels = (List<MealModel>) getIntent().getSerializableExtra("Meals");
-        Log.d(TAG, "onCreate: " + mealModels.get(0).getArName());
+        List<Meal> meals = (List<Meal>) getIntent().getSerializableExtra("Meals");
+        Log.d(TAG, "onCreate: " + meals.get(0).getArName());
 
         RecyclerView recyclerView = findViewById(R.id.meals_recyclerview);
-        MealAdapter adapter = new MealAdapter(this, mealModels);
+        MealAdapter adapter = new MealAdapter(this, meals);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);

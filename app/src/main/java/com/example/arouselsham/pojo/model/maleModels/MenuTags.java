@@ -7,7 +7,7 @@ public class MenuTags implements Serializable {
     private String enName;
     private String arName;
 
-     MenuTags(String enName, String arName) {
+    public MenuTags(String enName, String arName) {
         this.enName = enName;
         this.arName = arName;
     }

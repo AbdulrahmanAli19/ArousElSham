@@ -1,8 +1,15 @@
 package com.example.arouselsham.pojo;
 
-import com.example.arouselsham.pojo.model.maleModels.PriceByBreadTypes;
-import com.example.arouselsham.pojo.model.maleModels.PriceByKilogram;
-import com.example.arouselsham.pojo.model.maleModels.PriceBySize;
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+
+import android.annotation.SuppressLint;
+
+import androidx.room.Room;
+
+import com.example.arouselsham.pojo.db.DataBaseManger;
+import com.example.arouselsham.pojo.model.KeyValue;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,53 +17,44 @@ import java.util.List;
 public class Common {
     public static boolean isArabicEnabled = false;
     public static final String CUSTOMER_INFO_REFERENCE = "CustomerInfo";
+    public static final String dbName = "ArousEl-ShamDB";
 
-    public static List<String> getKilogramsTags(PriceByKilogram priceByKilogram) {
-        List<String> tags = new ArrayList<>();
+    public static final String syrianPrice = "Arabic bread";
+    public static final String frenchPrice = "French bread";
+    public static final String saro5Price = "Saro5 bread";
 
-        if (priceByKilogram.getTomnKilograms() != 0)
-            tags.add("⅛ Kilogram");
+    public static final String kilograms = "1 Kilogram";
+    public static final String halfKilograms = "½ Kilogram";
+    public static final String quarterKilograms = "¼ Kilogram";
+    public static final String tomnKilograms = "⅛ Kilogram";
 
-        if (priceByKilogram.getQuarterKilograms() != 0)
-            tags.add("¼ Kilogram");
+    public static final String priceByOne = "priceByOne";
+    public static final String discount = "discount";
 
-        if (priceByKilogram.getHalfKilograms() != 0)
-            tags.add("½ Kilogram");
+    public static final String holeChicken = "¼ Chicken";
+    public static final String halfChicken = "½ Chicken";
+    public static final String quarterChicken = "1 Chicken";
 
-        if (priceByKilogram.getKilograms() != 0)
-            tags.add("1 Kilogram");
-        return tags;
-    }
+    public static final String mediumSizePrice = "Medium";
+    public static final String bigSizePrice = "Large";
 
-    public static List<String> getSizeTags(PriceBySize priceBySize) {
-        List<String> tags = new ArrayList<>();
+    @SuppressLint("RestrictedApi")
+    public static DataBaseManger dataBaseManger = Room
+            .databaseBuilder(getApplicationContext(),
+                    DataBaseManger.class,
+                    dbName)
+            .allowMainThreadQueries().build();
 
-        if (priceBySize.getMediumSizePrice() != 0)
-            tags.add("Medium");
+    public static List<PriceOption> getPriceOptions(Meal meal) {
+        List<PriceOption> models = new ArrayList<>();
 
-        if (priceBySize.getBigSizePrice() != 0)
-            tags.add("Large");
-        return tags;
-    }
+        KeyValue keyValue = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
 
-    public static List<String> getBreadTags(PriceByBreadTypes priceByBreadTypes) {
-        List<String> tags = new ArrayList<>();
+        for (int i = 0; i < keyValue.getValue().size(); i++) {
+            models.add(new PriceOption(keyValue.getKey().get(i), keyValue.getValue().get(i)));
+        }
 
-        if (priceByBreadTypes.getSyrianPrice() != 0)
-            tags.add("Arabic bread");
-        if (priceByBreadTypes.getFrenchPrice() != 0)
-            tags.add("French bread");
-        if (priceByBreadTypes.getSaro5Price() != 0)
-            tags.add("Saro5 bread");
-        return tags;
-    }
-
-    public static List<String> getPeaceTags() {
-        List<String> tags = new ArrayList<>();
-        tags.add("¼ Chicken");
-        tags.add("½ Chicken");
-        tags.add("1 Chicken");
-        return tags;
+        return models;
     }
 
 }

@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="French priceByOne"
+                android:hint="French mealByOne"
                 android:inputType="number"
                 android:visibility="gone" />
 
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Saro5 priceByOne"
+                android:hint="Saro5 mealByOne"
                 android:inputType="number"
                 android:visibility="gone" />
 

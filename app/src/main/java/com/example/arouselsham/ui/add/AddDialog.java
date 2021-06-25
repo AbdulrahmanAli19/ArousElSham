@@ -18,16 +18,18 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.model.MenuClass;
-import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuTags;
 import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
-import com.example.arouselsham.pojo.model.maleModels.PriceByOne;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,6 +108,7 @@ public class AddDialog extends DialogFragment {
             }
 
         });
+
         FirebaseFirestore.getInstance()
                 .collection("Menu")
                 .document("MenuMainTags")
@@ -253,7 +256,7 @@ public class AddDialog extends DialogFragment {
         //List<MealModel.PriceByBreadTypes> priceByBreadTypes = new ArrayList<>();
         //List<MealModel.PriceByPiece> priceByPieces = new ArrayList<>();
         //List<MealModel.PriceByKilogram> priceByKilograms = new ArrayList<>();
-        List<PriceByOne> priceByOnes = new ArrayList<>();
+       // List<MealByOne> mealByOnes = new ArrayList<>();
         //List<MealModel.PriceBySize> priceBySizes = new ArrayList<>();
 
 
@@ -364,14 +367,14 @@ public class AddDialog extends DialogFragment {
 
     }
 
-    private void uploadData(String enName, String tag, MealModel mealModel) {
+    private void uploadData(String enName, String tag, Meal meal) {
 
         FirebaseFirestore.getInstance()
                 .collection("Menu")
                 .document(tag)
                 .collection("MenuItems")
                 .document(enName)
-                .set(mealModel)
+                .set(meal)
                 .addOnSuccessListener(unused ->
                         Log.d(TAG, "onSuccess: done"))
                 .addOnFailureListener(e ->
@@ -379,12 +382,45 @@ public class AddDialog extends DialogFragment {
     }
 
     private void removeData(String names, String tag) {
+
         FirebaseFirestore.getInstance()
                 .collection("Menu")
                 .document(tag)
                 .collection("MenuItems")
                 .document(names)
-                .delete();
+                .delete()
+                .addOnSuccessListener(unused ->
+                        Log.d(TAG, "onSuccess: done"))
+                .addOnFailureListener(e ->
+                        Log.d(TAG, "onFailure: " + e.getMessage()));
+    }
+
+    private void updateData(String names, String tag, Object mealModel) {
+
+        Map<String, Object> map = parameters(mealModel);
+
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document(tag)
+                .collection("MenuItems")
+                .document(names)
+                .update(map)
+                .addOnSuccessListener(unused ->
+                        Log.d(TAG, "onSuccess: done"))
+                .addOnFailureListener(e ->
+                        Log.d(TAG, "onFailure: " + e.getMessage()));
+    }
+
+    public static Map<String, Object> parameters(Object obj) {
+        Map<String, Object> map = new HashMap<>();
+        for (Field field : obj.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                map.put(field.getName(), field.get(obj));
+            } catch (Exception e) {
+            }
+        }
+        return map;
     }
 
     private void logic() {

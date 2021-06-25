@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.pojo.model.maleModels.SelectorModel;
+import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 
 import java.util.List;
 
@@ -21,14 +21,14 @@ public class SelectorAdapter extends RecyclerView.Adapter<SelectorAdapter.Select
 
     private boolean isItJustInflated = true;
     private final Context mContext;
-    public final List<SelectorModel> list;
+    private final List<PriceOption> list;
     private int row_index = -1;
     private final ListItemClickListener mOnClickListener;
 
 
-    public SelectorAdapter(Context mContext, List<SelectorModel> selectorModel, ListItemClickListener mOnClickListener) {
+    public SelectorAdapter(Context mContext, List<PriceOption> priceOption, ListItemClickListener mOnClickListener) {
         this.mContext = mContext;
-        this.list = selectorModel;
+        this.list = priceOption;
         this.mOnClickListener = mOnClickListener;
     }
 
@@ -42,7 +42,7 @@ public class SelectorAdapter extends RecyclerView.Adapter<SelectorAdapter.Select
 
     @Override
     public void onBindViewHolder(@NonNull SelectorViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.txtTitle.setText(list.get(position).getTag());
+        holder.txtTitle.setText(list.get(position).getOption());
 
         if (row_index == position) {
             holder.cardView.setCardBackgroundColor(mContext.getColor(R.color.d_gold));
@@ -57,6 +57,7 @@ public class SelectorAdapter extends RecyclerView.Adapter<SelectorAdapter.Select
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void changeBackground(int position) {
         isItJustInflated = false;
         row_index = position;
@@ -69,9 +70,9 @@ public class SelectorAdapter extends RecyclerView.Adapter<SelectorAdapter.Select
     }
 
     public class SelectorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView txtTitle;
-        private CardView cardView;
-        private ListItemClickListener mListClickListener;
+        private final TextView txtTitle;
+        private final CardView cardView;
+        private final ListItemClickListener mListClickListener;
 
         public SelectorViewHolder(@NonNull View itemView, ListItemClickListener listener) {
             super(itemView);

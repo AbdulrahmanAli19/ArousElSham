@@ -1,20 +1,20 @@
 package com.example.arouselsham.pojo.model.maleModels;
 
-public class SelectorModel {
-   private String tag;
+public class PriceOption {
+   private String option;
    private Double price ;
 
-    public SelectorModel(String tag, Double price) {
-        this.tag = tag;
+    public PriceOption(String option, Double price) {
+        this.option = option;
         this.price = price;
     }
 
-    public String getTag() {
-        return tag;
+    public String getOption() {
+        return option;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setOption(String option) {
+        this.option = option;
     }
 
     public Double getPrice() {

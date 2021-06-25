@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.SecondActivity;
-import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Callback;
@@ -86,15 +86,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                 .collection("MenuItems")
                 .get()
                 .addOnCompleteListener(task1 -> {
-                    List<MealModel> mealModels = new ArrayList<>();
+                    List<Meal> meals = new ArrayList<>();
 
                     for (QueryDocumentSnapshot document : task1.getResult()) {
-                        mealModels.add(document.toObject(MealModel.class));
+                        meals.add(document.toObject(Meal.class));
                         Log.d(TAG, "onComplete: called");
                     }
 
                     Intent intent = new Intent(mContext, SecondActivity.class);
-                    intent.putExtra("Meals", (Serializable) mealModels);
+                    intent.putExtra("Meals", (Serializable) meals);
                     mContext.startActivity(intent);
                 });
     }

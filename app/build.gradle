@@ -86,7 +86,17 @@ dependencies {
     //bannerViewPager
     implementation 'com.github.zhpanvip:BannerViewPager:3.5.0'
 
+    //likeBtn
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
+    
+    //Room
+    def room_version = "2.3.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    //GSON Android
+    implementation 'com.google.code.gson:gson:2.8.7'
 
 
 

@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.DetailsActivity;
 import com.example.arouselsham.R;
-import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.example.arouselsham.pojo.Common;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHolder> implements Serializable {
 
     private Context mContext;
-    private List<MealModel> meals;
+    private List<Meal> meals;
 
-    public MealAdapter(Context mContext, List<MealModel> meals) {
+    public MealAdapter(Context mContext, List<Meal> meals) {
         this.mContext = mContext;
         this.meals = meals;
     }
@@ -39,20 +42,21 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SandwichViewHolder holder, int position) {
-        MealModel mealModel = meals.get(position);
-        holder.txtMealName.setText(mealModel.getArName());
-        if (mealModel.getPriceBySize() != null ||
-                mealModel.getPriceByKilogram() != null ||
-                mealModel.getPriceByBreadTypes() != null ||
-                mealModel.getPriceByPiece() != null) {
+        Meal meal = meals.get(position);
+        holder.txtMealName.setText(meal.getArName());
+
+        List<PriceOption> priceOptions = Common.getPriceOptions(meal);
+        if (priceOptions.get(0).getOption() != Common.priceByOne ||
+                priceOptions.get(0).getOption().equals(Common.priceByOne)) {
             holder.txtFrechPrice.setText(R.string.price_by_selection);
-        }else {
-            holder.txtFrechPrice.setText(mealModel.getPriceByOne().getPrice()+" EGP");
+        } else {
+            holder.txtFrechPrice.setText(priceOptions.get(0).getOption() + " EGP");
+
         }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, DetailsActivity.class);
-            intent.putExtra("Meal", (Serializable) mealModel);
+            intent.putExtra("Meal", (Serializable) meal);
             mContext.startActivity(intent);
         });
     }
@@ -62,8 +66,9 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
         return meals.size();
     }
 
-    class SandwichViewHolder extends RecyclerView.ViewHolder{
+    class SandwichViewHolder extends RecyclerView.ViewHolder {
         TextView txtMealName, txtFrechPrice;
+
         public SandwichViewHolder(@NonNull View itemView) {
             super(itemView);
             txtMealName = itemView.findViewById(R.id.txt_snadwich_name);

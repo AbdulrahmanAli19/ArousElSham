@@ -1,26 +1,27 @@
 package com.example.arouselsham;
 
+import static com.example.arouselsham.pojo.Common.dataBaseManger;
 import static com.example.arouselsham.pojo.Common.isArabicEnabled;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.arouselsham.pojo.model.maleModels.MealModel;
+import com.example.arouselsham.pojo.db.Cart;
+import com.example.arouselsham.pojo.db.Favorite;
+import com.example.arouselsham.pojo.model.KeyValue;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
-import com.example.arouselsham.pojo.model.maleModels.PriceByBreadTypes;
-import com.example.arouselsham.pojo.model.maleModels.PriceByKilogram;
-import com.example.arouselsham.pojo.model.maleModels.PriceByPiece;
-import com.example.arouselsham.pojo.model.maleModels.PriceBySize;
-import com.example.arouselsham.pojo.model.maleModels.SelectorModel;
+import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 import com.example.arouselsham.ui.SelectorAdapter;
 import com.example.arouselsham.ui.ToppingAdapter;
 import com.like.LikeButton;
@@ -34,11 +35,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener,
-        SelectorAdapter.ListItemClickListener {
+        SelectorAdapter.ListItemClickListener, ToppingAdapter.ItemClickListener {
 
     private static final String TAG = "DetailsActivity";
-    public static double mainPrice;
+    private double mainPrice;
+    private double toppingPrice;
     private int numberOfItems = 1;
+    private SelectorAdapter selectorAdapter;
+    private Meal meal;
+
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.txt_details_name)
@@ -89,12 +94,12 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
-        MealModel meal = (MealModel) getIntent().getSerializableExtra("Meal");
-        init(meal);
+        meal = (Meal) getIntent().getSerializableExtra("Meal");
+        init();
     }
 
     @SuppressLint("SetTextI18n")
-    private void init(MealModel meal) {
+    private void init() {
         String localeLanguage = Locale.getDefault().getDisplayLanguage();
         boolean isItArabic;
         List<MenuTopping> toppings = meal.getToppings();
@@ -111,7 +116,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             isItArabic = false;
         }
 
-        ToppingAdapter toppingAdapter = new ToppingAdapter(this, toppings, isItArabic);
+        ToppingAdapter toppingAdapter = new ToppingAdapter(this, toppings, isItArabic, this);
         toppingRecycler.setLayoutManager(new LinearLayoutManager(this));
         toppingRecycler.setAdapter(toppingAdapter);
 
@@ -122,91 +127,35 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         plusCard.setOnClickListener(this);
         addToCartCard.setOnClickListener(this);
 
-
         likeBtn.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                //TODO: Create database for favorite meals and the meal inside of it.
+                dataBaseManger.favoriteDao().insert(new Favorite(meal));
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                //TODO: find the meal in the database and remove it.
+                dataBaseManger.favoriteDao().delete(new Favorite(meal));
             }
         });
 
     }
 
-    public List<SelectorModel> createSelectorList(MealModel meal) {
+    public List<PriceOption> createSelectorList(Meal meal) {
+        List<PriceOption> models = new ArrayList<>();
 
-        List<SelectorModel> models = new ArrayList<>();
+        KeyValue keyValue = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
 
-        if (meal.getPriceByPiece() != null) {
-            models.add(new SelectorModel("¼ Chicken", meal.getPriceByPiece().getQuarterChicken()));
-            models.add(new SelectorModel("½ Chicken", meal.getPriceByPiece().getHalfChicken()));
-            models.add(new SelectorModel("1 Chicken", meal.getPriceByPiece().getHoleChicken()));
-
-            mainPrice = meal.getPriceByPiece().getQuarterChicken();
-
-            return models;
-
-        } else if (meal.getPriceByBreadTypes() != null) {
-
-            if (meal.getPriceByBreadTypes().getSyrianPrice() != 0)
-                models.add(new SelectorModel("Arabic bread", meal.getPriceByBreadTypes().getSyrianPrice()));
-
-            if (meal.getPriceByBreadTypes().getFrenchPrice() != 0)
-                models.add(new SelectorModel("French bread", meal.getPriceByBreadTypes().getFrenchPrice()));
-
-            if (meal.getPriceByBreadTypes().getSaro5Price() != 0)
-                models.add(new SelectorModel("Saro5 bread", meal.getPriceByBreadTypes().getSaro5Price()));
-
-            mainPrice = meal.getPriceByBreadTypes().getSyrianPrice();
-
-            return models;
-
-        } else if (meal.getPriceBySize() != null) {
-
-            if (meal.getPriceBySize().getMediumSizePrice() != 0)
-                models.add(new SelectorModel("Medium", meal.getPriceBySize().getMediumSizePrice()));
-
-            if (meal.getPriceBySize().getBigSizePrice() != 0)
-                models.add(new SelectorModel("Large", meal.getPriceBySize().getBigSizePrice()));
-
-            mainPrice = meal.getPriceBySize().getMediumSizePrice();
-
-            return models;
-
-        } else if (meal.getPriceByKilogram() != null) {
-
-            if (meal.getPriceByKilogram().getTomnKilograms() != 0)
-                models.add(new SelectorModel("⅛ KG", meal.getPriceByKilogram().getTomnKilograms()));
-
-            if (meal.getPriceByKilogram().getQuarterKilograms() != 0)
-                models.add(new SelectorModel("¼ KG", meal.getPriceByKilogram().getQuarterKilograms()));
-
-            if (meal.getPriceByKilogram().getHalfKilograms() != 0)
-                models.add(new SelectorModel("½ KG", meal.getPriceByKilogram().getHalfKilograms()));
-
-            if (meal.getPriceByKilogram().getKilograms() != 0)
-                models.add(new SelectorModel("1 KG", meal.getPriceByKilogram().getKilograms()));
-
-            mainPrice = (meal.getPriceByKilogram().getTomnKilograms() != 0) ?
-                    meal.getPriceByKilogram().getTomnKilograms() : meal.getPriceByKilogram().getQuarterKilograms();
-
-            return models;
-
-        } else {
-            mainPrice = meal.getPriceByOne().getPrice();
-
-            return models;
+        for (int i = 0; i < keyValue.getValue().size(); i++) {
+            models.add(new PriceOption(keyValue.getKey().get(i), keyValue.getValue().get(i)));
         }
+
+        return models;
     }
 
-    private SelectorAdapter selectorAdapter;
 
-    public void inflateSelectorRecyclerView(List<SelectorModel> selectorModels) {
-        selectorAdapter = new SelectorAdapter(this, selectorModels, this);
+    public void inflateSelectorRecyclerView(List<PriceOption> priceOptions) {
+        selectorAdapter = new SelectorAdapter(this, priceOptions, this);
         sizeSelectorRecycler.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
         sizeSelectorRecycler.setAdapter(selectorAdapter);
@@ -232,7 +181,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.add_to_cart_card:
-
+                dataBaseManger.cartDao().Insert(new Cart(meal));
                 break;
         }
     }
@@ -240,6 +189,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @SuppressLint("SetTextI18n")
     private void setNewPrice() {
         double operationPrice = numberOfItems * mainPrice;
+        operationPrice += toppingPrice * numberOfItems;
         txtNumberOfSelectedItems.setText(String.valueOf(numberOfItems));
         txtPrice.setText(operationPrice + " EGP");
     }
@@ -248,6 +198,18 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     public void onItemClick(int position, double price) {
         mainPrice = price;
         selectorAdapter.changeBackground(position);
+        setNewPrice();
+    }
+
+    @Override
+    public void onItemCLickListener(int position, double price, CheckBox checkBox) {
+        checkBox.setChecked(!checkBox.isChecked());
+
+        if (checkBox.isChecked()) {
+            toppingPrice += price;
+        } else {
+            toppingPrice -= price;
+        }
         setNewPrice();
     }
 }
