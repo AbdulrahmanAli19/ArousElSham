@@ -3,6 +3,7 @@ package com.example.arouselsham.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arouselsham.DetailsActivity;
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.Common;
+import com.example.arouselsham.pojo.model.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHolder> implements Serializable {
-
+    private static final String TAG = "Cannot invoke method length() on null object";
     private Context mContext;
     private List<Meal> meals;
 
@@ -44,9 +46,9 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
     public void onBindViewHolder(@NonNull SandwichViewHolder holder, int position) {
         Meal meal = meals.get(position);
         holder.txtMealName.setText(meal.getArName());
-
         List<PriceOption> priceOptions = Common.getPriceOptions(meal);
-        if (priceOptions.get(0).getOption() != Common.priceByOne ||
+
+        /*if (priceOptions.get(0).getOption() != Common.priceByOne ||
                 priceOptions.get(0).getOption().equals(Common.priceByOne)) {
             holder.txtFrechPrice.setText(R.string.price_by_selection);
         } else {
@@ -58,6 +60,17 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
             Intent intent = new Intent(mContext, DetailsActivity.class);
             intent.putExtra("Meal", (Serializable) meal);
             mContext.startActivity(intent);
+        });*/
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KeyValue map = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
+                System.out.println("should be prented now");
+
+                for (int i = 0; i < map.getKey().size(); i++) {
+                    Log.d(TAG, "test : "+map.getKey().get(i)+" "+map.getValue().get(i));
+                }
+            }
         });
     }
 

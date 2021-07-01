@@ -1,5 +1,7 @@
 package com.example.arouselsham;
 
+import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -46,8 +48,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private final static int LOGIN_REQUEST_CODE = 711;
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ");
         init();
 
+
     }
 
     private void init() {
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 showLoginScreen();
             }
         };
+
     }
 
     private void checkUserFromDatabase() {
@@ -245,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
         setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
-
 
 
 }

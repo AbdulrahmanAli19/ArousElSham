@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="..\:/Users/Boda/AndroidStudioProjects/ArousElSham/app/src/main/res/drawable/cart_icon.xml" value="0.2095" />
+        <entry key="..\:/Users/Boda/AndroidStudioProjects/ArousElSham/app/src/main/res/drawable/favorite_icon.xml" value="0.2095" />
         <entry key="..\:/Users/Boda/AndroidStudioProjects/ArousElSham/app/src/main/res/layout/activity_main.xml" value="0.371875" />
         <entry key="..\:/Users/Boda/AndroidStudioProjects/ArousElSham/app/src/main/res/layout/add_fragment.xml" value="0.371875" />
         <entry key="..\:/Users/Boda/AndroidStudioProjects/ArousElSham/app/src/main/res/layout/categori_layout.xml" value="0.36615384615384616" />
+        <entry key="..\:/Users/Boda/AndroidStudioProjects/ArousElSham/app/src/main/res/layout/meal_single_item.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/drawable/cart_icon.xml" value="0.2490740740740741" />
         <entry key="app/src/main/res/drawable/comment_background.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/drawable/favorite_icon.xml" value="0.2490740740740741" />

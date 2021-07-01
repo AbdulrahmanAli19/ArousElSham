@@ -25,7 +25,8 @@ public class Meal implements Serializable {
     public Meal(String arName, String enName,
                 Map<String, Double> price,
                 String arDescription, String enDescription,
-                List<MenuTopping> toppings, List<MenuTags> tags) {
+                 List<MenuTopping> toppings, List<MenuTags> tags
+    ) {
         this.arName = arName;
         this.enName = enName;
         this.arDescription = arDescription;

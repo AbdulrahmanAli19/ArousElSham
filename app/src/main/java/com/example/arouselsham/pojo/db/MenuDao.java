@@ -2,6 +2,7 @@ package com.example.arouselsham.pojo.db;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Embedded;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -22,5 +23,6 @@ public interface MenuDao {
 
     @Query("SELECT * FROM menu_table")
     List<Menu> selectAll();
+
 
 }

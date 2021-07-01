@@ -35,8 +35,8 @@ public class Common {
     public static final String halfChicken = "½ Chicken";
     public static final String quarterChicken = "1 Chicken";
 
-    public static final String mediumSizePrice = "Medium";
-    public static final String bigSizePrice = "Large";
+    public static final String mediumPrice = "Medium";
+    public static final String largPrice = "Large";
 
     @SuppressLint("RestrictedApi")
     public static DataBaseManger dataBaseManger = Room
