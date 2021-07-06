@@ -37,7 +37,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private List<String> images;
     private List<String> enNames, arNames;
 
-    public CategoriesAdapter(Context mContext, List<String> enNames,List<String> arNames, List<String> images) {
+    public CategoriesAdapter(Context mContext, List<String> enNames, List<String> arNames, List<String> images) {
         this.mContext = mContext;
         this.enNames = enNames;
         this.arNames = arNames;

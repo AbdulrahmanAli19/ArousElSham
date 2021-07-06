@@ -14,6 +14,7 @@ public class Menu {
     private Meal meal;
 
     public Menu() {
+
     }
 
     public Menu(Meal meal) {

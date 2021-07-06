@@ -3,10 +3,12 @@ package com.example.arouselsham.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,31 +49,23 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
     public void onBindViewHolder(@NonNull SandwichViewHolder holder, int position) {
         Meal meal = meals.get(position);
         holder.txtMealName.setText(meal.getArName());
-        List<PriceOption> priceOptions = Common.getPriceOptions(meal);
 
-        /*if (priceOptions.get(0).getOption() != Common.priceByOne ||
-                priceOptions.get(0).getOption().equals(Common.priceByOne)) {
-            holder.txtFrechPrice.setText(R.string.price_by_selection);
+        KeyValue prices = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
+
+        Picasso.get().load(meal.getImageUrl()).into(holder.imageView);
+
+        if (prices.getKey().get(0).equals(Common.priceByOne) || prices.getKey().get(0) == Common.priceByOne) {
+
+            holder.txtFrechPrice.setText(prices.getValue().get(0) + " EGP");
+
         } else {
-            holder.txtFrechPrice.setText(priceOptions.get(0).getOption() + " EGP");
-
+            holder.txtFrechPrice.setText(R.string.price_by_selection);
         }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, DetailsActivity.class);
             intent.putExtra("Meal", (Serializable) meal);
             mContext.startActivity(intent);
-        });*/
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                KeyValue map = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
-                System.out.println("should be prented now");
-
-                for (int i = 0; i < map.getKey().size(); i++) {
-                    Log.d(TAG, "test : "+map.getKey().get(i)+" "+map.getValue().get(i));
-                }
-            }
         });
     }
 
@@ -81,11 +76,12 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
 
     class SandwichViewHolder extends RecyclerView.ViewHolder {
         TextView txtMealName, txtFrechPrice;
-
+        ImageView imageView;
         public SandwichViewHolder(@NonNull View itemView) {
             super(itemView);
             txtMealName = itemView.findViewById(R.id.txt_snadwich_name);
             txtFrechPrice = itemView.findViewById(R.id.txt_french_price);
+            imageView = itemView.findViewById(R.id.meal_image);
         }
     }
 }

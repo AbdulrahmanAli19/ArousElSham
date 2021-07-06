@@ -20,7 +20,7 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         List<Meal> meals = (List<Meal>) getIntent().getSerializableExtra("Meals");
-        Log.d(TAG, "onCreate: " + meals.get(0).getArName());
+
 
         RecyclerView recyclerView = findViewById(R.id.meals_recyclerview);
         MealAdapter adapter = new MealAdapter(this, meals);

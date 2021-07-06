@@ -1,0 +1,169 @@
+package com.example.arouselsham.pojo.model.addMeals;
+
+import android.net.Uri;
+import android.util.Log;
+
+import com.example.arouselsham.pojo.Common;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+
+public class AddToFireBase {
+
+    private static final String TAG = "Cannot invoke method length() on null object";
+
+    private static Map<String, Double> thePrices = new HashMap<>();
+    private static List<Meal> meals = new ArrayList<>();
+    private static List<String> enNames, arNames;
+    private static List<Double> syrianBrad, frenchBrad, saro5Bread;
+    private static List<Double> kg, halfKg, rob3kg, tomnKg;
+    private static List<Double> mediumPrices, largePrices;
+    private static List<Double> oneChicken, halfChicken, rob3Chicken;
+    private static List<Double> priceByOne;
+
+
+    public static List<Meal> fillTheList() {
+        enNames = getTextFromString(TheStrings.enName);
+        arNames = getTextFromString(TheStrings.arName);
+
+
+        priceByOne = getPriceFromString(TheStrings.price);
+
+
+        for (int i = 0; i < enNames.size(); i++) {
+
+            thePrices.put(Common.priceByOne, priceByOne.get(i));
+
+
+            meals.add(new Meal(arNames.get(i), enNames.get(i), thePrices, enNames.get(i),
+                    arNames.get(i), TheStrings.getToppings(), TheStrings.getTags()));
+
+            meals.get(i).setId(meals.get(i).getTags().get(0).getEnName().toLowerCase(Locale.ROOT).trim() + i);
+
+            uploadData(meals.get(i));
+            uploadImage(i);
+            thePrices.clear();
+        }
+        return meals;
+    }
+
+    private static void uploadData(Meal meal) {
+
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document(meal.getTags().get(0).getEnName())
+                .collection("MenuItems")
+                .document(meal.getEnName())
+                .set(meal)
+                .addOnSuccessListener(unused ->
+                        Log.d(TAG, "onSuccess: done"))
+                .addOnFailureListener(e ->
+                        Log.d(TAG, "onFailure: " + e.getMessage()));
+
+    }
+
+    private static void updateData(Meal meal) {
+
+        Map<String, Object> imageURL = new HashMap<>();
+        imageURL.put("imageUrl", meal.getImageUrl());
+
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document(meal.getTags().get(0).getEnName())
+                .collection("MenuItems")
+                .document(meal.getEnName())
+                .update(imageURL)
+                .addOnSuccessListener(unused ->
+                        Log.d(TAG, "onSuccess: done"))
+                .addOnFailureListener(e ->
+                        Log.d(TAG, "onFailure: " + e.getMessage()));
+
+    }
+
+    private static void uploadImage(int i) {
+        StorageReference storage;
+        StorageReference ref;
+
+        Uri file = Uri.parse("android.resource://com.example.arouselsham/" + TheStrings.getImages().get(i));
+        storage = FirebaseStorage.getInstance().getReference("Meal Images");
+        String id = enNames.get(i).toLowerCase(Locale.ROOT).trim() + i;
+        String tag = meals.get(0).getTags().get(0).getEnName();
+        ref = storage.child(tag + id);
+
+        int finalI = i;
+        ref.putFile(file)
+                .addOnSuccessListener(taskSnapshot -> {
+
+                    if (taskSnapshot.getMetadata() != null) {
+
+                        if (taskSnapshot.getMetadata().getReference() != null) {
+
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(uri -> {
+
+                                String imageUrl = uri.toString();
+                                meals.get(finalI).setImageUrl(imageUrl);
+                                Log.d(TAG, "the URL is : " + imageUrl);
+                                updateData(meals.get(finalI));
+
+                            });
+
+                        }
+
+                    }
+                })
+                .addOnFailureListener(e -> Log.d(TAG, " onFailure : " + e.getMessage()));
+
+    }
+
+    private static List<String> getTextFromString(String text) {
+        String meal = "";
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < text.length(); i++) {
+
+            if (text.charAt(i) == '\n') {
+
+                if (meal.length() > 1) {
+                    list.add(meal);
+                    meal = "";
+                }
+
+            } else {
+                meal += String.valueOf(text.charAt(i));
+            }
+        }
+        return list;
+    }
+
+    private static List<Double> getPriceFromString(String text) {
+        String meal = "";
+        List<Double> list = new ArrayList<>();
+
+        for (int i = 0; i < text.length(); i++) {
+
+            if (text.charAt(i) == '\n') {
+
+                if (meal.length() > 0) {
+                    if (meal.equals("-") || meal == "-")
+                        meal = "0";
+                    list.add(Double.valueOf(meal));
+                    meal = "";
+                }
+
+            } else {
+                meal += String.valueOf(text.charAt(i));
+            }
+        }
+        return list;
+    }
+
+}

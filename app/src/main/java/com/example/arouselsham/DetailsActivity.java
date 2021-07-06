@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.db.Cart;
 import com.example.arouselsham.pojo.db.Favorite;
 import com.example.arouselsham.pojo.model.KeyValue;
@@ -26,6 +27,7 @@ import com.example.arouselsham.ui.SelectorAdapter;
 import com.example.arouselsham.ui.ToppingAdapter;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +122,21 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         toppingRecycler.setLayoutManager(new LinearLayoutManager(this));
         toppingRecycler.setAdapter(toppingAdapter);
 
-        inflateSelectorRecyclerView(createSelectorList(meal));
+
+        Picasso.get().load(meal.getImageUrl()).into(imgMain);
+
+        KeyValue prices = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
+
+        if (prices.getValue().size() > 0 && !prices.getKey().get(0).equals(Common.priceByOne)){
+            inflateSelectorRecyclerView(createSelectorList(meal));
+            mainPrice = prices.getValue().get(0);
+            setNewPrice();
+        }else{
+            sizeSelectorRecycler.setVisibility(View.GONE);
+            mainPrice = prices.getValue().get(0);
+            setNewPrice();
+        }
+
 
         txtPrice.setText(mainPrice + " EGP");
         minusCard.setOnClickListener(this);

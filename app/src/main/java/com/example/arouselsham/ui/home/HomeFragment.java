@@ -35,10 +35,11 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "Cannot invoke method length() on null object";
+
     private HomeViewModel homeViewModel;
     private List<String> enNames, arNames, images;
     private Handler sliderHandler = new Handler();
-
+    private String menuVersion ;
     @BindView(R.id.offers_viewpager)
     ViewPager2 viewPager2;
 
@@ -64,6 +65,8 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    ///TODO:
+    /** change the viewPager layout **/
     private void setUpViewPager () {
         List<Integer> images = new ArrayList();
         images.add(R.drawable.offer3);
@@ -99,9 +102,11 @@ public class HomeFragment extends Fragment {
                 .document("MenuMainTags")
                 .get()
                 .addOnCompleteListener(task -> {
+
                     enNames = (List<String>) task.getResult().get("enTags");
                     arNames = (List<String>) task.getResult().get("arTags");
                     images = (List<String>) task.getResult().get("images");
+                    menuVersion = (String) task.getResult().get("menuVersion ");
 
                     CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), enNames, arNames, images);
                     GridLayoutManager  gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -110,7 +115,8 @@ public class HomeFragment extends Fragment {
                     categoryRecycler.setAdapter(adapter);
 
                 });
-        setUpViewPager();
+        viewPager2.setVisibility(View.GONE);
+       // setUpViewPager();
     }
 
     private Runnable sliderRunable = new Runnable() {
@@ -123,13 +129,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        sliderHandler.removeCallbacks(sliderRunable);
+       // sliderHandler.removeCallbacks(sliderRunable);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        sliderHandler.post(sliderRunable);
+       // sliderHandler.post(sliderRunable);
     }
 
     @Override

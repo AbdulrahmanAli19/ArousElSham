@@ -26,9 +26,10 @@
             app:cardCornerRadius="40dp">
 
             <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/meal_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
                 android:src="@drawable/burger" />
         </androidx.cardview.widget.CardView>
 

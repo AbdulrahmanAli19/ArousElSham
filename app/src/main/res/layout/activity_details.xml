@@ -65,11 +65,11 @@
                 android:id="@+id/cardView2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                app:cardCornerRadius="500dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/size_selector_recycler"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,9 +78,9 @@
 
                 <ImageView
                     android:id="@+id/img_details"
+                    android:scaleType="centerCrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
                     android:src="@drawable/pie" />
             </androidx.cardview.widget.CardView>
 
