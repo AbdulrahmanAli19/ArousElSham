@@ -34,14 +34,31 @@ public class AddToFireBase {
     public static List<Meal> fillTheList() {
         enNames = getTextFromString(TheStrings.enName);
         arNames = getTextFromString(TheStrings.arName);
-
-
+        kg = getPriceFromString(TheStrings.kgPrice);
+        halfKg = getPriceFromString(TheStrings.halfKgPrice);
+        rob3kg = getPriceFromString(TheStrings.rob3KgPrice);
         priceByOne = getPriceFromString(TheStrings.price);
-
 
         for (int i = 0; i < enNames.size(); i++) {
 
-            thePrices.put(Common.priceByOne, priceByOne.get(i));
+            if (kg.get(i) > 0.0 && kg.get(i) != null)
+                thePrices.put(Common.kilograms, kg.get(i));
+
+            if (halfKg.get(i) > 0.0 && halfKg.get(i) != null)
+                thePrices.put(Common.halfKilograms, halfKg.get(i));
+
+            if (rob3kg.get(i) > 0.0 && rob3kg.get(i) != null)
+                thePrices.put(Common.quarterKilograms, rob3kg.get(i));
+
+            if (priceByOne.get(i) > 0.0 && priceByOne.get(i) != null)
+                thePrices.put(Common.priceByOne, priceByOne.get(i));
+
+
+           /* if (kg.get(i) > 0.0 && kg.get(i) != null)
+                thePrices.put(Common.kilograms, kg.get(i));
+
+            if (halfKg.get(i) > 0.0 && halfKg.get(i) != null)
+                thePrices.put(Common.halfKilograms, halfKg.get(i));*/
 
 
             meals.add(new Meal(arNames.get(i), enNames.get(i), thePrices, enNames.get(i),
@@ -94,7 +111,7 @@ public class AddToFireBase {
         StorageReference ref;
 
         Uri file = Uri.parse("android.resource://com.example.arouselsham/" + TheStrings.getImages().get(i));
-        storage = FirebaseStorage.getInstance().getReference("Meal Images");
+        storage = FirebaseStorage.getInstance().getReference("Menu Images/" + meals.get(i).getTags().get(0).getEnName());
         String id = enNames.get(i).toLowerCase(Locale.ROOT).trim() + i;
         String tag = meals.get(0).getTags().get(0).getEnName();
         ref = storage.child(tag + id);

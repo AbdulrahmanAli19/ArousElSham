@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "412400397061",
-    "project_id": "arous-el-sham",
-    "storage_bucket": "arous-el-sham.appspot.com"
+    "project_number": "740395231",
+    "firebase_url": "https://arous-el-sham-1f42f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "arous-el-sham-1f42f",
+    "storage_bucket": "arous-el-sham-1f42f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:412400397061:android:74c986bc0444d9a9efa56c",
+        "mobilesdk_app_id": "1:740395231:android:8538d1d0b5b3ca1f9a416a",
         "android_client_info": {
           "package_name": "com.example.arouselsham"
         }
       },
       "oauth_client": [
         {
-          "client_id": "412400397061-0aj7r8sr6er19so0rng2nq84q4ql5glo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.arouselsham",
-            "certificate_hash": "fea29c7e71ef76bb06c97973c664e806112179cd"
-          }
-        },
-        {
-          "client_id": "412400397061-njp3747qgt8mbpfp122t701hnrc2hddr.apps.googleusercontent.com",
+          "client_id": "740395231-hdmui879qbj1mbtbrsh0sn56ajva8725.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBixnIA7PtTmeVKe1AtlHzu-FIp45ESqJg"
+          "current_key": "AIzaSyANgSCb0VAAM6QLpEM0TbMw_pRLJeVhtkQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "412400397061-njp3747qgt8mbpfp122t701hnrc2hddr.apps.googleusercontent.com",
+              "client_id": "740395231-hdmui879qbj1mbtbrsh0sn56ajva8725.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -22,7 +22,8 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.ui.add.AddDialog;
+import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +40,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private List<String> enNames, arNames, images;
     private Handler sliderHandler = new Handler();
-    private String menuVersion ;
+    private Double menuVersion;
     @BindView(R.id.offers_viewpager)
     ViewPager2 viewPager2;
 
@@ -65,9 +66,8 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    ///TODO:
-    /** change the viewPager layout **/
-    private void setUpViewPager () {
+    ///TODO:change the viewPager layout
+    private void setUpViewPager() {
         List<Integer> images = new ArrayList();
         images.add(R.drawable.offer3);
         images.add(R.drawable.offer3);
@@ -96,27 +96,34 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void init () {
+    private void init() {
         FirebaseFirestore.getInstance()
-                .collection("Menu")
-                .document("MenuMainTags")
+                .collection("MainManu")
+                .document("Tags")
                 .get()
                 .addOnCompleteListener(task -> {
 
-                    enNames = (List<String>) task.getResult().get("enTags");
-                    arNames = (List<String>) task.getResult().get("arTags");
-                    images = (List<String>) task.getResult().get("images");
-                    menuVersion = (String) task.getResult().get("menuVersion ");
+                    MenuSection section ;
 
-                    CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), enNames, arNames, images);
-                    GridLayoutManager  gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-                    gridLayoutManager.setSpanCount(2);
-                    categoryRecycler.setLayoutManager(gridLayoutManager);
-                    categoryRecycler.setAdapter(adapter);
+                    if (task.isSuccessful()) {
+                        ///TODO: check if the menuVersion equals the menuVersion from SharedPref
+                        menuVersion = (Double) task.getResult().get("menuVersion");
+
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot != null) {
+                            section = documentSnapshot.toObject(MenuSection.class);
+                            CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), section);
+                            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                            gridLayoutManager.setSpanCount(2);
+                            categoryRecycler.setLayoutManager(gridLayoutManager);
+                            categoryRecycler.setAdapter(adapter);
+
+                        }
+                    }
 
                 });
         viewPager2.setVisibility(View.GONE);
-       // setUpViewPager();
+        // setUpViewPager();
     }
 
     private Runnable sliderRunable = new Runnable() {
@@ -129,13 +136,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-       // sliderHandler.removeCallbacks(sliderRunable);
+        // sliderHandler.removeCallbacks(sliderRunable);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-       // sliderHandler.post(sliderRunable);
+        // sliderHandler.post(sliderRunable);
     }
 
     @Override
@@ -153,10 +160,6 @@ public class HomeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.navigation_add:
-                AddDialog addDialog = new AddDialog();
-                addDialog.show(getActivity().getSupportFragmentManager(), "Add Dialog");
-                break;
             default:
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 break;

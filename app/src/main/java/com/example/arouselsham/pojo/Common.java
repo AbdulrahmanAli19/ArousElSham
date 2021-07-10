@@ -7,7 +7,7 @@ import android.annotation.SuppressLint;
 import androidx.room.Room;
 
 import com.example.arouselsham.pojo.db.DataBaseManger;
-import com.example.arouselsham.pojo.model.KeyValue;
+import com.example.arouselsham.pojo.model.maleModels.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 

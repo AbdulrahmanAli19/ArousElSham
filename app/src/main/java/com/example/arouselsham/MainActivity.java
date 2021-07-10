@@ -24,6 +24,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;
+import com.example.arouselsham.pojo.model.addMeals.AddToFireBase;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -38,10 +40,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -210,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                 .setGoogleButtonId(R.id.btn_sign_in_google)
                 .setPhoneButtonId(R.id.btn_sign_in_phone)
                 .build();
-
         startActivityForResult(AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAuthMethodPickerLayout(pickerLayout)
@@ -241,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().show();
         navView.setVisibility(View.VISIBLE);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user, R.id.navigation_add)
+                R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setupActionBarWithNavController(this, navController, appBarConfiguration);

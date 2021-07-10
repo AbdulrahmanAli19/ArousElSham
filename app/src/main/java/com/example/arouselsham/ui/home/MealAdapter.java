@@ -3,8 +3,6 @@ package com.example.arouselsham.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arouselsham.DetailsActivity;
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.Common;
-import com.example.arouselsham.pojo.model.KeyValue;
+import com.example.arouselsham.pojo.model.maleModels.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
-import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHolder> implements Serializable {
@@ -48,7 +44,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
     @Override
     public void onBindViewHolder(@NonNull SandwichViewHolder holder, int position) {
         Meal meal = meals.get(position);
-        holder.txtMealName.setText(meal.getArName());
+        holder.txtMealName.setText(meal.getEnName());
 
         KeyValue prices = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
 

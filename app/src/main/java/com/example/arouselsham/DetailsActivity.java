@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.db.Cart;
 import com.example.arouselsham.pojo.db.Favorite;
-import com.example.arouselsham.pojo.model.KeyValue;
+import com.example.arouselsham.pojo.model.maleModels.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;

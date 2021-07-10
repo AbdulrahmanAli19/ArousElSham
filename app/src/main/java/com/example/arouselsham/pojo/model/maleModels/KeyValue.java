@@ -1,4 +1,4 @@
-package com.example.arouselsham.pojo.model;
+package com.example.arouselsham.pojo.model.maleModels;
 
 import java.util.ArrayList;
 import java.util.Collection;

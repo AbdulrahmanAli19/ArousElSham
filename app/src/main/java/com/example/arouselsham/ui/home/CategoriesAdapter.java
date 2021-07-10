@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arouselsham.R;
 import com.example.arouselsham.SecondActivity;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Callback;
@@ -34,14 +35,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     private static final String TAG = "CategoriesAdapter";
     private Context mContext;
-    private List<String> images;
-    private List<String> enNames, arNames;
+    private MenuSection mSection;
 
-    public CategoriesAdapter(Context mContext, List<String> enNames, List<String> arNames, List<String> images) {
+    public CategoriesAdapter(Context mContext, MenuSection section) {
         this.mContext = mContext;
-        this.enNames = enNames;
-        this.arNames = arNames;
-        this.images = images;
+        this.mSection = section;
     }
 
     @NonNull
@@ -56,9 +54,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull @NotNull CategoriesViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        String image = images.get(position);
-        String enName = enNames.get(position);
-        holder.textView.setText(arNames.get(position));
+        String image = mSection.getTagsMap().get(position).get("imageUrl");
+        String enName = mSection.getTagsMap().get(position).get("enName");
+        String arName = mSection.getTagsMap().get(position).get("arName");
+
+        holder.textView.setText(enName);
 
         Picasso.get().load(image).into(holder.imageView, new Callback() {
             @Override
@@ -80,6 +80,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
     private void getDataFromFirebase(String selectedItem) {
+
         FirebaseFirestore.getInstance()
                 .collection("Menu")
                 .document(selectedItem)
@@ -97,11 +98,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                     intent.putExtra("Meals", (Serializable) meals);
                     mContext.startActivity(intent);
                 });
+
     }
 
     @Override
     public int getItemCount() {
-        return images.size();
+        if (mSection != null)
+            return mSection.getTagsMap().size();
+        else
+            return 0;
     }
 
 
