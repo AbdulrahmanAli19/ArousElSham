@@ -8,16 +8,17 @@
 
     <RelativeLayout
         android:id="@+id/home_layout"
-        android:visibility="gone"
-        android:background="#0A3C3932"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#0A3C3932"
+        android:visibility="gone">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            app:itemIconTint="@color/icon_color_selector"
             app:itemTextColor="@color/black"
             app:menu="@menu/bottom_nav_menu" />
 
@@ -49,9 +50,9 @@
         </ImageView>
 
         <ProgressBar
-            android:layout_marginTop="60dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />

@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/navigation_offers"
-        android:name="com.example.arouselsham.ui.offers.OffersFragment"
+        android:name="com.example.arouselsham.ui.favorite.FavoriteFragment"
         android:label="@string/title_offers"
         tools:layout="@layout/fragment_offers" >
         <action

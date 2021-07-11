@@ -5,6 +5,7 @@ import static com.example.arouselsham.pojo.Common.isArabicEnabled;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -91,6 +92,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.txt_number_of_item)
     TextView txtNumberOfSelectedItems;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.txt_main_price)
+    TextView txtMainPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +109,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private void init() {
         String localeLanguage = Locale.getDefault().getDisplayLanguage();
         boolean isItArabic;
+
         List<MenuTopping> toppings = meal.getToppings();
 
         txtNumberOfSelectedItems.setText(String.valueOf(numberOfItems));
@@ -118,25 +124,29 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             isItArabic = false;
         }
 
-        ToppingAdapter toppingAdapter = new ToppingAdapter(this, toppings, isItArabic, this);
-        toppingRecycler.setLayoutManager(new LinearLayoutManager(this));
-        toppingRecycler.setAdapter(toppingAdapter);
+        if (meal.getToppings().size() <= 0) {
+            toppingRecycler.setVisibility(View.GONE);
+        } else {
+            ToppingAdapter toppingAdapter = new ToppingAdapter(this, toppings, isItArabic, this);
+            toppingRecycler.setLayoutManager(new LinearLayoutManager(this));
+            toppingRecycler.setAdapter(toppingAdapter);
+        }
 
 
         Picasso.get().load(meal.getImageUrl()).into(imgMain);
 
         KeyValue prices = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
 
-        if (prices.getValue().size() > 0 && !prices.getKey().get(0).equals(Common.priceByOne)){
+        if (prices.getValue().size() > 0 && !prices.getKey().get(0).equals(Common.priceByOne)) {
             inflateSelectorRecyclerView(createSelectorList(meal));
             mainPrice = prices.getValue().get(0);
             setNewPrice();
-        }else{
+        } else {
             sizeSelectorRecycler.setVisibility(View.GONE);
             mainPrice = prices.getValue().get(0);
             setNewPrice();
         }
-
+        txtMainPrice.setText(String.valueOf(mainPrice));
 
         txtPrice.setText(mainPrice + " EGP");
         minusCard.setOnClickListener(this);

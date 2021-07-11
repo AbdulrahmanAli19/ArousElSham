@@ -42,7 +42,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:padding="16dp"
-                    tools:src="@drawable/burger" />
+                    tools:src="@drawable/asset_3" />
 
                 <ProgressBar
                     android:id="@+id/menu_progress_par"
