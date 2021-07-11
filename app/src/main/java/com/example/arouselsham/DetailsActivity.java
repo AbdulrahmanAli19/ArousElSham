@@ -1,11 +1,9 @@
 package com.example.arouselsham;
 
-import static com.example.arouselsham.pojo.Common.dataBaseManger;
 import static com.example.arouselsham.pojo.Common.isArabicEnabled;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -18,8 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.pojo.Common;
-import com.example.arouselsham.pojo.db.Cart;
-import com.example.arouselsham.pojo.db.Favorite;
 import com.example.arouselsham.pojo.model.maleModels.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
@@ -156,12 +152,13 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         likeBtn.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                dataBaseManger.favoriteDao().insert(new Favorite(meal));
+                //TODO: add to db
+                //dataBaseManger.favoriteDao().insert(new Favorite(meal));
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                dataBaseManger.favoriteDao().delete(new Favorite(meal));
+                //dataBaseManger.favoriteDao().delete(new Favorite(meal));
             }
         });
 
@@ -207,7 +204,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.add_to_cart_card:
-                dataBaseManger.cartDao().Insert(new Cart(meal));
+                //TODO: add meal to cart
                 break;
         }
     }
@@ -218,6 +215,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         operationPrice += toppingPrice * numberOfItems;
         txtNumberOfSelectedItems.setText(String.valueOf(numberOfItems));
         txtPrice.setText(operationPrice + " EGP");
+        txtMainPrice.setText(String.valueOf(mainPrice));
     }
 
     @Override

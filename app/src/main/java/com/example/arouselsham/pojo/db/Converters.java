@@ -50,6 +50,7 @@ public class Converters {
         }.getType();
         return new Gson().fromJson(toppings, type);
     }
+
     @TypeConverter
     public String fromMealListToString(Meal meal) {
         return new Gson().toJson(meal);

@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:740395231:android:8538d1d0b5b3ca1f9a416a",
+        "mobilesdk_app_id": "1:740395231:android:5d5c478f698194a89a416a",
         "android_client_info": {
           "package_name": "com.example.arouselsham"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "740395231-7k0o81ar0uoqrqbqc1tek6l56b743hm8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.arouselsham",
+            "certificate_hash": "37d0ee6444c3cfff70604db5d5f749263a8b243d"
+          }
+        },
         {
           "client_id": "740395231-hdmui879qbj1mbtbrsh0sn56ajva8725.apps.googleusercontent.com",
           "client_type": 3

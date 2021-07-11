@@ -1,10 +1,13 @@
-package com.example.arouselsham.pojo.db;
+package com.example.arouselsham.pojo.db.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.arouselsham.pojo.db.entities.Favorite;
 
 import java.util.List;
 
@@ -17,10 +20,7 @@ public interface FavoriteDao {
     @Delete
     void delete(Favorite meal);
 
-    @Update
-    void update(Favorite meal);
-
     @Query("SELECT * FROM favorite_table")
-    List<Favorite> selectAll();
+    LiveData<List<Favorite>> selectAll();
 
 }

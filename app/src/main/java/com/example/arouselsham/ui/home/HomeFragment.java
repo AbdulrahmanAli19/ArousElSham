@@ -2,6 +2,7 @@ package com.example.arouselsham.ui.home;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,17 +49,13 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, root);
+        homeViewModel.getAllMeals().observe(getViewLifecycleOwner(), menus -> {
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-
-            }
         });
+
 
         init();
 
@@ -103,7 +99,7 @@ public class HomeFragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task -> {
 
-                    MenuSection section ;
+                    MenuSection section;
 
                     if (task.isSuccessful()) {
                         ///TODO: check if the menuVersion equals the menuVersion from SharedPref

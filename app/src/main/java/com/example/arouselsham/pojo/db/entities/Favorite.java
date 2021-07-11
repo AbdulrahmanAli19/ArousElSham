@@ -1,5 +1,6 @@
-package com.example.arouselsham.pojo.db;
+package com.example.arouselsham.pojo.db.entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,20 +9,17 @@ import com.example.arouselsham.pojo.model.maleModels.Meal;
 @Entity(tableName = "favorite_table")
 public class Favorite {
 
+    @ColumnInfo(name = "_ID")
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private Meal meal;
+    private String firebaseID;
 
     public Favorite() {
     }
 
-    public Favorite(Meal meal) {
-        this.meal = meal;
-    }
-
-    public Meal getMeal() {
-        return meal;
+    public Favorite(String firebaseID) {
+        this.firebaseID = firebaseID;
     }
 
     public int getId() {
@@ -32,7 +30,11 @@ public class Favorite {
         this.id = id;
     }
 
-    public void setMeal(Meal meal) {
-        this.meal = meal;
+    public String getFirebaseID() {
+        return firebaseID;
+    }
+
+    public void setFirebaseID(String firebaseID) {
+        this.firebaseID = firebaseID;
     }
 }
