@@ -16,13 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ToppingAdapter extends RecyclerView.Adapter<ToppingAdapter.ToppingsViewHolder> {
 
     private final Context mContext;
     private final boolean isItArabic;
-    private final List<MenuTopping> toppings;
+    private  List<MenuTopping> toppings = new ArrayList<>();
     private final ItemClickListener itemClickListener;
 
 

@@ -3,8 +3,11 @@ package com.example.arouselsham.pojo.model.addMeals;
 import android.net.Uri;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -88,32 +91,22 @@ public class AddToFireBase {
 
     }
 
-    private static void updateData(Meal meal) {
-
-        Map<String, Object> imageURL = new HashMap<>();
-        imageURL.put("imageUrl", meal.getImageUrl());
-
-        FirebaseFirestore.getInstance()
-                .collection("Menu")
-                .document(meal.getTags().get(0).getEnName())
-                .collection("MenuItems")
-                .document(meal.getEnName())
-                .update(imageURL)
-                .addOnSuccessListener(unused ->
-                        Log.d(TAG, "onSuccess: done"))
-                .addOnFailureListener(e ->
-                        Log.d(TAG, "onFailure: " + e.getMessage()));
-
-    }
-
     private static void uploadImage(int i) {
+
         StorageReference storage;
         StorageReference ref;
 
+        ///TODO: get the image from mobile
+
         Uri file = Uri.parse("android.resource://com.example.arouselsham/" + TheStrings.getImages().get(i));
-        storage = FirebaseStorage.getInstance().getReference("Menu Images/" + meals.get(i).getTags().get(0).getEnName());
+
+        storage = FirebaseStorage.getInstance()
+                .getReference("Menu Images/" + meals.get(i).getTags().get(0).getEnName());
+
         String id = enNames.get(i).toLowerCase(Locale.ROOT).trim() + i;
+
         String tag = meals.get(0).getTags().get(0).getEnName();
+
         ref = storage.child(tag + id);
 
         int finalI = i;
@@ -140,6 +133,42 @@ public class AddToFireBase {
                 })
                 .addOnFailureListener(e -> Log.d(TAG, " onFailure : " + e.getMessage()));
 
+    }
+
+
+    private static void updateData(Meal meal) {
+
+        Map<String, Object> imageURL = new HashMap<>();
+        imageURL.put("imageUrl", meal.getImageUrl());
+
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document(meal.getTags().get(0).getEnName())
+                .collection("MenuItems")
+                .document(meal.getEnName())
+                .update(imageURL)
+                .addOnSuccessListener(unused ->
+                        Log.d(TAG, "onSuccess: done"))
+                .addOnFailureListener(e ->
+                        Log.d(TAG, "onFailure: " + e.getMessage()));
+
+    }
+
+
+    private static void deleteData (Meal meal){
+        FirebaseFirestore.getInstance()
+                .collection("Menu")
+                .document(meal.getTags().get(0).getEnName())
+                .collection("MenuItems")
+                .document(meal.getEnName())
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful())
+                            Log.d(TAG, ": OK.");
+                    }
+                });
     }
 
     private static List<String> getTextFromString(String text) {

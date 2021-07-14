@@ -20,12 +20,13 @@ import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHolder> implements Serializable {
     private static final String TAG = "Cannot invoke method length() on null object";
     private Context mContext;
-    private List<Meal> meals;
+    private List<Meal> meals = new ArrayList<>();
 
     public MealAdapter(Context mContext, List<Meal> meals) {
         this.mContext = mContext;

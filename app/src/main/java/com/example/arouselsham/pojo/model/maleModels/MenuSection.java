@@ -11,14 +11,14 @@ public class MenuSection implements Serializable {
     private Double menuVersion;
 
     @SerializedName("tagsMap")
-    private List<Map<String, String>> tagsMap;
+    private List<Map<String, String>> mealsList;
 
     public MenuSection() {
     }
 
-    public MenuSection(Double menuVersion, List<Map<String, String>> tagsMap) {
+    public MenuSection(Double menuVersion, List<Map<String, String>> mealsList) {
         this.menuVersion = menuVersion;
-        this.tagsMap = tagsMap;
+        this.mealsList = mealsList;
     }
 
     public Double getMenuVersion() {
@@ -29,11 +29,11 @@ public class MenuSection implements Serializable {
         this.menuVersion = menuVersion;
     }
 
-    public List<Map<String, String>> getTagsMap() {
-        return tagsMap;
+    public List<Map<String, String>> getMealsList() {
+        return mealsList;
     }
 
-    public void setTagsMap(List<Map<String, String>> tagsMap) {
-        this.tagsMap = tagsMap;
+    public void setMealsList(List<Map<String, String>> mealsList) {
+        this.mealsList = mealsList;
     }
 }

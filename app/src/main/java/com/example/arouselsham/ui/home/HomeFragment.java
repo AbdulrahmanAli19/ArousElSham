@@ -23,6 +23,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -53,12 +54,10 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, root);
         homeViewModel.getAllMeals().observe(getViewLifecycleOwner(), menus -> {
-
+            //menus.get(0).getId();
         });
 
-
         init();
-
         return root;
     }
 
@@ -98,16 +97,16 @@ public class HomeFragment extends Fragment {
                 .document("Tags")
                 .get()
                 .addOnCompleteListener(task -> {
-
                     MenuSection section;
 
                     if (task.isSuccessful()) {
                         ///TODO: check if the menuVersion equals the menuVersion from SharedPref
-                        menuVersion = (Double) task.getResult().get("menuVersion");
+                        //menuVersion = (Double) task.getResult().get("menuVersion");
 
                         DocumentSnapshot documentSnapshot = task.getResult();
                         if (documentSnapshot != null) {
                             section = documentSnapshot.toObject(MenuSection.class);
+
                             CategoriesAdapter adapter = new CategoriesAdapter(getActivity(), section);
                             GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
                             gridLayoutManager.setSpanCount(2);

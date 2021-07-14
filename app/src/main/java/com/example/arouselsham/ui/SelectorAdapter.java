@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,7 +22,7 @@ public class SelectorAdapter extends RecyclerView.Adapter<SelectorAdapter.Select
 
     private boolean isItJustInflated = true;
     private final Context mContext;
-    private final List<PriceOption> list;
+    private List<PriceOption> list = new ArrayList<>();
     private int row_index = -1;
     private final ListItemClickListener mOnClickListener;
 
