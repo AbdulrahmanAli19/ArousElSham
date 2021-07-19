@@ -9,27 +9,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.arouselsham.databinding.ActivityMainBinding;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;
-import com.example.arouselsham.pojo.model.addMeals.AddToFireBase;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,19 +37,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -64,15 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener listener;
     private FirebaseAuth auth;
 
-
-    @BindView(R.id.nav_view)
-    BottomNavigationView navView;
-
-    @BindView(R.id.home_layout)
-    RelativeLayout homeLayout;
-
-    @BindView(R.id.splash_layout)
-    ConstraintLayout splashLayout;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onStart() {
@@ -91,9 +73,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_ArousElSham);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        View view = binding.getRoot();
+        setContentView(view);
         getSupportActionBar().hide();
-        ButterKnife.bind(this);
         Log.d(TAG, "onCreate: ");
         init();
 
@@ -102,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
 
-        navView.setItemIconTintList(null);
+        binding.navView.setItemIconTintList(null);
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         customerInfoRef = database.getReference(Common.CUSTOMER_INFO_REFERENCE);
@@ -196,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
                                     Snackbar.LENGTH_SHORT).show();
                             dialog.dismiss();
                             showHomeScreen();
-                            splashLayout.setVisibility(View.GONE);
-                            homeLayout.setVisibility(View.VISIBLE);
+                            binding.splashLayout.setVisibility(View.GONE);
+                            binding.homeLayout.setVisibility(View.VISIBLE);
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(this, "ERROR: " + e.getMessage(),
@@ -241,16 +224,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showHomeScreen() {
-        splashLayout.setVisibility(View.GONE);
-        homeLayout.setVisibility(View.VISIBLE);
+        binding.splashLayout.setVisibility(View.GONE);
+        binding.homeLayout.setVisibility(View.VISIBLE);
         getSupportActionBar().show();
-        navView.setVisibility(View.VISIBLE);
+        binding.navView.setVisibility(View.VISIBLE);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
 

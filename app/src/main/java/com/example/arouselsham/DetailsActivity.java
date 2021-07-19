@@ -6,15 +6,13 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arouselsham.databinding.ActivityDetailsBinding;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.maleModels.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
@@ -30,9 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener,
         SelectorAdapter.ListItemClickListener, ToppingAdapter.ItemClickListener {
 
@@ -43,60 +38,13 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private SelectorAdapter selectorAdapter;
     private Meal meal;
 
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_details_name)
-    TextView txtName;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_details_tag)
-    TextView txtTag;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.img_details)
-    ImageView imgMain;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.details_like_btn)
-    LikeButton likeBtn;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.size_selector_recycler)
-    RecyclerView sizeSelectorRecycler;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.topping_recycler)
-    RecyclerView toppingRecycler;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.minus_card)
-    CardView minusCard;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.plus_card)
-    CardView plusCard;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.add_to_cart_card)
-    CardView addToCartCard;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_details_price)
-    TextView txtPrice;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_number_of_item)
-    TextView txtNumberOfSelectedItems;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.txt_main_price)
-    TextView txtMainPrice;
+    ActivityDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
         meal = (Meal) getIntent().getSerializableExtra("Meal");
         init();
     }
@@ -108,28 +56,28 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         List<MenuTopping> toppings = meal.getToppings();
 
-        txtNumberOfSelectedItems.setText(String.valueOf(numberOfItems));
+        binding.txtNumberOfItems.setText(String.valueOf(numberOfItems));
 
         if (isArabicEnabled || localeLanguage.equals("ar")) {
-            txtName.setText(meal.getArName());
-            txtTag.setText(meal.getTags().get(0).getArName());
+            binding.txtName.setText(meal.getArName());
+            binding.txtSection.setText(meal.getTags().get(0).getArName());
             isItArabic = true;
         } else {
-            txtName.setText(meal.getEnName());
-            txtTag.setText(meal.getTags().get(0).getEnName());
+            binding.txtName.setText(meal.getEnName());
+            binding.txtSection.setText(meal.getTags().get(0).getEnName());
             isItArabic = false;
         }
 
         if (meal.getToppings().size() <= 0) {
-            toppingRecycler.setVisibility(View.GONE);
+            binding.toppingRecycler.setVisibility(View.GONE);
         } else {
             ToppingAdapter toppingAdapter = new ToppingAdapter(this, toppings, isItArabic, this);
-            toppingRecycler.setLayoutManager(new LinearLayoutManager(this));
-            toppingRecycler.setAdapter(toppingAdapter);
+            binding.toppingRecycler.setLayoutManager(new LinearLayoutManager(this));
+            binding.toppingRecycler.setAdapter(toppingAdapter);
         }
 
 
-        Picasso.get().load(meal.getImageUrl()).into(imgMain);
+        Picasso.get().load(meal.getImageUrl()).into(binding.mainImage);
 
         KeyValue prices = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
 
@@ -138,18 +86,18 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             mainPrice = prices.getValue().get(0);
             setNewPrice();
         } else {
-            sizeSelectorRecycler.setVisibility(View.GONE);
+            binding.sizeSelectorRecycler.setVisibility(View.GONE);
             mainPrice = prices.getValue().get(0);
             setNewPrice();
         }
-        txtMainPrice.setText(String.valueOf(mainPrice));
+        binding.txtMainPrice.setText(String.valueOf(mainPrice));
 
-        txtPrice.setText(mainPrice + " EGP");
-        minusCard.setOnClickListener(this);
-        plusCard.setOnClickListener(this);
-        addToCartCard.setOnClickListener(this);
+        binding.txtPrice.setText(mainPrice + " EGP");
+        binding.minusCard.setOnClickListener(this);
+        binding.plusCard.setOnClickListener(this);
+        binding.addToCartCard.setOnClickListener(this);
 
-        likeBtn.setOnLikeListener(new OnLikeListener() {
+        binding.likeBtn.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
                 //TODO: add to db
@@ -179,21 +127,21 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
     public void inflateSelectorRecyclerView(List<PriceOption> priceOptions) {
         selectorAdapter = new SelectorAdapter(this, priceOptions, this);
-        sizeSelectorRecycler.setLayoutManager(new LinearLayoutManager(this,
+        binding.sizeSelectorRecycler.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
-        sizeSelectorRecycler.setAdapter(selectorAdapter);
+        binding.sizeSelectorRecycler.setAdapter(selectorAdapter);
     }
 
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.plus_card:
+            case R.id.plusCard:
                 numberOfItems++;
                 setNewPrice();
                 break;
 
-            case R.id.minus_card:
+            case R.id.minusCard:
                 if (numberOfItems == 1)
                     Toast.makeText(this, "The minimum number of order is 1!",
                             Toast.LENGTH_LONG).show();
@@ -203,7 +151,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
 
-            case R.id.add_to_cart_card:
+            case R.id.addToCartCard:
                 //TODO: add meal to cart
                 break;
         }
@@ -213,9 +161,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private void setNewPrice() {
         double operationPrice = numberOfItems * mainPrice;
         operationPrice += toppingPrice * numberOfItems;
-        txtNumberOfSelectedItems.setText(String.valueOf(numberOfItems));
-        txtPrice.setText(operationPrice + " EGP");
-        txtMainPrice.setText(String.valueOf(mainPrice));
+        binding.txtNumberOfItems.setText(String.valueOf(numberOfItems));
+        binding.txtPrice.setText(operationPrice + " EGP");
+        binding.txtMainPrice.setText(String.valueOf(mainPrice));
     }
 
     @Override

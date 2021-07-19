@@ -42,6 +42,17 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         this.mSection = section;
     }
 
+    public CategoriesAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public void setmSection(MenuSection mSection) {
+        this.mSection = mSection;
+        notifyDataSetChanged();
+        Log.d(TAG, "Has Been Set: "+mSection.getTagsMap().size());
+
+    }
+
     @NonNull
     @NotNull
     @Override
@@ -54,9 +65,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull @NotNull CategoriesViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        String image = mSection.getMealsList().get(position).get("imageUrl");
-        String enName = mSection.getMealsList().get(position).get("enName");
-        String arName = mSection.getMealsList().get(position).get("arName");
+        String image = mSection.getTagsMap().get(position).get("imageUrl");
+        String enName = mSection.getTagsMap().get(position).get("enName");
+        String arName = mSection.getTagsMap().get(position).get("arName");
 
         holder.textView.setText(enName);
 
@@ -103,7 +114,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public int getItemCount() {
-        return mSection.getMealsList().size();
+
+        return mSection.getTagsMap().size();
     }
 
 

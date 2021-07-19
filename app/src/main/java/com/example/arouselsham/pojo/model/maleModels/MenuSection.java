@@ -3,6 +3,7 @@ package com.example.arouselsham.pojo.model.maleModels;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,14 +12,14 @@ public class MenuSection implements Serializable {
     private Double menuVersion;
 
     @SerializedName("tagsMap")
-    private List<Map<String, String>> mealsList;
+    private List<Map<String, String>> tagsMap = new ArrayList<>();
 
     public MenuSection() {
     }
 
-    public MenuSection(Double menuVersion, List<Map<String, String>> mealsList) {
+    public MenuSection(Double menuVersion, List<Map<String, String>> tagsMap) {
         this.menuVersion = menuVersion;
-        this.mealsList = mealsList;
+        this.tagsMap = tagsMap;
     }
 
     public Double getMenuVersion() {
@@ -29,11 +30,11 @@ public class MenuSection implements Serializable {
         this.menuVersion = menuVersion;
     }
 
-    public List<Map<String, String>> getMealsList() {
-        return mealsList;
+    public List<Map<String, String>> getTagsMap() {
+        return tagsMap;
     }
 
-    public void setMealsList(List<Map<String, String>> mealsList) {
-        this.mealsList = mealsList;
+    public void setTagsMap(List<Map<String, String>> tagsMap) {
+        this.tagsMap = tagsMap;
     }
 }

@@ -2,7 +2,6 @@ package com.example.arouselsham.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.solver.widgets.ChainHead;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
@@ -23,9 +21,8 @@ public class ToppingAdapter extends RecyclerView.Adapter<ToppingAdapter.Toppings
 
     private final Context mContext;
     private final boolean isItArabic;
-    private  List<MenuTopping> toppings = new ArrayList<>();
+    private List<MenuTopping> toppings = new ArrayList<>();
     private final ItemClickListener itemClickListener;
-
 
 
     public ToppingAdapter(Context mContext, List<MenuTopping> toppings, boolean isItArabic,
@@ -51,17 +48,7 @@ public class ToppingAdapter extends RecyclerView.Adapter<ToppingAdapter.Toppings
         holder.txtName.setText(
                 (isItArabic ? topping.getToppingArName() : topping.getToppingEnName()));
 
-        //holder.itemView.setOnClickListener(v -> holder.checkBox.setChecked(!holder.checkBox.isChecked()));
-        checkBox = holder.checkBox;
-    }
-    private CheckBox checkBox;
 
-    public CheckBox getCheckBox (){
-        return checkBox;
-    }
-
-    public Boolean isCheckBoxChecked (){
-        return checkBox.isChecked();
     }
 
     @Override

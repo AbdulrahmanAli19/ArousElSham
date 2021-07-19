@@ -166,7 +166,9 @@ public class AddToFireBase {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful())
-                            Log.d(TAG, ": OK.");
+                            Log.d(TAG, meal.getEnName()+" Deleted.");
+                        else
+                            Log.d(TAG, " Error: "+task.getException());
                     }
                 });
     }
