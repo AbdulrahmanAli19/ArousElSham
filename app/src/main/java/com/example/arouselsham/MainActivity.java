@@ -24,9 +24,13 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.arouselsham.databinding.ActivityMainBinding;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;
+import com.example.arouselsham.ui.home.HomeFragment;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,7 +48,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HomeFragment.SetViewV {
     private static final String TAG = "MainActivity";
     private final static int LOGIN_REQUEST_CODE = 711;
 
@@ -77,11 +81,10 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         getSupportActionBar().hide();
-        Log.d(TAG, "onCreate: ");
         init();
 
-
     }
+
 
     private void init() {
 
@@ -237,4 +240,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick() {
+        if (binding.navView.getVisibility() == View.VISIBLE){
+            binding.navView.setVisibility(View.GONE);
+
+        }else {
+            binding.navView.setVisibility(View.VISIBLE);
+
+        }
+    }
 }

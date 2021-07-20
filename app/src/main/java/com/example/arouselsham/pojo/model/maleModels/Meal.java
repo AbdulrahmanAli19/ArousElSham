@@ -108,4 +108,18 @@ public class Meal implements Serializable {
         this.toppings = toppings;
     }
 
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "id='" + id + '\'' +
+                ", arName='" + arName + '\'' +
+                ", enName='" + enName + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", arDescription='" + arDescription + '\'' +
+                ", enDescription='" + enDescription + '\'' +
+                ", toppings=" + toppings +
+                ", tags=" + tags +
+                ", price=" + price +
+                '}';
+    }
 }

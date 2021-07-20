@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MenuSection implements Serializable {
 
-    private Double menuVersion;
+    private Float menuVersion;
 
     @SerializedName("tagsMap")
     private List<Map<String, String>> tagsMap = new ArrayList<>();
@@ -17,16 +17,16 @@ public class MenuSection implements Serializable {
     public MenuSection() {
     }
 
-    public MenuSection(Double menuVersion, List<Map<String, String>> tagsMap) {
+    public MenuSection(Float menuVersion, List<Map<String, String>> tagsMap) {
         this.menuVersion = menuVersion;
         this.tagsMap = tagsMap;
     }
 
-    public Double getMenuVersion() {
+    public Float getMenuVersion() {
         return menuVersion;
     }
 
-    public void setMenuVersion(Double menuVersion) {
+    public void setMenuVersion(Float menuVersion) {
         this.menuVersion = menuVersion;
     }
 

@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.example.arouselsham.pojo.db.entities.Menu;
 import com.example.arouselsham.pojo.db.repositories.MenuRepository;
 import com.example.arouselsham.pojo.firebase.FirebaseRepo;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 
 import java.util.List;
@@ -30,7 +31,11 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<MenuSection>> getMenuTags() {
-        return FirebaseRepo.getInstance().productListening();
+        return FirebaseRepo.getInstance().menuTags();
+    }
+
+    public LiveData<List<Meal>> getMeals(String section) {
+        return FirebaseRepo.getInstance().getAllMeals(section);
     }
 
     public void insert(Menu menu) {

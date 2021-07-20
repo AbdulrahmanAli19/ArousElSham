@@ -1,5 +1,6 @@
 package com.example.arouselsham.pojo.db.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,9 +11,10 @@ import com.example.arouselsham.pojo.model.maleModels.Meal;
 @Entity(tableName = "menu_table")
 public class Menu {
 
+    @NonNull
     @ColumnInfo(name = "_ID")
     @PrimaryKey
-    private int id;
+    private String id;
 
     private Meal meal;
 
@@ -22,6 +24,8 @@ public class Menu {
     public Menu() {
 
     }
+
+
 
     public Menu(Meal meal) {
         KeyValue prices = new KeyValue(meal.getPrice().keySet(),meal.getPrice().values());
@@ -37,11 +41,11 @@ public class Menu {
         this.meal = meal;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

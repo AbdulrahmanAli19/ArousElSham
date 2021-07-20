@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">عروس الشام</string>
     <string name="title_home">الرئسيه</string>
-    <string name="title_offers">العروض</string>
-    <string name="title_orders">الطبات</string>
+    <string name="title_favorite">العروض</string>
+    <string name="title_cart">الطبات</string>
     <string name="title_user">المستخدم</string>
     <string name="about">حول التطبيق</string>
     <string name="settings">الاعدادات</string>

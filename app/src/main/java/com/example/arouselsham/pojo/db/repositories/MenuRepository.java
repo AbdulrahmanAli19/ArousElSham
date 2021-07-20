@@ -16,6 +16,7 @@ public class MenuRepository {
     private MenuDao menuDao;
     private LiveData<List<Menu>> allMeals;
 
+
     public MenuRepository(Application application) {
         DataBaseManger dataBaseManger = DataBaseManger.getInstance(application);
         this.menuDao = dataBaseManger.menuDao();
@@ -36,6 +37,10 @@ public class MenuRepository {
 
     public void deleteAll() {
         new DeleteAllMenuAsyncTask(menuDao).execute();
+    }
+
+    public LiveData<Menu> getSingleMeal(String id) {
+        return menuDao.getMeal(id);
     }
 
     public LiveData<List<Menu>> getAllMeals() {
@@ -87,9 +92,10 @@ public class MenuRepository {
     private static class DeleteAllMenuAsyncTask extends AsyncTask<Void, Void, Void> {
         private MenuDao menuDao;
 
-        private DeleteAllMenuAsyncTask (MenuDao menuDao) {
+        private DeleteAllMenuAsyncTask(MenuDao menuDao) {
             this.menuDao = menuDao;
         }
+
         @Override
         protected Void doInBackground(Void... voids) {
             menuDao.deleteAll();

@@ -2,6 +2,7 @@ package com.example.arouselsham.pojo.firebase;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -24,9 +25,18 @@ public class FirebaseRepo {
         return instance;
     }
 
-    public LiveData<List<MenuSection>> productListening() {
+    public LiveData<List<MenuSection>> menuTags() {
         return new FirestoreLiveData<>(firebaseFirestore.collection("MainManu"),
                 MenuSection.class);
     }
+
+    public LiveData<List<Meal>> getAllMeals(String section) {
+
+        return new FirestoreLiveData<>(firebaseFirestore.collection("Menu")
+                .document(section)
+                .collection("MenuItems"),
+                Meal.class);
+    }
+
 
 }

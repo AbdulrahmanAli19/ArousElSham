@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
-import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -15,7 +14,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FirestoreLiveData<T> extends LiveData<T> {
 
@@ -42,12 +40,10 @@ public class FirestoreLiveData<T> extends LiveData<T> {
 
             List<T> itemList = new ArrayList<>();
             if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()) {
-                //MenuSection menuSection = null;
                 for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
                     T item = (T) snapshot.toObject(clazz);
-                    //menuSection = (MenuSection) item;
                     itemList.add(item);
-                    Log.i(TAG, "snapshot is "+snapshot.getId());
+                    Log.i(TAG, "snapshot is " + snapshot.getId());
                 }
                 setValue((T) itemList);
             }

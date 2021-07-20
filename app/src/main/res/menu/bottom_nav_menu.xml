@@ -9,12 +9,12 @@
     <item
         android:id="@+id/navigation_offers"
         android:icon="@drawable/ic_baseline_favorite_24"
-        android:title="@string/title_offers" />
+        android:title="@string/title_favorite" />
 
     <item
         android:id="@+id/navigation_orders"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="@string/title_orders" />
+        android:title="@string/title_cart" />
 
     <item
         android:id="@+id/navigation_user"

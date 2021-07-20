@@ -9,63 +9,109 @@
         android:id="@+id/navigation_home"
         android:name="com.example.arouselsham.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
+
+        <argument
+            android:name="listOfMeals"
+            android:defaultValue="None" />
+
         <action
             android:id="@+id/action_navigation_home_to_navigation_about"
-            app:destination="@id/navigation_about" />
+            app:destination="@id/navigation_about"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
         <action
             android:id="@+id/action_navigation_home_to_navigation_settings"
-            app:destination="@id/navigation_settings" />
+            app:destination="@id/navigation_settings"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
         <action
             android:id="@+id/action_navigation_home_to_navigation_search"
-            app:destination="@id/navigation_search" />
+            app:destination="@id/navigation_search"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
         <action
-            android:id="@+id/action_navigation_home_to_navigation_offers"
-            app:destination="@id/navigation_offers" />
+            android:id="@+id/action_navigation_home_to_sectionFragment"
+            app:destination="@id/sectionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sectionFragment"
+        android:name="com.example.arouselsham.ui.section.SectionFragment"
+        android:label="section_fragment"
+        tools:layout="@layout/section_fragment">
+
+        <!--<argument
+            android:name="listOfMeals"
+            app:argType="com.example.arouselsham.pojo.model.maleModels.ListOfMeals"
+            android:defaultValue="None" />
+
+        <argument
+            android:name="sidleMeal"
+            app:argType="com.example.arouselsham.pojo.model.maleModels.Meal"
+            android:defaultValue="None" />-->
+
+        <action
+            android:id="@+id/action_sectionFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.arouselsham.ui.details.DetailsFragment"
+        android:label="details_fragment"
+        tools:layout="@layout/details_fragment">
+        <!--<argument
+            android:name="sigleMeal"
+            app:argType="com.example.arouselsham.pojo.model.maleModels.Meal"
+            android:defaultValue="None" />-->
     </fragment>
 
     <fragment
         android:id="@+id/navigation_about"
         android:name="com.example.arouselsham.ui.about.AboutFragment"
         android:label="@string/about"
-        tools:layout="@layout/about_fragment"/>
+        tools:layout="@layout/about_fragment" />
 
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.arouselsham.ui.search.SearchFragment"
         android:label="@string/search"
-        tools:layout="@layout/search_fragment"/>
+        tools:layout="@layout/search_fragment" />
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.arouselsham.ui.settings.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/settings_fragment"/>
+        tools:layout="@layout/settings_fragment" />
 
     <fragment
         android:id="@+id/navigation_offers"
         android:name="com.example.arouselsham.ui.favorite.FavoriteFragment"
-        android:label="@string/title_offers"
-        tools:layout="@layout/fragment_offers" >
-        <action
-            android:id="@+id/action_navigation_offers_to_navigation_orders"
-            app:destination="@id/navigation_orders" />
-    </fragment>
+        android:label="@string/title_favorite"
+        tools:layout="@layout/fragment_offers" />
 
     <fragment
         android:id="@+id/navigation_orders"
         android:name="com.example.arouselsham.ui.orders.OrdersFragment"
-        android:label="@string/title_orders"
-        tools:layout="@layout/fragment_offers" >
-        <action
-            android:id="@+id/action_navigation_orders_to_navigation_user"
-            app:destination="@id/navigation_user" />
-    </fragment>
+        android:label="@string/title_cart"
+        tools:layout="@layout/fragment_offers" />
 
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.arouselsham.ui.user.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_offers" />
+
+
 </navigation>

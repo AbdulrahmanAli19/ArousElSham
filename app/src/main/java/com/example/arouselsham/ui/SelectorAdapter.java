@@ -27,7 +27,8 @@ public class SelectorAdapter extends RecyclerView.Adapter<SelectorAdapter.Select
     private final ListItemClickListener mOnClickListener;
 
 
-    public SelectorAdapter(Context mContext, List<PriceOption> priceOption, ListItemClickListener mOnClickListener) {
+    public SelectorAdapter(Context mContext, List<PriceOption> priceOption,
+                           ListItemClickListener mOnClickListener) {
         this.mContext = mContext;
         this.list = priceOption;
         this.mOnClickListener = mOnClickListener;

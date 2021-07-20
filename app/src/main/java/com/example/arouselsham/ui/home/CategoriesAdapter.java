@@ -36,14 +36,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private static final String TAG = "CategoriesAdapter";
     private Context mContext;
     private MenuSection mSection = new MenuSection();
+    private final OnItemClickListener onItemClickListener;
 
-    public CategoriesAdapter(Context mContext, MenuSection section) {
+    public CategoriesAdapter(Context mContext, OnItemClickListener onItemClickListener) {
         this.mContext = mContext;
-        this.mSection = section;
-    }
-
-    public CategoriesAdapter(Context mContext) {
-        this.mContext = mContext;
+        this.onItemClickListener = onItemClickListener;
     }
 
     public void setmSection(MenuSection mSection) {
@@ -58,7 +55,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @Override
     public CategoriesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.categori_layout, parent, false);
-        CategoriesViewHolder viewHolder = new CategoriesViewHolder(view);
+        CategoriesViewHolder viewHolder = new CategoriesViewHolder(view, onItemClickListener);
         return viewHolder;
     }
 
@@ -84,32 +81,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             }
         });
 
-        holder.mainCard.setOnClickListener(v -> {
-            getDataFromFirebase(enName);
-        });
-
-    }
-
-    private void getDataFromFirebase(String selectedItem) {
-
-        FirebaseFirestore.getInstance()
-                .collection("Menu")
-                .document(selectedItem)
-                .collection("MenuItems")
-                .get()
-                .addOnCompleteListener(task1 -> {
-                    List<Meal> meals = new ArrayList<>();
-
-                    for (QueryDocumentSnapshot document : task1.getResult()) {
-                        meals.add(document.toObject(Meal.class));
-                        Log.d(TAG, "onComplete: called");
-                    }
-
-                    Intent intent = new Intent(mContext, SecondActivity.class);
-                    intent.putExtra("Meals", (Serializable) meals);
-                    mContext.startActivity(intent);
-                });
-
     }
 
     @Override
@@ -119,18 +90,31 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
 
-    static class CategoriesViewHolder extends RecyclerView.ViewHolder {
+    static class CategoriesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ImageView imageView;
         private final TextView textView;
         private final CardView mainCard;
         private final ProgressBar progressBar;
+        private OnItemClickListener onItemClickListener;
 
-        public CategoriesViewHolder(@NonNull @NotNull View itemView) {
+        public CategoriesViewHolder(@NonNull @NotNull View itemView,
+                                    OnItemClickListener onItemClickListener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imd_category);
             textView = itemView.findViewById(R.id.txt_category);
             mainCard = itemView.findViewById(R.id.main_card);
             progressBar = itemView.findViewById(R.id.menu_progress_par);
+            this.onItemClickListener = onItemClickListener ;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.onItemClickListener(getBindingAdapterPosition());
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClickListener(int position);
     }
 }

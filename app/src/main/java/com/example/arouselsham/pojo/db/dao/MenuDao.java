@@ -30,6 +30,6 @@ public interface MenuDao {
     LiveData<List<Menu>> getAllMeals();
 
     @Query("SELECT * FROM menu_table WHERE _ID = :firebaseId")
-    Menu getMeal(String firebaseId);
+    LiveData<Menu> getMeal(String firebaseId);
 
 }
