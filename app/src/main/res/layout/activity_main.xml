@@ -28,7 +28,7 @@
                 app:itemTextColor="@color/black"
                 app:menu="@menu/bottom_nav_menu" />
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/nav_host_fragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
@@ -42,12 +42,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/splash_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/gold">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="240dp"
                 android:layout_height="340dp"
+                android:src="@drawable/asset_3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -32,4 +32,7 @@ public interface MenuDao {
     @Query("SELECT * FROM menu_table WHERE _ID = :firebaseId")
     LiveData<Menu> getMeal(String firebaseId);
 
+    @Query("SELECT * FROM menu_table WHERE _SECTION = :section ORDER BY _PRICE ASC")
+    LiveData<List<Menu>> getMealBySection(String section);
+
 }

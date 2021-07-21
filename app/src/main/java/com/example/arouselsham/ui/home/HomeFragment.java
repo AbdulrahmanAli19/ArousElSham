@@ -1,7 +1,6 @@
 package com.example.arouselsham.ui.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,74 +15,72 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.SecondActivity;
 import com.example.arouselsham.databinding.FragmentHomeBinding;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.db.entities.MenuTags;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemClickListener{
+public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemClickListener {
     private static final String TAG = "HomeFragment";
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
     private NavController navController;
     private MenuSection section;
     private SetViewV setViewV;
-    private final SharedPreferences preferences = getContext().getSharedPreferences("the tags",Context.MODE_PRIVATE);
-    private final SharedPreferences.Editor prefEditor = preferences.edit();
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor prefEditor;
+    private List<MenuTags> tagsList;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        preferences = getContext().getSharedPreferences("the tags", Context.MODE_PRIVATE);
+        prefEditor = preferences.edit();
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         setViewV = (SetViewV) getContext();
+
         homeViewModel.getAllMeals().observe(getViewLifecycleOwner(), menus -> {
 
             if (menus.size() > 0) {
-                Toast.makeText(getActivity(), "Menu has" + menus.size(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "NOT EMPTY :) : "+"Menu has" + menus.size());
             } else {
-                Toast.makeText(getActivity(), "menu is empty has " +
-                        menus.size(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "EMPTY :( : "+"Menu has" + menus.size());
             }
 
         });
 
-        CategoriesAdapter adapter = setUpRecyclerView();
 
-        float menuVersion =  preferences.getFloat("menuVersion", 0.0f);
-
-        homeViewModel.getMenuTags().observe(getViewLifecycleOwner(), menuSections -> {
-            section = menuSections.get(0);
-            if (menuVersion == section.getMenuVersion()) {
-                Log.d(TAG, "GET DATA FROM DATA BASE: ");
-                adapter.setmSection(section);
+        homeViewModel.getAllMenuTags().observe(getViewLifecycleOwner(), menuTags -> {
+            if (menuTags.size() > 0) {
+                this.tagsList = menuTags;
+                CategoriesAdapter adapter = setUpRecyclerView();
+                adapter.setTags(menuTags);
                 binding.recyclerCategories.setAdapter(adapter);
+            }
+        });
 
-            } else {
+        float menuVersion = preferences.getFloat("menuVersion", 0.0f);
+
+        homeViewModel.getMenuTagsFromFirestore().observe(getViewLifecycleOwner(), menuSections -> {
+            section = menuSections.get(0);
+            if (menuVersion != section.getMenuVersion()) {
                 Log.d(TAG, "SAVE DATA TO DATA BASE: ");
-
                 prefEditor.putFloat("menuVersion", section.getMenuVersion());
                 prefEditor.apply();
-                adapter.setmSection(section);
-                binding.recyclerCategories.setAdapter(adapter);
                 saveMenuToDatabase();
+                saveMenuTagsToDatabase();
             }
 
         });
@@ -92,10 +89,22 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
         return root;
     }
 
+    private void saveMenuTagsToDatabase() {
+        homeViewModel.deleteAllMenuTags();
+        for (int i = 0; i < section.getTagsMap().size(); i++) {
+            String imageUrl = section.getTagsMap().get(i).get("imageUrl");
+            String enName = section.getTagsMap().get(i).get("enName");
+            String arName = section.getTagsMap().get(i).get("arName");
+            MenuTags menuTags = new MenuTags(imageUrl, enName, arName);
+            homeViewModel.insertMenuTags(menuTags);
+        }
+    }
+
     private void saveMenuToDatabase() {
+        homeViewModel.deleteAllMeals();
         for (int i = 0; i < section.getTagsMap().size(); i++) {
 
-            homeViewModel.getMeals(section.getTagsMap().get(i).get("enName"))
+            homeViewModel.getMealsFromFirestore(section.getTagsMap().get(i).get("enName"))
                     .observe(getViewLifecycleOwner(), meals -> {
 
                         for (int j = 0; j < meals.size(); j++) {
@@ -103,11 +112,10 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
                                     = new com.example.arouselsham.pojo.db.entities.Menu(meals.get(j));
                             menu.setId(meals.get(j).getId());
 
-                            homeViewModel.insert(menu);
+                            homeViewModel.insertMeal(menu);
                         }
 
                     });
-
         }
 
     }
@@ -165,25 +173,11 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
 
     @Override
     public void onItemClickListener(int position) {
-        //String tag = section.getTagsMap().get(position).get("enName");
-        FirebaseFirestore.getInstance()
-                .collection("Menu")
-                .document(section.getTagsMap().get(position).get("enName"))
-                .collection("MenuItems")
-                .get()
-                .addOnCompleteListener(task1 -> {
-                    List<Meal> meals = new ArrayList<>();
+        String tag = section.getTagsMap().get(position).get("enName");
+        HomeFragmentDirections.ActionNavigationHomeToSectionFragment action =
+                HomeFragmentDirections.actionNavigationHomeToSectionFragment(tag);
 
-                    for (QueryDocumentSnapshot document : task1.getResult()) {
-                        meals.add(document.toObject(Meal.class));
-                        Log.d(TAG, "onComplete: called");
-                    }
-
-                    Intent intent = new Intent(getContext(), SecondActivity.class);
-                    intent.putExtra("Meals", (Serializable) meals);
-                    getContext().startActivity(intent);
-                });
-
+        navController.navigate(action);
     }
 
     public interface SetViewV {

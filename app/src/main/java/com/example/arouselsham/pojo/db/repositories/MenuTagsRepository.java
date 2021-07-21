@@ -34,7 +34,7 @@ public class MenuTagsRepository {
         new UpdateMenuTagAsyncTask(dao).execute(menuTags);
     }
 
-    private void deleteAll () {
+    public void deleteAll () {
         new DeleteAllMenuTagsAsyncTask(dao).execute();
     }
 

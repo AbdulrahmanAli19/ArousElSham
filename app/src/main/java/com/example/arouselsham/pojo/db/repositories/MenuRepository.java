@@ -15,12 +15,14 @@ public class MenuRepository {
 
     private MenuDao menuDao;
     private LiveData<List<Menu>> allMeals;
+    private LiveData<List<Menu>> mealsBySection;
 
 
     public MenuRepository(Application application) {
         DataBaseManger dataBaseManger = DataBaseManger.getInstance(application);
         this.menuDao = dataBaseManger.menuDao();
         this.allMeals = menuDao.getAllMeals();
+
     }
 
     public void insert(Menu menu) {
@@ -45,6 +47,10 @@ public class MenuRepository {
 
     public LiveData<List<Menu>> getAllMeals() {
         return allMeals;
+    }
+
+    public LiveData<List<Menu>> getMealsBySection(String section) {
+        return this.mealsBySection = menuDao.getMealBySection(section);
     }
 
     private static class InsertMenuAsyncTask extends AsyncTask<Menu, Void, Void> {

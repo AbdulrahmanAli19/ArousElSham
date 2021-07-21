@@ -1,8 +1,7 @@
-package com.example.arouselsham.ui.home;
+package com.example.arouselsham.ui.section;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arouselsham.DetailsActivity;
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.maleModels.KeyValue;
@@ -25,19 +23,25 @@ import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHolder> implements Serializable {
     private static final String TAG = "Cannot invoke method length() on null object";
-    private Context mContext;
+    private final OnItemClickListener onItemClickListener;
+    private final Context mContext;
     private List<Meal> meals = new ArrayList<>();
 
-    public MealAdapter(Context mContext, List<Meal> meals) {
+    public MealAdapter(Context mContext,  OnItemClickListener onItemClickListener) {
         this.mContext = mContext;
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setMeals(List<Meal> meals) {
         this.meals = meals;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public SandwichViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.snadwich_layout, parent, false);
-        SandwichViewHolder sandwichViewHolder = new SandwichViewHolder(view);
+        SandwichViewHolder sandwichViewHolder = new SandwichViewHolder(view, onItemClickListener);
         return sandwichViewHolder;
     }
 
@@ -59,11 +63,6 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
             holder.txtFrechPrice.setText(R.string.price_by_selection);
         }
 
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(mContext, DetailsActivity.class);
-            intent.putExtra("Meal", (Serializable) meal);
-            mContext.startActivity(intent);
-        });
     }
 
     @Override
@@ -71,14 +70,27 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
         return meals.size();
     }
 
-    class SandwichViewHolder extends RecyclerView.ViewHolder {
+    static class SandwichViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        OnItemClickListener onItemClickListener;
         TextView txtMealName, txtFrechPrice;
         ImageView imageView;
-        public SandwichViewHolder(@NonNull View itemView) {
+
+        public SandwichViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
             txtMealName = itemView.findViewById(R.id.txt_snadwich_name);
             txtFrechPrice = itemView.findViewById(R.id.txt_french_price);
             imageView = itemView.findViewById(R.id.meal_image);
+            this.onItemClickListener = onItemClickListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.onClick(getBindingAdapterPosition());
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onClick(int position);
     }
 }

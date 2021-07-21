@@ -21,16 +21,19 @@ public class Menu {
     @ColumnInfo(name = "_PRICE")
     private Double price;
 
+    @ColumnInfo(name = "_SECTION")
+    private String section;
+
     public Menu() {
 
     }
-
 
 
     public Menu(Meal meal) {
         KeyValue prices = new KeyValue(meal.getPrice().keySet(),meal.getPrice().values());
         this.price = prices.getValue().get(0);
         this.meal = meal;
+        this.section = meal.getTags().get(0).getEnName();
     }
 
     public Meal getMeal() {
@@ -55,5 +58,13 @@ public class Menu {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 }

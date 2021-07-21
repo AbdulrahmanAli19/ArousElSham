@@ -41,7 +41,11 @@
 
         <action
             android:id="@+id/action_navigation_home_to_sectionFragment"
-            app:destination="@id/sectionFragment" />
+            app:destination="@id/sectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -50,19 +54,16 @@
         android:label="section_fragment"
         tools:layout="@layout/section_fragment">
 
-        <!--<argument
-            android:name="listOfMeals"
-            app:argType="com.example.arouselsham.pojo.model.maleModels.ListOfMeals"
-            android:defaultValue="None" />
-
-        <argument
-            android:name="sidleMeal"
-            app:argType="com.example.arouselsham.pojo.model.maleModels.Meal"
-            android:defaultValue="None" />-->
-
         <action
             android:id="@+id/action_sectionFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="section"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -70,10 +71,9 @@
         android:name="com.example.arouselsham.ui.details.DetailsFragment"
         android:label="details_fragment"
         tools:layout="@layout/details_fragment">
-        <!--<argument
-            android:name="sigleMeal"
-            app:argType="com.example.arouselsham.pojo.model.maleModels.Meal"
-            android:defaultValue="None" />-->
+        <argument
+            android:name="meal"
+            app:argType="com.example.arouselsham.pojo.model.maleModels.Meal" />
     </fragment>
 
     <fragment

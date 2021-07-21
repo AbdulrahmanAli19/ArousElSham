@@ -2,7 +2,6 @@ package com.example.arouselsham.ui.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +15,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.SecondActivity;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.db.entities.MenuTags;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +31,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     private static final String TAG = "CategoriesAdapter";
     private Context mContext;
-    private MenuSection mSection = new MenuSection();
+    private List<MenuTags> tags = new ArrayList<>();
     private final OnItemClickListener onItemClickListener;
 
     public CategoriesAdapter(Context mContext, OnItemClickListener onItemClickListener) {
@@ -43,10 +39,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         this.onItemClickListener = onItemClickListener;
     }
 
-    public void setmSection(MenuSection mSection) {
-        this.mSection = mSection;
+    public void setTags(List<MenuTags> tags) {
+        this.tags = tags;
         notifyDataSetChanged();
-        Log.d(TAG, "Has Been Set: "+mSection.getTagsMap().size());
 
     }
 
@@ -62,9 +57,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull @NotNull CategoriesViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        String image = mSection.getTagsMap().get(position).get("imageUrl");
-        String enName = mSection.getTagsMap().get(position).get("enName");
-        String arName = mSection.getTagsMap().get(position).get("arName");
+        String image = tags.get(position).getImageUrl();
+        String enName = tags.get(position).getEnName();
+        String arName = tags.get(position).getArName();
 
         holder.textView.setText(enName);
 
@@ -86,7 +81,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @Override
     public int getItemCount() {
 
-        return mSection.getTagsMap().size();
+        return tags.size();
     }
 
 
@@ -104,7 +99,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             textView = itemView.findViewById(R.id.txt_category);
             mainCard = itemView.findViewById(R.id.main_card);
             progressBar = itemView.findViewById(R.id.menu_progress_par);
-            this.onItemClickListener = onItemClickListener ;
+            this.onItemClickListener = onItemClickListener;
             itemView.setOnClickListener(this);
         }
 

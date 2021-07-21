@@ -9,17 +9,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.arouselsham.databinding.SectionFragmentBinding;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 
-public class SectionFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private SectionViewModel mViewModel;
+public class SectionFragment extends Fragment implements MealAdapter.OnItemClickListener {
+    private static final String TAG = "SectionFragment";
+    private NavController navController;
+    private SectionViewModel sectionViewModel;
     private SectionFragmentBinding binding;
-
-    public static SectionFragment newInstance() {
-        return new SectionFragment();
-    }
+    private List<Meal> meals;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -27,7 +32,22 @@ public class SectionFragment extends Fragment {
 
         binding = SectionFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        mViewModel = new ViewModelProvider(this).get(SectionViewModel.class);
+        sectionViewModel = new ViewModelProvider(this).get(SectionViewModel.class);
+
+        String section = SectionFragmentArgs.fromBundle(getArguments()).getSection();
+        MealAdapter adapter = new MealAdapter(getContext(), this);
+
+        sectionViewModel.getMealsBySection(section).observe(getViewLifecycleOwner(), menus -> {
+            meals = new ArrayList<>();
+            for (int i = 0; i < menus.size(); i++)
+                meals.add(menus.get(i).getMeal());
+
+            adapter.setMeals(meals);
+            LinearLayoutManager manager = new LinearLayoutManager(getContext());
+            binding.mealsRecyclerview.setLayoutManager(manager);
+            binding.mealsRecyclerview.setAdapter(adapter);
+        });
+
 
         return root;
     }
@@ -35,5 +55,14 @@ public class SectionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+    }
+
+    @Override
+    public void onClick(int position) {
+        SectionFragmentDirections.ActionSectionFragmentToDetailsFragment action =
+                SectionFragmentDirections.actionSectionFragmentToDetailsFragment(meals.get(position));
+        navController.navigate(action);
+
     }
 }

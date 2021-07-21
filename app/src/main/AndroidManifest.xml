@@ -13,12 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArousElSham">
-        <activity
-            android:name=".DetailsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SecondActivity"
-            android:exported="true" />
 
         <uses-library
             android:name="com.google.android.wearable"
