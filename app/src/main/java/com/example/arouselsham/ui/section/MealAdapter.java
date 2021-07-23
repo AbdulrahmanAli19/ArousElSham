@@ -2,6 +2,7 @@ package com.example.arouselsham.ui.section;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
     private final Context mContext;
     private List<Meal> meals = new ArrayList<>();
 
-    public MealAdapter(Context mContext,  OnItemClickListener onItemClickListener) {
+    public MealAdapter(Context mContext, OnItemClickListener onItemClickListener) {
         this.mContext = mContext;
         this.onItemClickListener = onItemClickListener;
     }
@@ -41,8 +42,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
     @Override
     public SandwichViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.snadwich_layout, parent, false);
-        SandwichViewHolder sandwichViewHolder = new SandwichViewHolder(view, onItemClickListener);
-        return sandwichViewHolder;
+        return new SandwichViewHolder(view, onItemClickListener);
     }
 
     @SuppressLint("SetTextI18n")
@@ -51,9 +51,12 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
         Meal meal = meals.get(position);
         holder.txtMealName.setText(meal.getEnName());
 
+        Log.d(TAG, "meal : " + meal.toString());
+
         KeyValue prices = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
 
         Picasso.get().load(meal.getImageUrl()).into(holder.imageView);
+
 
         if (prices.getKey().get(0).equals(Common.priceByOne) || prices.getKey().get(0) == Common.priceByOne) {
 
@@ -62,6 +65,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
         } else {
             holder.txtFrechPrice.setText(R.string.price_by_selection);
         }
+
 
     }
 

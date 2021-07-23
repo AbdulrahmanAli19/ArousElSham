@@ -3,6 +3,8 @@ package com.example.arouselsham.pojo.db.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+
 @Entity(tableName = "menu_tags_table")
 public class MenuTags {
 
@@ -15,10 +17,16 @@ public class MenuTags {
 
     private String arName;
 
-    public MenuTags( String imageUrl, String enName, String arName) {
+    public MenuTags(String imageUrl, String enName, String arName) {
         this.imageUrl = imageUrl;
         this.enName = enName;
         this.arName = arName;
+    }
+
+    public MenuTags(MenuSection section) {
+        this.imageUrl = section.getTagsMap().get(0).get("imageUrl");
+        this.enName = section.getTagsMap().get(0).get("enName");
+        this.arName = section.getTagsMap().get(0).get("arName");
     }
 
     public int getId() {

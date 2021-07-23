@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/sectionFragment"
         android:name="com.example.arouselsham.ui.section.SectionFragment"
-        android:label="section_fragment"
+        android:label="{section}"
         tools:layout="@layout/section_fragment">
 
         <action
@@ -69,7 +69,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.arouselsham.ui.details.DetailsFragment"
-        android:label="details_fragment"
+        android:label="Details"
         tools:layout="@layout/details_fragment">
         <argument
             android:name="meal"
@@ -99,19 +99,27 @@
         android:id="@+id/navigation_offers"
         android:name="com.example.arouselsham.ui.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
-        tools:layout="@layout/fragment_offers" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_navigation_offers_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_orders"
-        android:name="com.example.arouselsham.ui.orders.OrdersFragment"
+        android:name="com.example.arouselsham.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_offers" />
+        tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.arouselsham.ui.user.UserFragment"
         android:label="@string/title_user"
-        tools:layout="@layout/fragment_offers" />
+        tools:layout="@layout/fragment_favorite" />
 
 
 </navigation>

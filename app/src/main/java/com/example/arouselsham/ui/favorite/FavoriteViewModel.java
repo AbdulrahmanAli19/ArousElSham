@@ -1,19 +1,46 @@
 package com.example.arouselsham.ui.favorite;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Observer;
 
-public class FavoriteViewModel extends ViewModel {
+import com.example.arouselsham.pojo.db.entities.Favorite;
+import com.example.arouselsham.pojo.db.entities.Menu;
+import com.example.arouselsham.pojo.db.repositories.FavoriteRepository;
+import com.example.arouselsham.pojo.db.repositories.MenuRepository;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
 
-    private MutableLiveData<String> mText;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
-    public FavoriteViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+public class FavoriteViewModel extends AndroidViewModel {
+
+    private Meal meal = new Meal();
+
+    private FavoriteRepository favoriteRepository;
+    private MenuRepository menuRepository;
+
+    public FavoriteViewModel(@NonNull Application application) {
+        super(application);
+        favoriteRepository = new FavoriteRepository(application);
+        menuRepository = new MenuRepository(application);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Favorite>> getFavorites() {
+        return favoriteRepository.getGetAll();
     }
+
+    public Menu getMealById(String id) throws ExecutionException, InterruptedException {
+       return menuRepository.getMealById(id);
+    }
+
+
 }

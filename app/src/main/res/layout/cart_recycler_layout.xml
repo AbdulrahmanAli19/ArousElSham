@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="numberOfMeals"
+            type="int" />
+
+        <variable
+            name="mealName"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent"
+        android:layout_marginTop="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/mealImage"
+            android:scaleType="centerCrop"
+            android:layout_width="110dp"
+            android:layout_height="150dp"
+            android:layout_margin="9dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/asset_3" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="9dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:text=""
+            app:layout_constraintStart_toEndOf="@+id/mealImage"
+            app:layout_constraintTop_toTopOf="@+id/mealImage"
+            tools:text="Test" />
+
+        <TextView
+            android:id="@+id/txtMinus"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/minus"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/mealImage" />
+
+
+        <TextView
+            android:id="@+id/txtNumberOfMeals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPlus"
+            app:layout_constraintStart_toEndOf="@+id/txtMinus"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/txtPlus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/plus"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtNumberOfMeals" />
+
+        <TextView
+            android:id="@+id/textTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mealImage"
+            tools:text="100.00 EGP" />
+
+        <TextView
+            android:id="@+id/txtToppings"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/txtNumberOfMeals"
+            app:layout_constraintStart_toEndOf="@+id/mealImage"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:text="SPICEY \n CHEESE\n HOT" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

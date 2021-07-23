@@ -9,4 +9,5 @@
     <string name="settings">الاعدادات</string>
     <string name="search">بحث</string>
     <string name="price_by_selection">السعر بالاختيار</string>
+    <string name="currency">ج.م</string>
 </resources>

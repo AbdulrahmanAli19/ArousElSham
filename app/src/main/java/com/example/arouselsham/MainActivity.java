@@ -57,8 +57,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
     private DatabaseReference customerInfoRef;
     private FirebaseAuth.AuthStateListener listener;
     private FirebaseAuth auth;
+    private NavController navController;
 
     private ActivityMainBinding binding;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        navController.navigateUp();
+        return super.onSupportNavigateUp();
+    }
 
     @Override
     protected void onStart() {
@@ -234,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
@@ -250,4 +257,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
 
         }
     }
+
+
 }

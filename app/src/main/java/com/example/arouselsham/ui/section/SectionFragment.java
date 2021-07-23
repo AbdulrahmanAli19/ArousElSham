@@ -13,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.arouselsham.MainActivity;
 import com.example.arouselsham.databinding.SectionFragmentBinding;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 
@@ -36,6 +37,7 @@ public class SectionFragment extends Fragment implements MealAdapter.OnItemClick
 
         String section = SectionFragmentArgs.fromBundle(getArguments()).getSection();
         MealAdapter adapter = new MealAdapter(getContext(), this);
+
 
         sectionViewModel.getMealsBySection(section).observe(getViewLifecycleOwner(), menus -> {
             meals = new ArrayList<>();

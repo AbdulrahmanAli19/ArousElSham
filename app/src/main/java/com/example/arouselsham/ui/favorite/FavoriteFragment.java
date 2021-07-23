@@ -8,28 +8,72 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.arouselsham.R;
+import com.example.arouselsham.databinding.FragmentFavoriteBinding;
+import com.example.arouselsham.pojo.db.entities.Favorite;
+import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.ui.section.MealAdapter;
 
-public class FavoriteFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-    private FavoriteViewModel notificationsViewModel;
+public class FavoriteFragment extends Fragment implements MealAdapter.OnItemClickListener {
+    private static final String TAG = "FavoriteFragment";
+    private NavController navController;
+    private FragmentFavoriteBinding binding;
+    private FavoriteViewModel favoriteViewModel;
+    private List<Favorite> favorites;
+    private final List<Meal> meals = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
+        favoriteViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
+        binding = FragmentFavoriteBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        View root = inflater.inflate(R.layout.fragment_offers, container, false);
+        MealAdapter adapter = new MealAdapter(getContext(), this);
+        binding.favoriteRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.favoriteRecyclerView.setAdapter(adapter);
 
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-
+        favoriteViewModel.getFavorites().observe(getViewLifecycleOwner(), favorites1 -> {
+            favorites = favorites1;
+            if (favorites != null) {
+                try {
+                    getMealsById();
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+                adapter.setMeals(meals);
             }
         });
 
 
         return root;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+    }
+
+    private void getMealsById() throws ExecutionException, InterruptedException {
+        meals.clear();
+        for (int i = 0; i < favorites.size(); i++) {
+            meals.add(favoriteViewModel.getMealById(favorites.get(i).getFirebaseID()).getMeal());
+        }
+    }
+
+    @Override
+    public void onClick(int position) {
+        FavoriteFragmentDirections.ActionNavigationOffersToDetailsFragment action =
+                FavoriteFragmentDirections.actionNavigationOffersToDetailsFragment(meals.get(position));
+        navController.navigate(action);
+    }
+
+
 }

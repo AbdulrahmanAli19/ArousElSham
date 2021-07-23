@@ -27,7 +27,7 @@ public class FavoriteRepository {
     }
 
     public void delete (Favorite favorite) {
-        new DeleteAsyncTask(favoriteDao).equals(favorite);
+        new DeleteAsyncTask(favoriteDao).execute(favorite);
     }
 
     public LiveData<List<Favorite>> getGetAll (){

@@ -3,19 +3,23 @@ package com.example.arouselsham.pojo.db.repositories;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.arouselsham.pojo.db.DataBaseManger;
 import com.example.arouselsham.pojo.db.dao.MenuDao;
 import com.example.arouselsham.pojo.db.entities.Menu;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MenuRepository {
 
     private MenuDao menuDao;
     private LiveData<List<Menu>> allMeals;
-    private LiveData<List<Menu>> mealsBySection;
+
 
 
     public MenuRepository(Application application) {
@@ -41,8 +45,8 @@ public class MenuRepository {
         new DeleteAllMenuAsyncTask(menuDao).execute();
     }
 
-    public LiveData<Menu> getSingleMeal(String id) {
-        return menuDao.getMeal(id);
+    public Menu getMealById(String id) throws ExecutionException, InterruptedException {
+        return new GetMealByIdAsyncTask(menuDao, id).execute().get();
     }
 
     public LiveData<List<Menu>> getAllMeals() {
@@ -50,8 +54,26 @@ public class MenuRepository {
     }
 
     public LiveData<List<Menu>> getMealsBySection(String section) {
-        return this.mealsBySection = menuDao.getMealBySection(section);
+        return  menuDao.getMealBySection(section);
     }
+
+
+    private static class GetMealByIdAsyncTask extends AsyncTask<Void, Void, Menu>{
+        private MenuDao menuDao;
+        private String id;
+
+        public GetMealByIdAsyncTask(MenuDao menuDao, String id) {
+            this.menuDao = menuDao;
+            this.id = id;
+        }
+
+        @Override
+        protected Menu doInBackground(Void... menus) {
+            return menuDao.getMealByID(id);
+
+        }
+    }
+
 
     private static class InsertMenuAsyncTask extends AsyncTask<Menu, Void, Void> {
         private MenuDao menuDao;

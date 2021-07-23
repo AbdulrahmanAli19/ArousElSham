@@ -1,6 +1,7 @@
 package com.example.arouselsham.pojo.db.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -30,9 +31,10 @@ public interface MenuDao {
     LiveData<List<Menu>> getAllMeals();
 
     @Query("SELECT * FROM menu_table WHERE _ID = :firebaseId")
-    LiveData<Menu> getMeal(String firebaseId);
+    Menu getMealByID(String firebaseId);
 
     @Query("SELECT * FROM menu_table WHERE _SECTION = :section ORDER BY _PRICE ASC")
     LiveData<List<Menu>> getMealBySection(String section);
+
 
 }

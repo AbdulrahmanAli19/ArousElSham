@@ -74,11 +74,11 @@ public class ToppingAdapter extends RecyclerView.Adapter<ToppingAdapter.Toppings
         @Override
         public void onClick(View v) {
             itemClickListener.onItemCLickListener(getBindingAdapterPosition(),
-                    toppings.get(getBindingAdapterPosition()).getToppingPrice(), checkBox);
+                    toppings.get(getBindingAdapterPosition()).getToppingPrice(), checkBox, toppings.get(getBindingAdapterPosition()));
         }
     }
 
     public interface ItemClickListener {
-        void onItemCLickListener(int position, double price, CheckBox checkBox);
+        void onItemCLickListener(int position, double price, CheckBox checkBox, MenuTopping menuTopping);
     }
 }

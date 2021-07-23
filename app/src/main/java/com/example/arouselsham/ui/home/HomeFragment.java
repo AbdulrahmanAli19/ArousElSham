@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -50,17 +51,6 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         setViewV = (SetViewV) getContext();
-
-        homeViewModel.getAllMeals().observe(getViewLifecycleOwner(), menus -> {
-
-            if (menus.size() > 0) {
-                Log.d(TAG, "NOT EMPTY :) : "+"Menu has" + menus.size());
-            } else {
-                Log.d(TAG, "EMPTY :( : "+"Menu has" + menus.size());
-            }
-
-        });
-
 
         homeViewModel.getAllMenuTags().observe(getViewLifecycleOwner(), menuTags -> {
             if (menuTags.size() > 0) {
@@ -154,15 +144,19 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
 
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        NavDirections action;
         switch (item.getItemId()) {
             case R.id.navigation_settings:
-                navController.navigate(R.id.action_navigation_home_to_navigation_settings);
+                action = HomeFragmentDirections.actionNavigationHomeToNavigationSettings();
+                navController.navigate(action);
                 break;
             case R.id.navigation_about:
-                navController.navigate(R.id.action_navigation_home_to_navigation_about);
+                action = HomeFragmentDirections.actionNavigationHomeToNavigationAbout();
+                navController.navigate(action);
                 break;
             case R.id.navigation_search:
-                navController.navigate(R.id.action_navigation_home_to_navigation_search);
+                action = HomeFragmentDirections.actionNavigationHomeToNavigationSearch();
+                navController.navigate(action);
                 break;
             default:
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
