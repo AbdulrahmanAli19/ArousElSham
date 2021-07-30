@@ -28,9 +28,6 @@ import com.example.arouselsham.ui.home.HomeFragment;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -147,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
     private void showRegisterLayout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogTheme);
 
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_register, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.register_layout, null);
         TextInputLayout firstNameInput = view.findViewById(R.id.edt_firts_name);
         TextInputLayout lastNameInput = view.findViewById(R.id.edt_last_name);
         TextInputLayout phoneNumberInput = view.findViewById(R.id.edt_phone_number);
@@ -237,10 +234,12 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
         binding.splashLayout.setVisibility(View.GONE);
         binding.homeLayout.setVisibility(View.VISIBLE);
         getSupportActionBar().show();
+        getSupportActionBar().setElevation(0);
         binding.navView.setVisibility(View.VISIBLE);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user)
                 .build();
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
@@ -249,10 +248,10 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
 
     @Override
     public void onClick() {
-        if (binding.navView.getVisibility() == View.VISIBLE){
+        if (binding.navView.getVisibility() == View.VISIBLE) {
             binding.navView.setVisibility(View.GONE);
 
-        }else {
+        } else {
             binding.navView.setVisibility(View.VISIBLE);
 
         }

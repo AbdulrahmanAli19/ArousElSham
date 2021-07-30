@@ -10,10 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.arouselsham.databinding.FragmentFavoriteBinding;
+import com.example.arouselsham.databinding.FavoriteFragmentBinding;
 import com.example.arouselsham.pojo.db.entities.Favorite;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.ui.section.MealAdapter;
@@ -25,14 +26,14 @@ import java.util.concurrent.ExecutionException;
 public class FavoriteFragment extends Fragment implements MealAdapter.OnItemClickListener {
     private static final String TAG = "FavoriteFragment";
     private NavController navController;
-    private FragmentFavoriteBinding binding;
+    private FavoriteFragmentBinding binding;
     private FavoriteViewModel favoriteViewModel;
     private List<Favorite> favorites;
     private final List<Meal> meals = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         favoriteViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
-        binding = FragmentFavoriteBinding.inflate(inflater, container, false);
+        binding = FavoriteFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         MealAdapter adapter = new MealAdapter(getContext(), this);

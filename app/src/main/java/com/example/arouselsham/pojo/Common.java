@@ -3,13 +3,16 @@ package com.example.arouselsham.pojo;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 import android.annotation.SuppressLint;
+import android.widget.ImageView;
 
+import androidx.databinding.BindingAdapter;
 import androidx.room.Room;
 
 import com.example.arouselsham.pojo.db.DataBaseManger;
 import com.example.arouselsham.pojo.model.maleModels.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,11 @@ public class Common {
         }
 
         return models;
+    }
+
+    @BindingAdapter("android:loadImage")
+    public static void loadImage (ImageView imageView, String imageUrl){
+        Picasso.get().load(imageUrl).into(imageView);
     }
 
 }

@@ -2,7 +2,6 @@ package com.example.arouselsham.ui.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.pojo.db.entities.MenuTags;
-import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.annotations.NonNull;
 
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> implements Serializable {

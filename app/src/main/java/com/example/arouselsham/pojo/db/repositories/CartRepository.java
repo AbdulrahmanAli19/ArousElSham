@@ -30,8 +30,26 @@ public class CartRepository {
         new DeleteCart(cartDao).execute(cart);
     }
 
+    public void update (Cart cart){
+        new UpdateCart(cartDao).execute(cart);
+    }
+
     public LiveData<List<Cart>> getAllCarts () {
         return allCarts;
+    }
+
+    private static class UpdateCart extends AsyncTask<Cart, Void, Void> {
+        private CartDao cartDao;
+
+        public UpdateCart(CartDao cartDao) {
+            this.cartDao = cartDao;
+        }
+
+        @Override
+        protected Void doInBackground(Cart... carts) {
+            cartDao.update(carts[0]);
+            return null;
+        }
     }
 
     private static class InsertCart extends AsyncTask<Cart, Void, Void> {

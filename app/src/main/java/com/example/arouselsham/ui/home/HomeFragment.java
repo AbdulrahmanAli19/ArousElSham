@@ -22,7 +22,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.databinding.FragmentHomeBinding;
+import com.example.arouselsham.databinding.HomeFragmentBinding;
 import com.example.arouselsham.pojo.db.entities.MenuTags;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemClickListener {
     private static final String TAG = "HomeFragment";
-    private FragmentHomeBinding binding;
+    private HomeFragmentBinding binding;
     private HomeViewModel homeViewModel;
     private NavController navController;
     private MenuSection section;
@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
         prefEditor = preferences.edit();
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = HomeFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         setViewV = (SetViewV) getContext();
 

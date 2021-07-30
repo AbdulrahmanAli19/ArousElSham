@@ -2,10 +2,8 @@ package com.example.arouselsham.pojo.db.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
 
 import java.util.List;
@@ -23,18 +21,21 @@ public class Cart {
     private int mealNum;
     private List<MenuTopping> selectedToppings;
     private String stringSelectedToppings = "";
+    private String imageUrl;
 
     public Cart() {
     }
 
-    public Cart(String firebaseID, String name, Double price, int mealNum,List<MenuTopping> selectedToppings) {
+    public Cart(String firebaseID, String name, Double price, int mealNum, String imageUrl
+            , List<MenuTopping> selectedToppings) {
         this.firebaseID = firebaseID;
         this.name = name;
+        this.imageUrl = imageUrl;
         this.price = price;
         this.mealNum = mealNum;
         this.selectedToppings = selectedToppings;
         for (int i = 0; i < selectedToppings.size(); i++) {
-            stringSelectedToppings += selectedToppings.get(i).getToppingEnName()+"\n";
+            stringSelectedToppings += selectedToppings.get(i).getToppingEnName() + "\n";
         }
     }
 
@@ -78,14 +79,31 @@ public class Cart {
         this.selectedToppings = selectedToppings;
     }
 
+    public String getFirebaseID() {
+        return firebaseID;
+    }
+
+    public void setFirebaseID(String firebaseID) {
+        this.firebaseID = firebaseID;
+    }
+
     public String getStringSelectedToppings() {
         return stringSelectedToppings;
     }
 
-    public void setStringSelectedToppings(List<MenuTopping> list) {
-        this.stringSelectedToppings = "";
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setStringSelectedToppings(String list) {
+        /*String holder = "";
         for (int i = 0; i < list.size(); i++) {
-            this.stringSelectedToppings += list.get(i).getToppingEnName()+"\n";
-        }
+            holder += list.get(i).getToppingEnName() + "\n";
+        }*/
+        this.stringSelectedToppings = list;
     }
 }

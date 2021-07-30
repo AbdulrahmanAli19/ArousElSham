@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.example.arouselsham.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/home_fragment">
 
         <argument
             android:name="listOfMeals"
@@ -99,7 +99,7 @@
         android:id="@+id/navigation_offers"
         android:name="com.example.arouselsham.ui.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/favorite_fragment" >
         <action
             android:id="@+id/action_navigation_offers_to_detailsFragment"
             app:destination="@id/detailsFragment"
@@ -113,13 +113,13 @@
         android:id="@+id/navigation_orders"
         android:name="com.example.arouselsham.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/favorite_fragment" />
 
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.arouselsham.ui.user.UserFragment"
         android:label="@string/title_user"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/favorite_fragment" />
 
 
 </navigation>

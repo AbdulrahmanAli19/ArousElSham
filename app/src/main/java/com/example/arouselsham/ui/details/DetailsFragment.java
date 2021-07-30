@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -25,8 +22,6 @@ import com.example.arouselsham.pojo.model.maleModels.KeyValue;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;
-import com.example.arouselsham.ui.SelectorAdapter;
-import com.example.arouselsham.ui.ToppingAdapter;
 import com.google.android.material.snackbar.Snackbar;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
@@ -34,6 +29,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.annotations.Nullable;
 
 
 public class DetailsFragment extends Fragment implements SelectorAdapter.ListItemClickListener,
@@ -165,7 +163,8 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
             case R.id.addToCartCard:
 
                 Double price = (binding.getMainPrice() + binding.getToppingsPrice()) * binding.getNumberOfItems();
-                Cart cart = new Cart(meal.getId(),meal.getEnName(),price, binding.getNumberOfItems(), selectedToppings);
+                Cart cart = new Cart(meal.getId(),meal.getEnName(),price, binding.getNumberOfItems(),
+                        meal.getImageUrl(), selectedToppings);
                 detailsViewModel.insertToCart(cart);
                 makeSnackBar("You have added " + binding.getNumberOfItems() + " for " +
                         (binding.getNumberOfItems() * binding.getMainPrice()) + " EGP");

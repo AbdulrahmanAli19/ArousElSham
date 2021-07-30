@@ -41,7 +41,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
     @NonNull
     @Override
     public SandwichViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.snadwich_layout, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.meal_layout, parent, false);
         return new SandwichViewHolder(view, onItemClickListener);
     }
 

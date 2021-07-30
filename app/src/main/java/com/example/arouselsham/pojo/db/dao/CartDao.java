@@ -20,6 +20,9 @@ public interface CartDao {
     @Delete
     void delete(Cart add);
 
+    @Update
+    void update(Cart cart);
+
     @Query("SELECT * FROM cart_table")
     LiveData<List<Cart>> selectAll();
 
