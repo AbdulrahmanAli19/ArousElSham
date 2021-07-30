@@ -75,7 +75,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public void updateCart (Cart cart, int position) {
         carts.remove(position);
-        carts.set(position, cart);
+        carts.add(position, cart);
+        notifyDataSetChanged();
     }
 
     @Override
