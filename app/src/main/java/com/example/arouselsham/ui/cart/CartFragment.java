@@ -1,7 +1,6 @@
 package com.example.arouselsham.ui.cart;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arouselsham.databinding.CartFragmentBinding;
 import com.example.arouselsham.pojo.db.entities.Cart;
 
-import io.reactivex.rxjava3.annotations.NonNull;
+import java.util.List;
+
 import io.reactivex.rxjava3.annotations.Nullable;
 
 public class CartFragment extends Fragment implements CartAdapter.OnItemClickListener, OnCartChange {
@@ -27,7 +28,6 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
     private CartFragmentBinding binding;
     private final CartAdapter adapter = new CartAdapter(this);
     private NavController navController;
-    private OnCartChange onCartChange;
 
     @Override
     public View onCreateView(@androidx.annotation.NonNull LayoutInflater inflater,
@@ -37,16 +37,12 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
         binding = CartFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        onCartChange = this;
-
         binding.cartRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.cartRecycler.setAdapter(adapter);
         cartViewModel.getCartList().observe(getViewLifecycleOwner(), carts -> {
             adapter.setCart(carts);
             binding.setTotalPrice(0.0);
-            for (int i = 0; i < carts.size(); i++) {
-                binding.setTotalPrice(binding.getTotalPrice() + carts.get(i).getPrice());
-            }
+            getTotalPrice(carts);
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -79,7 +75,8 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
 
     @Override
     public void onItemClick(int position) {
-        ///TODO : navigate to a new fragment where the user can conform the payment process
+        NavDirections direction = CartFragmentDirections.actionNavigationOrdersToAddAddressFragment();
+        navController.navigate(direction);
     }
 
     @Override
@@ -112,7 +109,6 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
             cartViewModel.updateCart(cart);
             onCartUpdate();
         } else {
-
             Toast.makeText(getContext(), "The minimum number of order is 1 !",
                     Toast.LENGTH_SHORT).show();
         }
@@ -120,11 +116,13 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
 
     @Override
     public void onCartUpdate() {
-        cartViewModel.getCartList().observe(getViewLifecycleOwner(), carts -> {
-            binding.setTotalPrice(0.0);
-            for (int i = 0; i < carts.size(); i++) {
-                binding.setTotalPrice(binding.getTotalPrice() + carts.get(i).getPrice());
-            }
-        });
+        cartViewModel.getCartList().observe(getViewLifecycleOwner(), this::getTotalPrice);
+    }
+
+    private void getTotalPrice(List<Cart> carts) {
+        binding.setTotalPrice(0.0);
+        for (int i = 0; i < carts.size(); i++) {
+            binding.setTotalPrice(binding.getTotalPrice() + carts.get(i).getPrice());
+        }
     }
 }

@@ -25,6 +25,7 @@ import com.example.arouselsham.databinding.ActivityMainBinding;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;
 import com.example.arouselsham.ui.home.HomeFragment;
+import com.example.arouselsham.ui.user.SigningOutListener;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -45,7 +46,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.SetViewV {
+public class MainActivity extends AppCompatActivity implements HomeFragment.SetViewV, SigningOutListener {
     private static final String TAG = "MainActivity";
     private final static int LOGIN_REQUEST_CODE = 711;
 
@@ -88,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
         init();
 
     }
-
 
     private void init() {
 
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LOGIN_REQUEST_CODE) {
             IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
@@ -245,7 +245,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-
     @Override
     public void onClick() {
         if (binding.navView.getVisibility() == View.VISIBLE) {
@@ -258,4 +257,8 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
     }
 
 
+    @Override
+    public void onSignOut() {
+        init();
+    }
 }

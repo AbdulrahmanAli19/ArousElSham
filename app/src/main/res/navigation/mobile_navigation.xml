@@ -113,13 +113,37 @@
         android:id="@+id/navigation_orders"
         android:name="com.example.arouselsham.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/favorite_fragment" />
+        tools:layout="@layout/favorite_fragment" >
+        <action
+            android:id="@+id/action_navigation_orders_to_addAddressFragment"
+            app:destination="@id/addAddressFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_orders_to_confirmPaymentFragment"
+            app:destination="@id/confirmPaymentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.arouselsham.ui.user.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/favorite_fragment" />
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.example.arouselsham.ui.addAddress.AddAddressFragment"
+        android:label="AddAddressFragment" />
+    <fragment
+        android:id="@+id/confirmPaymentFragment"
+        android:name="com.example.arouselsham.ui.confirmPayment.ConfirmPaymentFragment"
+        android:label="confirm_payment_fragment"
+        tools:layout="@layout/confirm_payment_fragment" />
 
 
 </navigation>
