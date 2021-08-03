@@ -1,5 +1,6 @@
 package com.example.arouselsham.ui.home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -37,14 +38,13 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
     private NavController navController;
     private MenuSection section;
     private SetViewV setViewV;
-    private SharedPreferences preferences;
     private SharedPreferences.Editor prefEditor;
-    private List<MenuTags> tagsList;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        preferences = getContext().getSharedPreferences("the tags", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getContext()
+                .getSharedPreferences("the tags", Context.MODE_PRIVATE);
         prefEditor = preferences.edit();
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
 
         homeViewModel.getAllMenuTags().observe(getViewLifecycleOwner(), menuTags -> {
             if (menuTags.size() > 0) {
-                this.tagsList = menuTags;
                 CategoriesAdapter adapter = setUpRecyclerView();
                 adapter.setTags(menuTags);
                 binding.recyclerCategories.setAdapter(adapter);
@@ -142,6 +141,7 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         NavDirections action;

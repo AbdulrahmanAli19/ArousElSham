@@ -25,6 +25,7 @@ import com.example.arouselsham.databinding.ActivityMainBinding;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;
 import com.example.arouselsham.ui.home.HomeFragment;
+import com.example.arouselsham.ui.home.HomeFragmentDirections;
 import com.example.arouselsham.ui.user.SigningOutListener;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
@@ -239,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user)
                 .build();
-
+        
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);

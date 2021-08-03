@@ -1,7 +1,11 @@
 package com.example.arouselsham.ui.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.arouselsham.MainActivity;
+import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.UserFragmentBinding;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +43,6 @@ public class UserFragment extends Fragment implements FirebaseInterface {
         listener = (SigningOutListener) getActivity();
 
 
-        binding.btnSignOut.setOnClickListener(v -> signOut());
         return root;
     }
 
@@ -45,13 +50,29 @@ public class UserFragment extends Fragment implements FirebaseInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
         navController = Navigation.findNavController(view);
     }
 
-    private void signOut() {
-        listener.onSignOut();
-        FirebaseAuth.getInstance().signOut();
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.user_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_edit:
+                break;
+            case R.id.navigation_sign_out:
+                listener.onSignOut();
+                FirebaseAuth.getInstance().signOut();
+                break;
+        }
+        return true;
+    }
+
 
     @Override
     public void onDataReceived(CustomerInfoModel customerInfoModel) {

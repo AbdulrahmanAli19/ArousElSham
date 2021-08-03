@@ -29,4 +29,6 @@
     <string name="total_price">Total</string>
     <string name="currency">EGP</string>
     <string name="proceed_to_checkout">Proceed to checkout</string>
+    <string name="sign_out">Sign out</string>
+    <string name="edit">Edit</string>
 </resources>
