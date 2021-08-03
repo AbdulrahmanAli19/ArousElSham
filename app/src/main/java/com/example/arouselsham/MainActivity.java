@@ -261,5 +261,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
     @Override
     public void onSignOut() {
         init();
+
     }
 }
