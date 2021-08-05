@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.arouselsham.pojo.db.DataBaseManger;
 import com.example.arouselsham.pojo.db.entities.Menu;
 import com.example.arouselsham.pojo.db.repositories.MenuRepository;
 
@@ -22,7 +21,7 @@ public class SectionViewModel extends AndroidViewModel {
         repository = new MenuRepository(application);
     }
 
-    public LiveData<List<Menu>> getMealsBySection (String section){
+    public LiveData<List<Menu>> getMealsBySection(String section) {
         return repository.getMealsBySection(section);
     }
 

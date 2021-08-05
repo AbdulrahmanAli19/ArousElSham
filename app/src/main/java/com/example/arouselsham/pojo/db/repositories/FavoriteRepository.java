@@ -13,32 +13,32 @@ import java.util.List;
 
 public class FavoriteRepository {
 
-    private FavoriteDao favoriteDao ;
+    private FavoriteDao favoriteDao;
     private LiveData<List<Favorite>> getAll;
 
-    public FavoriteRepository (Application application) {
+    public FavoriteRepository(Application application) {
         DataBaseManger dataBaseManger = DataBaseManger.getInstance(application);
         this.favoriteDao = dataBaseManger.favoriteDao();
         this.getAll = favoriteDao.selectAll();
     }
 
-    public void insert (Favorite favorite) {
+    public void insert(Favorite favorite) {
         new InsertAsyncTask(favoriteDao).execute(favorite);
     }
 
-    public void delete (Favorite favorite) {
+    public void delete(Favorite favorite) {
         new DeleteAsyncTask(favoriteDao).execute(favorite);
     }
 
-    public LiveData<List<Favorite>> getGetAll (){
+    public LiveData<List<Favorite>> getGetAll() {
         return getAll;
     }
 
     private static class InsertAsyncTask extends AsyncTask<Favorite, Void, Void> {
 
-        private FavoriteDao favoriteDao ;
+        private FavoriteDao favoriteDao;
 
-        public InsertAsyncTask (FavoriteDao favoriteDao) {
+        public InsertAsyncTask(FavoriteDao favoriteDao) {
             this.favoriteDao = favoriteDao;
         }
 
@@ -51,9 +51,9 @@ public class FavoriteRepository {
 
     private static class DeleteAsyncTask extends AsyncTask<Favorite, Void, Void> {
 
-        private FavoriteDao favoriteDao ;
+        private FavoriteDao favoriteDao;
 
-        public DeleteAsyncTask (FavoriteDao favoriteDao) {
+        public DeleteAsyncTask(FavoriteDao favoriteDao) {
             this.favoriteDao = favoriteDao;
         }
 

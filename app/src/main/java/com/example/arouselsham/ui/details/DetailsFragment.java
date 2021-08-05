@@ -163,7 +163,7 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
             case R.id.addToCartCard:
 
                 Double price = (binding.getMainPrice() + binding.getToppingsPrice()) * binding.getNumberOfItems();
-                Cart cart = new Cart(meal.getId(),meal.getEnName(),price, binding.getNumberOfItems(),
+                Cart cart = new Cart(meal.getId(), meal.getEnName(), price, binding.getNumberOfItems(),
                         meal.getImageUrl(), selectedToppings);
                 detailsViewModel.insertToCart(cart);
                 makeSnackBar("You have added " + binding.getNumberOfItems() + " for " +
@@ -183,10 +183,10 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
     public void liked(LikeButton likeButton) {
         detailsViewModel.getAllFavorites().observe(getViewLifecycleOwner(), favorites -> {
             for (int i = 0; i < favorites.size(); i++) {
-                Log.d(TAG, "LICKED CALLED: IT HAS "+favorites.size());
-                Log.d(TAG, "fav = : "+favorites.get(i).getFirebaseID());
+                Log.d(TAG, "LICKED CALLED: IT HAS " + favorites.size());
+                Log.d(TAG, "fav = : " + favorites.get(i).getFirebaseID());
                 if (favorites.get(i).getFirebaseID().trim() == meal.getId().trim()
-                        ||favorites.get(i).getFirebaseID().equals(meal.getId())) {
+                        || favorites.get(i).getFirebaseID().equals(meal.getId())) {
                     break;
                 }
             }
@@ -200,12 +200,12 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
     public void unLiked(LikeButton likeButton) {
         detailsViewModel.getAllFavorites().observe(getViewLifecycleOwner(), favorites -> {
             for (int i = 0; i < favorites.size(); i++) {
-                Log.d(TAG, "fav = : "+favorites.get(i).getFirebaseID());
+                Log.d(TAG, "fav = : " + favorites.get(i).getFirebaseID());
                 if (favorites.get(i).getFirebaseID().trim() == meal.getId().trim()
-                        ||favorites.get(i).getFirebaseID().equals(meal.getId())) {
+                        || favorites.get(i).getFirebaseID().equals(meal.getId())) {
                     Favorite favorite = favorites.get(i);
                     detailsViewModel.deleteFromFavorite(favorite);
-                    Log.d(TAG, "UNLICKED CALLED: REMOVED NOW IT HAS "+favorites.size());
+                    Log.d(TAG, "UNLICKED CALLED: REMOVED NOW IT HAS " + favorites.size());
                 }
             }
         });

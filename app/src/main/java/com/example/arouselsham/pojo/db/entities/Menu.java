@@ -30,7 +30,7 @@ public class Menu {
 
 
     public Menu(Meal meal) {
-        KeyValue prices = new KeyValue(meal.getPrice().keySet(),meal.getPrice().values());
+        KeyValue prices = new KeyValue(meal.getPrice().keySet(), meal.getPrice().values());
         this.price = prices.getValue().get(0);
         this.meal = meal;
         this.section = meal.getTags().get(0).getEnName();

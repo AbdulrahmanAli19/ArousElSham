@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.arouselsham.pojo.model.maleModels.Meal;
-
 @Entity(tableName = "favorite_table")
 public class Favorite {
 

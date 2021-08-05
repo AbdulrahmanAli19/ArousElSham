@@ -1,6 +1,5 @@
 package com.example.arouselsham.ui.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.arouselsham.MainActivity;
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.UserFragmentBinding;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;

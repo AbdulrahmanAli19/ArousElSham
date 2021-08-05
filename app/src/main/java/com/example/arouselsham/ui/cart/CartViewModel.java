@@ -23,11 +23,11 @@ public class CartViewModel extends AndroidViewModel {
         return repository.getAllCarts();
     }
 
-    public void removeOneCart (Cart cart) {
+    public void removeOneCart(Cart cart) {
         repository.delete(cart);
     }
 
-    public void updateCart(Cart cart){
+    public void updateCart(Cart cart) {
         repository.update(cart);
     }
 }

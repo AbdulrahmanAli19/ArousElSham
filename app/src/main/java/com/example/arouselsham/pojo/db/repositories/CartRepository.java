@@ -16,25 +16,25 @@ public class CartRepository {
     private CartDao cartDao;
     private LiveData<List<Cart>> allCarts;
 
-    public CartRepository (Application application) {
+    public CartRepository(Application application) {
         DataBaseManger dataBaseManger = DataBaseManger.getInstance(application);
         this.cartDao = dataBaseManger.cartDao();
         this.allCarts = cartDao.selectAll();
     }
 
-    public void insert (Cart cart) {
+    public void insert(Cart cart) {
         new InsertCart(cartDao).execute(cart);
     }
 
-    public void delete (Cart cart) {
+    public void delete(Cart cart) {
         new DeleteCart(cartDao).execute(cart);
     }
 
-    public void update (Cart cart){
+    public void update(Cart cart) {
         new UpdateCart(cartDao).execute(cart);
     }
 
-    public LiveData<List<Cart>> getAllCarts () {
+    public LiveData<List<Cart>> getAllCarts() {
         return allCarts;
     }
 
@@ -56,7 +56,7 @@ public class CartRepository {
 
         private CartDao cartDao;
 
-        public InsertCart (CartDao cartDao) {
+        public InsertCart(CartDao cartDao) {
             this.cartDao = cartDao;
         }
 
@@ -71,7 +71,7 @@ public class CartRepository {
 
         private CartDao cartDao;
 
-        public DeleteCart (CartDao cartDao) {
+        public DeleteCart(CartDao cartDao) {
             this.cartDao = cartDao;
         }
 

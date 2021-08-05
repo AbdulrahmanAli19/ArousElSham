@@ -34,7 +34,7 @@ public class MenuTagsRepository {
         new UpdateMenuTagAsyncTask(dao).execute(menuTags);
     }
 
-    public void deleteAll () {
+    public void deleteAll() {
         new DeleteAllMenuTagsAsyncTask(dao).execute();
     }
 
@@ -42,7 +42,7 @@ public class MenuTagsRepository {
         return allTags;
     }
 
-    private static class InsertMenuTagAsyncTask extends AsyncTask <MenuTags, Void, Void>{
+    private static class InsertMenuTagAsyncTask extends AsyncTask<MenuTags, Void, Void> {
         private MenuTagsDao menuTagsDao;
 
         public InsertMenuTagAsyncTask(MenuTagsDao menuTagsDao) {
@@ -56,7 +56,7 @@ public class MenuTagsRepository {
         }
     }
 
-    private static class DeleteMenuTagAsyncTask extends AsyncTask <MenuTags, Void, Void> {
+    private static class DeleteMenuTagAsyncTask extends AsyncTask<MenuTags, Void, Void> {
         private MenuTagsDao menuTagsDao;
 
         public DeleteMenuTagAsyncTask(MenuTagsDao menuTagsDao) {
@@ -70,7 +70,7 @@ public class MenuTagsRepository {
         }
     }
 
-    private static class UpdateMenuTagAsyncTask extends AsyncTask <MenuTags, Void, Void>{
+    private static class UpdateMenuTagAsyncTask extends AsyncTask<MenuTags, Void, Void> {
         private MenuTagsDao menuTagsDao;
 
         public UpdateMenuTagAsyncTask(MenuTagsDao menuTagsDao) {
@@ -84,7 +84,7 @@ public class MenuTagsRepository {
         }
     }
 
-    private static class DeleteAllMenuTagsAsyncTask extends AsyncTask<Void, Void, Void>{
+    private static class DeleteAllMenuTagsAsyncTask extends AsyncTask<Void, Void, Void> {
         private MenuTagsDao menuTagsDao;
 
         public DeleteAllMenuTagsAsyncTask(MenuTagsDao menuTagsDao) {

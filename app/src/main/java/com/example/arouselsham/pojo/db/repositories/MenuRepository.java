@@ -3,10 +3,7 @@ package com.example.arouselsham.pojo.db.repositories;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.arouselsham.pojo.db.DataBaseManger;
 import com.example.arouselsham.pojo.db.dao.MenuDao;
@@ -19,7 +16,6 @@ public class MenuRepository {
 
     private MenuDao menuDao;
     private LiveData<List<Menu>> allMeals;
-
 
 
     public MenuRepository(Application application) {
@@ -54,11 +50,11 @@ public class MenuRepository {
     }
 
     public LiveData<List<Menu>> getMealsBySection(String section) {
-        return  menuDao.getMealBySection(section);
+        return menuDao.getMealBySection(section);
     }
 
 
-    private static class GetMealByIdAsyncTask extends AsyncTask<Void, Void, Menu>{
+    private static class GetMealByIdAsyncTask extends AsyncTask<Void, Void, Menu> {
         private MenuDao menuDao;
         private String id;
 

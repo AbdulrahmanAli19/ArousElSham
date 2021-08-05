@@ -58,7 +58,8 @@ public class Converters {
 
     @TypeConverter
     public Meal fromStringToMeal(String toppings) {
-        Type type = new TypeToken<Meal>() {}.getType();
+        Type type = new TypeToken<Meal>() {
+        }.getType();
         return new Gson().fromJson(toppings, type);
     }
 }

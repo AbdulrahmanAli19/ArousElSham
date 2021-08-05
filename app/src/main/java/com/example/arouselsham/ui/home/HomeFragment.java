@@ -29,8 +29,6 @@ import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemClickListener {
     private static final String TAG = "HomeFragment";
     private HomeFragmentBinding binding;

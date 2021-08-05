@@ -2,11 +2,9 @@ package com.example.arouselsham.pojo.firebase;
 
 import static com.example.arouselsham.pojo.Common.CUSTOMER_INFO_REFERENCE;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
 
 import com.example.arouselsham.pojo.model.CustomerInfoModel;

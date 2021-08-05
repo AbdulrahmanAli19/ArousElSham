@@ -7,8 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.arouselsham.pojo.db.entities.Menu;
-
-
 import com.example.arouselsham.pojo.db.entities.MenuTags;
 import com.example.arouselsham.pojo.db.repositories.MenuRepository;
 import com.example.arouselsham.pojo.db.repositories.MenuTagsRepository;
