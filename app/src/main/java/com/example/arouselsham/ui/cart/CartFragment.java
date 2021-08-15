@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -26,19 +27,20 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
     private static final String TAG = "CartFragment";
     private CartViewModel cartViewModel;
     private CartFragmentBinding binding;
-    private final CartAdapter adapter = new CartAdapter(this);
+    private CartAdapter adapter;
     private NavController navController;
 
     @Override
-    public View onCreateView(@androidx.annotation.NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
         binding = CartFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        adapter = new CartAdapter(this);
 
         binding.cartRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.cartRecycler.setAdapter(adapter);
+
         cartViewModel.getCartList().observe(getViewLifecycleOwner(), carts -> {
             adapter.setCart(carts);
             binding.setTotalPrice(0.0);
@@ -48,27 +50,27 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(@androidx.annotation.NonNull RecyclerView recyclerView,
-                                  @androidx.annotation.NonNull RecyclerView.ViewHolder viewHolder,
-                                  @androidx.annotation.NonNull RecyclerView.ViewHolder target) {
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
 
             @Override
-            public void onSwiped(@androidx.annotation.NonNull RecyclerView.ViewHolder viewHolder,
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
                                  int direction) {
                 cartViewModel.removeOneCart(adapter.getCurrentCart(viewHolder
                         .getBindingAdapterPosition()));
                 Toast.makeText(getContext(), "Item deleted.", Toast.LENGTH_SHORT).show();
             }
-        }).attachToRecyclerView(binding.cartRecycler);
+        })
+                .attachToRecyclerView(binding.cartRecycler);
 
         return root;
     }
 
     @Override
-    public void onViewCreated(@androidx.annotation.NonNull View view,
-                              @androidx.annotation.Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
     }

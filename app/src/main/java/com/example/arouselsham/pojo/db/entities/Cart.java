@@ -22,6 +22,7 @@ public class Cart {
     private List<MenuTopping> selectedToppings;
     private String stringSelectedToppings = "";
     private String imageUrl;
+    private String selectedItem;
 
     public Cart() {
     }
@@ -34,6 +35,20 @@ public class Cart {
         this.price = price;
         this.mealNum = mealNum;
         this.selectedToppings = selectedToppings;
+        for (int i = 0; i < selectedToppings.size(); i++) {
+            stringSelectedToppings += selectedToppings.get(i).getToppingEnName() + "\n";
+        }
+    }
+
+    public Cart(String firebaseID, String name, Double price, int mealNum, String imageUrl
+            , List<MenuTopping> selectedToppings, String selectedItem) {
+        this.firebaseID = firebaseID;
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.mealNum = mealNum;
+        this.selectedToppings = selectedToppings;
+        this.selectedItem = selectedItem;
         for (int i = 0; i < selectedToppings.size(); i++) {
             stringSelectedToppings += selectedToppings.get(i).getToppingEnName() + "\n";
         }
@@ -105,5 +120,13 @@ public class Cart {
             holder += list.get(i).getToppingEnName() + "\n";
         }*/
         this.stringSelectedToppings = list;
+    }
+
+    public String getSelectedItem() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(String selectedItem) {
+        this.selectedItem = selectedItem;
     }
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.CartRecyclerLayoutBinding;
+import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.db.entities.Cart;
 
 import java.util.ArrayList;
@@ -57,6 +58,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.binding.setCart(currentCart);
         holder.binding.executePendingBindings();
 
+        if (holder.binding.getCart().getSelectedItem() == null) {
+            holder.binding.selectionType.setVisibility(View.INVISIBLE);
+            holder.binding.selectionType.setHeight(0);
+        }
+
         Log.d(TAG, "onBindViewHolder: position= " + position);
 
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(
@@ -73,7 +79,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         cartViewHolder = holder;
     }
 
-    public void updateCart (Cart cart, int position) {
+    public void updateCart(Cart cart, int position) {
         carts.remove(position);
         carts.add(position, cart);
         notifyDataSetChanged();

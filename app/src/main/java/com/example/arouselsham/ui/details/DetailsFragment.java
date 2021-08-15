@@ -39,11 +39,13 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
 
     private static final String TAG = "DetailsFragment";
 
+    private String selectedItem = Common.priceByOne;
     private DetailsViewModel detailsViewModel;
     private DetailsFragmentBinding binding;
     private Meal meal;
     private KeyValue prices;
     private SelectorAdapter selectorAdapter;
+    private List<PriceOption> priceOptions = new ArrayList<>();
 
     private List<MenuTopping> selectedToppings = new ArrayList<>();
 
@@ -98,9 +100,9 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
 
     private void setUpPriceSelectorRecycler() {
         binding.setMainPrice(prices.getValue().get(0));
+        priceOptions.clear();
 
         if (prices.getValue().size() > 0 && !prices.getKey().get(0).equals(Common.priceByOne)) {
-            List<PriceOption> priceOptions = new ArrayList<>();
             for (int i = 0; i < prices.getValue().size(); i++) {
                 priceOptions.add(new PriceOption(prices.getKey().get(i),
                         prices.getValue().get(i)));
@@ -125,6 +127,7 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
 
     @Override
     public void onItemClick(int position, double price) {
+        selectedItem = priceOptions.get(position).getOption();
         binding.setMainPrice(price);
         selectorAdapter.changeBackground(position);
     }
@@ -163,8 +166,14 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
             case R.id.addToCartCard:
 
                 Double price = (binding.getMainPrice() + binding.getToppingsPrice()) * binding.getNumberOfItems();
-                Cart cart = new Cart(meal.getId(), meal.getEnName(), price, binding.getNumberOfItems(),
-                        meal.getImageUrl(), selectedToppings);
+                Cart cart;
+
+                if (meal.getPrice().get(Common.priceByOne) != null)
+                    cart = new Cart(meal.getId(), meal.getEnName(), price, binding.getNumberOfItems(),
+                            meal.getImageUrl(), selectedToppings);
+                else
+                    cart = new Cart(meal.getId(), meal.getEnName(), price, binding.getNumberOfItems(),
+                            meal.getImageUrl(), selectedToppings, selectedItem);
                 detailsViewModel.insertToCart(cart);
                 makeSnackBar("You have added " + binding.getNumberOfItems() + " for " +
                         (binding.getNumberOfItems() * binding.getMainPrice()) + " EGP");

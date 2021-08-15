@@ -41,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginTop="9dp"
-            android:layout_marginBottom="9dp"
             android:layout_toStartOf="@+id/txtClose"
             android:layout_toEndOf="@id/imageCard"
             android:fontFamily="sans-serif-light"
@@ -55,14 +54,26 @@
             tools:text="Test" />
 
         <TextView
+            android:id="@+id/selectionType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtName"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/imageCard"
+            android:text="@{cart.selectedItem}"
+            tools:text="Arabic bread" />
+
+        <TextView
             android:id="@+id/txtToppings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtName"
-            android:gravity="center |start"
             android:layout_above="@id/linearLayout4"
+            android:layout_below="@+id/selectionType"
             android:layout_marginStart="9dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/imageCard"
+            android:gravity="center |start"
             android:text="@{cart.stringSelectedToppings}"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintStart_toEndOf="@+id/imageCard"
@@ -75,7 +86,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageCard"
-            android:layout_margin="9dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginBottom="9dp"
             android:layout_toEndOf="@+id/imageCard"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -130,8 +142,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:padding="10dp"
             android:text="X"
             android:textColor="@android:color/holo_red_dark" />
