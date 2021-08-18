@@ -60,7 +60,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="section"
             app:argType="string" />
@@ -93,27 +93,35 @@
         android:id="@+id/navigation_settings"
         android:name="com.example.arouselsham.ui.settings.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/settings_fragment" />
+        tools:layout="@layout/settings_fragment">
+        <action
+            android:id="@+id/action_navigation_settings_to_confirmPaymentFragment"
+            app:destination="@id/confirmPaymentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_offers"
         android:name="com.example.arouselsham.ui.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
-        tools:layout="@layout/favorite_fragment" >
+        tools:layout="@layout/favorite_fragment">
         <action
             android:id="@+id/action_navigation_offers_to_detailsFragment"
             app:destination="@id/detailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_orders"
         android:name="com.example.arouselsham.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/favorite_fragment" >
+        tools:layout="@layout/favorite_fragment">
         <action
             android:id="@+id/action_navigation_orders_to_addAddressFragment"
             app:destination="@id/addAddressFragment"
@@ -127,7 +135,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment

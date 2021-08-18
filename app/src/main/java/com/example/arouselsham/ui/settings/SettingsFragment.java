@@ -1,22 +1,20 @@
 package com.example.arouselsham.ui.settings;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.arouselsham.R;
+import com.example.arouselsham.databinding.SettingsFragmentBinding;
 
 public class SettingsFragment extends Fragment {
-
-    private SettingsViewModel mViewModel;
+    private SettingsFragmentBinding binding;
+    private SettingsViewModel settingsViewModel;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -25,14 +23,12 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.settings_fragment, container, false);
+        binding = SettingsFragmentBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        binding.txtSelectedLanguage.setText(R.string.english);
+
+        return root;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
 }

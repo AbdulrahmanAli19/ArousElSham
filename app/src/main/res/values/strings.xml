@@ -31,4 +31,23 @@
     <string name="proceed_to_checkout">Proceed to checkout</string>
     <string name="sign_out">Sign out</string>
     <string name="edit">Edit</string>
+    <string name="account_info">Account Info</string>
+    <string name="saved_addresses">Saved Addresses</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_email">Change Email</string>
+    <string name="language">Language</string>
+    <string name="logout">Logout</string>
+    <string name="english">English</string>
+    <string name="street_name">Street Name</string>
+    <string name="area">Area</string>
+    <string name="building_number">Building Number</string>
+    <string name="floor_number">Floor Number</string>
+    <string name="apartment_number">Apartment Number</string>
+    <string name="landmark_group_numbwe_etc">Landmark, group numbwe, etc</string>
+    <string name="landline_number_optional">Landline number (optional)</string>
+    <string name="office">Office</string>
+    <string name="type_of_building">Type of building</string>
+    <string name="villa">Villa</string>
+    <string name="save_address">Save Address</string>
+    <string name="apartment">Apartment</string>
 </resources>

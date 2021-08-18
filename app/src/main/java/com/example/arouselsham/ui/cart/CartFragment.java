@@ -66,6 +66,14 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
         })
                 .attachToRecyclerView(binding.cartRecycler);
 
+        binding.cardProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections navDirections = CartFragmentDirections.actionNavigationOrdersToConfirmPaymentFragment();
+                navController.navigate(navDirections);
+            }
+        });
+
         return root;
     }
 

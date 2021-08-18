@@ -11,4 +11,13 @@
     <color name="d_gold">#FFB700</color>
     <color name="light_gold">#ffe05d</color>
 
+    <color name="primaryColor">#ffc107</color>
+    <color name="primaryLightColor">#fff350</color>
+    <color name="primaryDarkColor">#c79100</color>
+    <color name="secondaryColor">#ffe57f</color>
+    <color name="secondaryLightColor">#ffffb0</color>
+    <color name="secondaryDarkColor">#cab350</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+
 </resources>
