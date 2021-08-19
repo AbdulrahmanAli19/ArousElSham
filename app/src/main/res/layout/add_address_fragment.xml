@@ -59,9 +59,9 @@
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinner"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/black"
                     app:layout_constraintTop_toBottomOf="@+id/input_txt_building_type"
                     tools:hint="Flat" />
 
@@ -164,21 +164,23 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSaveAddress"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="@color/d_gold"
             app:cardCornerRadius="10dp">
 
             <TextView
+                android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/save_address"
-                android:textSize="18sp" />
+                android:text="@string/save_address" />
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
