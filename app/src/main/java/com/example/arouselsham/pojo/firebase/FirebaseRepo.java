@@ -2,6 +2,7 @@ package com.example.arouselsham.pojo.firebase;
 
 import static com.example.arouselsham.pojo.Common.CUSTOMER_INFO_REFERENCE;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import com.example.arouselsham.pojo.model.CustomerInfoModel;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 import com.example.arouselsham.ui.user.FirebaseInterface;
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +30,6 @@ public class FirebaseRepo {
 
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final DatabaseReference reference = database.getReference(CUSTOMER_INFO_REFERENCE);
-    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private static FirebaseRepo instance;
 
@@ -56,10 +57,12 @@ public class FirebaseRepo {
                 Meal.class);
     }
 
+    @SuppressLint("RestrictedApi")
     public void getUserInfo(FirebaseInterface interface1) {
         FirebaseInterface firebaseInterface = interface1;
 
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(AuthUI.getInstance().getAuth().getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {

@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +23,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.HomeFragmentBinding;
+import com.example.arouselsham.pojo.db.entities.Menu;
 import com.example.arouselsham.pojo.db.entities.MenuTags;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 
@@ -35,7 +35,6 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
     private HomeViewModel homeViewModel;
     private NavController navController;
     private MenuSection section;
-    private SetViewV setViewV;
     private SharedPreferences.Editor prefEditor;
 
 
@@ -48,7 +47,7 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = HomeFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        setViewV = (SetViewV) getContext();
+
 
         homeViewModel.getAllMenuTags().observe(getViewLifecycleOwner(), menuTags -> {
             if (menuTags.size() > 0) {
@@ -95,8 +94,7 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
                     .observe(getViewLifecycleOwner(), meals -> {
 
                         for (int j = 0; j < meals.size(); j++) {
-                            com.example.arouselsham.pojo.db.entities.Menu menu
-                                    = new com.example.arouselsham.pojo.db.entities.Menu(meals.get(j));
+                            Menu menu = new Menu(meals.get(j));
                             menu.setId(meals.get(j).getId());
 
                             homeViewModel.insertMeal(menu);
@@ -134,7 +132,7 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
     }
 
     @Override
-    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull android.view.Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.home_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }

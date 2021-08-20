@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FirestoreLiveData<T> extends LiveData<T> {
 
-    public static final String TAG = "debinf firestore";
+    public static final String TAG = "FirestoreLiveData";
 
     private ListenerRegistration registration;
 
@@ -43,7 +43,6 @@ public class FirestoreLiveData<T> extends LiveData<T> {
                 for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
                     T item = (T) snapshot.toObject(clazz);
                     itemList.add(item);
-                    Log.i(TAG, "snapshot is " + snapshot.getId());
                 }
                 setValue((T) itemList);
             }

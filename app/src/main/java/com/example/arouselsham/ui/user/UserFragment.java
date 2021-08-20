@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.UserFragmentBinding;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserFragment extends Fragment implements FirebaseInterface {
@@ -65,7 +66,7 @@ public class UserFragment extends Fragment implements FirebaseInterface {
                 break;
             case R.id.navigation_sign_out:
                 listener.onSignOut();
-                FirebaseAuth.getInstance().signOut();
+                AuthUI.getInstance().signOut(getContext());
                 break;
         }
         return true;

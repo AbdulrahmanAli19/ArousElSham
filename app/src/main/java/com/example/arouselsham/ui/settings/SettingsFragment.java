@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.SettingsFragmentBinding;
+import com.firebase.ui.auth.AuthUI;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
     private SettingsFragmentBinding binding;
@@ -33,6 +34,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         binding.accountInfo.setOnClickListener(this);
         binding.savedAddresses.setOnClickListener(this);
         binding.changeEmail.setOnClickListener(this);
+        binding.logout.setOnClickListener(this);
 
         return root;
     }
@@ -58,6 +60,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             case R.id.savedAddresses:
                 navDirections = SettingsFragmentDirections.actionNavigationSettingsToSavedAddressesFragment();
                 navController.navigate(navDirections);
+                break;
+            case R.id.logout:
+                AuthUI.getInstance().signOut(getContext());
                 break;
 
 
