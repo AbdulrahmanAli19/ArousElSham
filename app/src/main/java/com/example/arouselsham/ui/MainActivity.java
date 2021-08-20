@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
         getSupportActionBar().setElevation(0);
         binding.navView.setVisibility(View.VISIBLE);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_offers, R.id.navigation_orders, R.id.navigation_user)
+                R.id.navigation_home, R.id.navigation_favorite, R.id.navigation_cart, R.id.navigation_order)
                 .build();
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);

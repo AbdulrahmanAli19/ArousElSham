@@ -10,6 +10,7 @@
     <color name="gold">#fcc12b</color>
     <color name="d_gold">#FFB700</color>
     <color name="light_gold">#ffe05d</color>
+    <color name="gray">#6E6E6E</color>
 
     <color name="primaryColor">#ffc107</color>
     <color name="primaryLightColor">#fff350</color>
@@ -19,5 +20,10 @@
     <color name="secondaryDarkColor">#cab350</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
+
+
+    <color name="colorTint">@color/button_tint</color>
+
+
 
 </resources>

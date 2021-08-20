@@ -50,4 +50,15 @@
     <string name="villa">Villa</string>
     <string name="save_address">Save Address</string>
     <string name="apartment">Apartment</string>
+    <string name="email">Email</string>
+    <string name="date_od_birth">Date of birth</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="p1">Yes, I want to revice offers and discounts</string>
+    <string name="p2">Subscribe to newsletter</string>
+    <string name="save">Save</string>
+    <string name="new_email">New Email</string>
+    <string name="confirm_email">Confirm email</string>
+    <string name="submit">Submit</string>
 </resources>

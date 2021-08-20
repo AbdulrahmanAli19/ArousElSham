@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/addressName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Address Name" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/addressName"
+            app:layout_constraintTop_toBottomOf="@+id/addressName">
+
+            <TextView
+                android:id="@+id/apartmentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="12sp"
+                tools:text="19, " />
+
+            <TextView
+                android:id="@+id/floorNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="12sp"
+                tools:text="5, " />
+
+            <TextView
+                android:id="@+id/buildingNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="12sp"
+                tools:text="104, " />
+
+            <TextView
+                android:id="@+id/streetName"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="El-hanger, " />
+
+            <TextView
+                android:id="@+id/area"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="Kattmeya, " />
+
+            <TextView
+                android:id="@+id/office"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="office, " />
+
+            <TextView
+                android:id="@+id/landmark"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="landmark." />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout5"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            tools:text="Mobile: (+20) 111 772 1727" />
+
+        <TextView
+            android:id="@+id/landLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout5"
+            app:layout_constraintTop_toBottomOf="@+id/mobile"
+            tools:text="Land line: (+20) 27 57 5128" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

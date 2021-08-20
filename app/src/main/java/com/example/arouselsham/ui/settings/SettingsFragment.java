@@ -33,7 +33,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         binding.accountInfo.setOnClickListener(this);
         binding.savedAddresses.setOnClickListener(this);
         binding.changeEmail.setOnClickListener(this);
-        binding.changePassword.setOnClickListener(this);
 
         return root;
     }
@@ -54,10 +53,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.changeEmail:
                 navDirections = SettingsFragmentDirections.actionNavigationSettingsToChangeEmailFragment();
-                navController.navigate(navDirections);
-                break;
-            case R.id.changePassword:
-                navDirections = SettingsFragmentDirections.actionNavigationSettingsToChangePasswordFragment();
                 navController.navigate(navDirections);
                 break;
             case R.id.savedAddresses:

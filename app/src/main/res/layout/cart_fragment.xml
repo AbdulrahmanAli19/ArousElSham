@@ -24,7 +24,7 @@
             tools:listitem="@layout/cart_recycler_layout" />
 
         <RelativeLayout
-            android:background="#E4FFFFFF"
+            android:background="#08FFC107"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

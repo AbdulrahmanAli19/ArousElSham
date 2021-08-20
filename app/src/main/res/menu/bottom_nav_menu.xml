@@ -7,17 +7,17 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_offers"
+        android:id="@+id/navigation_favorite"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="@string/title_favorite" />
 
     <item
-        android:id="@+id/navigation_orders"
+        android:id="@+id/navigation_cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="@string/title_cart" />
 
     <item
-        android:id="@+id/navigation_user"
+        android:id="@+id/navigation_order"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/title_user" />
 

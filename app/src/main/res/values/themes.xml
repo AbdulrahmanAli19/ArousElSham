@@ -20,7 +20,21 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/black</item>
         <item name="android:windowFullscreen">false</item>
+
+        <item name="radioButtonStyle">@style/radioBoxStyle</item>
+        <item name="checkboxStyle">@style/checkBoxStyle</item>
     </style>
+
+    <style name="radioBoxStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:buttonTint">@color/button_tint</item>
+
+    </style>
+
+    <style name="checkBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">@color/button_tint</item>
+
+    </style>
+
 
     <style name="DialogTheme" parent="android:Theme.Dialog">
         <item name="android:layout_width">match_parent</item>
