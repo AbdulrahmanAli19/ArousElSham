@@ -1,4 +1,4 @@
-package com.example.arouselsham;
+package com.example.arouselsham.ui;
 
 import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
 
@@ -21,6 +21,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.ActivityMainBinding;
 import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.CustomerInfoModel;

@@ -101,6 +101,34 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_settings_to_accountInfoFragment"
+            app:destination="@id/accountInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_settings_to_savedAddressesFragment"
+            app:destination="@id/savedAddressesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_settings_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_settings_to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -152,6 +180,22 @@
         android:name="com.example.arouselsham.ui.confirmPayment.ConfirmPaymentFragment"
         android:label="confirm_payment_fragment"
         tools:layout="@layout/confirm_payment_fragment" />
+    <fragment
+        android:id="@+id/accountInfoFragment"
+        android:name="com.example.arouselsham.ui.accountInfo.AccountInfoFragment"
+        android:label="AccountInfoFragment" />
+    <fragment
+        android:id="@+id/changeEmailFragment"
+        android:name="com.example.arouselsham.ui.changeEmail.ChangeEmailFragment"
+        android:label="ChangeEmailFragment" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.arouselsham.ui.changePassword.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/savedAddressesFragment"
+        android:name="com.example.arouselsham.ui.savedAddresses.SavedAddressesFragment"
+        android:label="SavedAddressesFragment" />
 
 
 </navigation>
