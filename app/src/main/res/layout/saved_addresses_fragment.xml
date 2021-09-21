@@ -29,6 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="You don't have any address \nsaved yet :(" />
         </LinearLayout>

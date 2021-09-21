@@ -79,10 +79,15 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
     }
 
     private void isListEmpty() {
-        if (adapter.getItemCount() == 0)
+        if (adapter.getItemCount() == 0) {
             binding.emptyList.setVisibility(View.VISIBLE);
-        else
+            binding.cardProceed.setVisibility(View.GONE);
+            binding.toatlPriceLayout.setVisibility(View.GONE);
+        } else {
             binding.emptyList.setVisibility(View.GONE);
+            binding.cardProceed.setVisibility(View.VISIBLE);
+            binding.toatlPriceLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
