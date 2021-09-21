@@ -7,13 +7,13 @@
 
         <variable
             name="customer"
-            type="com.example.arouselsham.pojo.model.CustomerInfoModel" />
+            type="com.example.arouselsham.pojo.model.Customer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.user.UserFragment">
+        tools:context=".ui.orders.OrdersFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

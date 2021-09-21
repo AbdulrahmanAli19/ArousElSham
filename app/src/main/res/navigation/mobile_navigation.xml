@@ -82,7 +82,6 @@
         android:label="@string/about"
         tools:layout="@layout/about_fragment" />
 
-
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.arouselsham.ui.search.SearchFragment"
@@ -108,13 +107,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_navigation_settings_to_changeEmailFragment"
-            app:destination="@id/changeEmailFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -134,7 +126,8 @@
     <fragment
         android:id="@+id/navigation_cart"
         android:name="com.example.arouselsham.ui.cart.CartFragment"
-        android:label="@string/title_cart">
+        android:label="@string/title_cart"
+        tools:layout="@layout/cart_fragment">
         <action
             android:id="@+id/action_navigation_orders_to_addAddressFragment"
             app:destination="@id/addAddressFragment"
@@ -153,33 +146,47 @@
 
     <fragment
         android:id="@+id/navigation_order"
-        android:name="com.example.arouselsham.ui.user.UserFragment"
-        android:label="@string/title_user"
+        android:name="com.example.arouselsham.ui.orders.OrdersFragment"
+        android:label="@string/title_orders"
         tools:layout="@layout/favorite_fragment" />
+
     <fragment
         android:id="@+id/addAddressFragment"
         android:name="com.example.arouselsham.ui.addAddress.AddAddressFragment"
-        android:label="AddAddressFragment" />
+        android:label="@string/add_address"
+        tools:layout="@layout/add_address_fragment">
+
+        <argument
+            android:name="address"
+            app:argType="com.example.arouselsham.pojo.model.UserAddress" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/confirmPaymentFragment"
         android:name="com.example.arouselsham.ui.confirmPayment.ConfirmPaymentFragment"
-        android:label="confirm_payment_fragment"
+        android:label="Confirm Payment"
         tools:layout="@layout/confirm_payment_fragment" />
+
     <fragment
         android:id="@+id/accountInfoFragment"
         android:name="com.example.arouselsham.ui.accountInfo.AccountInfoFragment"
-        android:label="AccountInfoFragment" />
-    <fragment
-        android:id="@+id/changeEmailFragment"
-        android:name="com.example.arouselsham.ui.changeEmail.ChangeEmailFragment"
-        android:label="ChangeEmailFragment" />
+        android:label="@string/account_info"
+        tools:layout="@layout/account_info_fragment" />
+
     <fragment
         android:id="@+id/savedAddressesFragment"
         android:name="com.example.arouselsham.ui.savedAddresses.SavedAddressesFragment"
-        android:label="SavedAddressesFragment" >
+        android:label="@string/saved_addresses"
+        tools:layout="@layout/saved_addresses_fragment">
         <action
             android:id="@+id/action_savedAddressesFragment_to_addAddressFragment"
-            app:destination="@id/addAddressFragment" />
+            app:destination="@id/addAddressFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
 

@@ -30,13 +30,13 @@ import com.example.arouselsham.pojo.model.maleModels.MenuSection;
 import org.jetbrains.annotations.NotNull;
 
 public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemClickListener {
+
     private static final String TAG = "HomeFragment";
     private HomeFragmentBinding binding;
     private HomeViewModel homeViewModel;
     private NavController navController;
     private MenuSection section;
     private SharedPreferences.Editor prefEditor;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
                 Log.d(TAG, "SAVE DATA TO DATA BASE: ");
                 prefEditor.putFloat("menuVersion", section.getMenuVersion());
                 prefEditor.apply();
+                ///TODO: User @SaveToDataBastService instead of these methods
                 saveMenuToDatabase();
                 saveMenuTagsToDatabase();
             }

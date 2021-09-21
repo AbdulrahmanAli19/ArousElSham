@@ -19,6 +19,6 @@
     <item
         android:id="@+id/navigation_order"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="@string/title_user" />
+        android:title="@string/title_orders" />
 
 </menu>

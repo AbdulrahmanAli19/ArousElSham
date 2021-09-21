@@ -13,6 +13,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.FavoriteFragmentBinding;
 import com.example.arouselsham.pojo.db.entities.Favorite;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
@@ -39,6 +41,7 @@ public class FavoriteFragment extends Fragment implements MealAdapter.OnItemClic
         binding.favoriteRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.favoriteRecyclerView.setAdapter(adapter);
 
+
         favoriteViewModel.getFavorites().observe(getViewLifecycleOwner(), favorites1 -> {
             favorites = favorites1;
             if (favorites != null) {
@@ -48,6 +51,11 @@ public class FavoriteFragment extends Fragment implements MealAdapter.OnItemClic
                     e.printStackTrace();
                 }
                 adapter.setMeals(meals);
+                if (adapter.getItemCount() == 0) {
+                    binding.emptyList.setVisibility(View.VISIBLE);
+                } else {
+                    binding.emptyList.setVisibility(View.GONE);
+                }
             }
         });
 

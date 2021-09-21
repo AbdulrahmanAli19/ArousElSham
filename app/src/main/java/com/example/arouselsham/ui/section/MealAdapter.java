@@ -58,7 +58,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.SandwichViewHo
         Picasso.get().load(meal.getImageUrl()).into(holder.imageView);
 
 
-        if (prices.getKey().get(0).equals(Common.priceByOne) || prices.getKey().get(0) == Common.priceByOne) {
+        if (prices.getKey().get(0).equals(Common.PRICE_BY_ONE) || prices.getKey().get(0) == Common.PRICE_BY_ONE) {
 
             holder.txtFrechPrice.setText(prices.getValue().get(0) + " EGP");
 

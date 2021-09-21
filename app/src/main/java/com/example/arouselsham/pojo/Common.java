@@ -18,35 +18,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Common {
-    public static boolean isArabicEnabled = false;
+
     public static final String CUSTOMER_INFO_REFERENCE = "CustomerInfo";
     public static final String dbName = "ArousEl-ShamDB";
 
-    public static final String syrianPrice = "Arabic bread";
-    public static final String frenchPrice = "French bread";
-    public static final String saro5Price = "Saro5 bread";
+    public static final String ARABIC_BREAD = "Arabic bread";
+    public static final String FRENCH_BREAD = "French bread";
+    public static final String SARO_5_BREAD = "Saro5 bread";
 
-    public static final String kilograms = "1 Kilogram";
-    public static final String halfKilograms = "½ Kilogram";
-    public static final String quarterKilograms = "¼ Kilogram";
-    public static final String tomnKilograms = "⅛ Kilogram";
+    public static final String KILOGRAM = "1 Kilogram";
+    public static final String HALF_KILOGRAMS = "½ Kilogram";
+    public static final String QUARTER_KILOGRAMS = "¼ Kilogram";
+    public static final String TOMN_KILOGRAMS = "⅛ Kilogram";
 
-    public static final String priceByOne = "priceByOne";
-    public static final String discount = "discount";
+    public static final String PRICE_BY_ONE = "priceByOne";
+    public static final String DISCOUNT = "discount";
 
-    public static final String holeChicken = "¼ Chicken";
-    public static final String halfChicken = "½ Chicken";
-    public static final String quarterChicken = "1 Chicken";
+    public static final String CHICKEN = "¼ Chicken";
+    public static final String HALF_CHICKEN = "½ Chicken";
+    public static final String QUARTER_CHICKEN = "1 Chicken";
 
-    public static final String mediumPrice = "Medium";
-    public static final String largPrice = "Large";
-
-    @SuppressLint("RestrictedApi")
-    public static DataBaseManger dataBaseManger = Room
-            .databaseBuilder(getApplicationContext(),
-                    DataBaseManger.class,
-                    dbName)
-            .allowMainThreadQueries().build();
+    public static final String MEDIUM_PRICE = "Medium";
+    public static final String LARGE = "Large";
 
     public static List<PriceOption> getPriceOptions(Meal meal) {
         List<PriceOption> models = new ArrayList<>();

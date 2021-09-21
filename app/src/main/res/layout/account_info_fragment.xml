@@ -4,14 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="customer"
+            type="com.example.arouselsham.pojo.model.Customer" />
     </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:id="@+id/linearUserInfo"
                 android:layout_width="match_parent"
@@ -20,7 +25,6 @@
                 tools:context=".ui.accountInfo.AccountInfoFragment">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:clickable="false"
                     android:id="@+id/inputEmail"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -31,43 +35,48 @@
                     android:hint="@string/email">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:clickable="false"
-
                         android:layout_width="match_parent"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:text="@{customer.email}"
+                        android:focusableInTouchMode="false"
                         android:layout_height="wrap_content"
                         android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputFirstName"
-                    app:endIconMode="clear_text"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:hint="@string/first_name">
+                    android:hint="@string/first_name"
+                    app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
+                        android:text="@{customer.firstName}"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputLastName"
-                    app:endIconMode="clear_text"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:hint="@string/last_name">
+                    android:hint="@string/last_name"
+                    app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
+                        android:text="@{customer.lastName}"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -84,8 +93,12 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:drawableEnd="@drawable/ic_date"
                         android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:drawableEnd="@drawable/ic_date"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -103,11 +116,13 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/btnMale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/male" />
 
                     <RadioButton
+                        android:id="@+id/btnFemale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -116,6 +131,7 @@
 
                 <CheckBox
                     android:id="@+id/cbP1"
+                    android:checked="@{customer.p1Granted}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -124,20 +140,21 @@
 
                 <CheckBox
                     android:id="@+id/cbP2"
+                    android:checked="@{customer.p2Granted}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="@string/p2" />
 
 
-
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                android:layout_margin="10dp"
+                android:id="@+id/save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/linearUserInfo"
+                android:layout_margin="10dp"
                 android:backgroundTint="@color/gold"
                 android:clickable="true"
                 android:focusable="true"

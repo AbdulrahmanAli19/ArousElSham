@@ -12,6 +12,8 @@
     <color name="light_gold">#ffe05d</color>
     <color name="gray">#6E6E6E</color>
 
+    <color name="colorOnPrimary">#F6F6F6</color>
+
     <color name="primaryColor">#ffc107</color>
     <color name="primaryLightColor">#fff350</color>
     <color name="primaryDarkColor">#c79100</color>

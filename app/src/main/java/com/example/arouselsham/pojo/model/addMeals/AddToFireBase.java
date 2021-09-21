@@ -45,16 +45,16 @@ public class AddToFireBase {
         for (int i = 0; i < enNames.size(); i++) {
 
             if (kg.get(i) > 0.0 && kg.get(i) != null)
-                thePrices.put(Common.kilograms, kg.get(i));
+                thePrices.put(Common.KILOGRAM, kg.get(i));
 
             if (halfKg.get(i) > 0.0 && halfKg.get(i) != null)
-                thePrices.put(Common.halfKilograms, halfKg.get(i));
+                thePrices.put(Common.HALF_KILOGRAMS, halfKg.get(i));
 
             if (rob3kg.get(i) > 0.0 && rob3kg.get(i) != null)
-                thePrices.put(Common.quarterKilograms, rob3kg.get(i));
+                thePrices.put(Common.QUARTER_KILOGRAMS, rob3kg.get(i));
 
             if (priceByOne.get(i) > 0.0 && priceByOne.get(i) != null)
-                thePrices.put(Common.priceByOne, priceByOne.get(i));
+                thePrices.put(Common.PRICE_BY_ONE, priceByOne.get(i));
 
 
            /* if (kg.get(i) > 0.0 && kg.get(i) != null)

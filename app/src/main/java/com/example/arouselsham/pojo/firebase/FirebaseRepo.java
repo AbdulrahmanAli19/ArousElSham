@@ -8,13 +8,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.example.arouselsham.pojo.model.CustomerInfoModel;
+import com.example.arouselsham.pojo.model.Customer;
 import com.example.arouselsham.pojo.model.maleModels.Meal;
 import com.example.arouselsham.pojo.model.maleModels.MenuSection;
-import com.example.arouselsham.ui.user.FirebaseInterface;
+import com.example.arouselsham.ui.accountInfo.FirebaseInterface;
 import com.firebase.ui.auth.AuthUI;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FirebaseRepo {
 
@@ -59,15 +58,14 @@ public class FirebaseRepo {
 
     @SuppressLint("RestrictedApi")
     public void getUserInfo(FirebaseInterface interface1) {
-        FirebaseInterface firebaseInterface = interface1;
 
-        reference.child(AuthUI.getInstance().getAuth().getCurrentUser().getUid())
+        reference.child(Objects.requireNonNull(AuthUI.getInstance().getAuth().getCurrentUser()).getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    CustomerInfoModel customer = snapshot.getValue(CustomerInfoModel.class);
-                    firebaseInterface.onDataReceived(customer);
+                    Customer customer = snapshot.getValue(Customer.class);
+                    interface1.onDataReceived(customer, snapshot);
                 }
             }
 

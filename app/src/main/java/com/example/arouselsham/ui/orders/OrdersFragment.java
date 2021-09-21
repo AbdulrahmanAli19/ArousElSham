@@ -1,4 +1,4 @@
-package com.example.arouselsham.ui.user;
+package com.example.arouselsham.ui.orders;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,19 +17,13 @@ import androidx.navigation.Navigation;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.UserFragmentBinding;
-import com.example.arouselsham.pojo.model.CustomerInfoModel;
-import com.firebase.ui.auth.AuthUI;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class UserFragment extends Fragment implements FirebaseInterface {
+public class OrdersFragment extends Fragment {
     private static final String TAG = "UserFragment";
 
-    private SigningOutListener listener;
     private UserFragmentBinding binding;
-
     private NavController navController;
-
-    private UserViewModel userViewModel;
+    private OrdersViewModel ordersViewModel;
 
 
     @Override
@@ -37,10 +31,7 @@ public class UserFragment extends Fragment implements FirebaseInterface {
                              @Nullable Bundle savedInstanceState) {
         binding = UserFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getCurrentUser(this);
-        listener = (SigningOutListener) getActivity();
-
+        ordersViewModel = new ViewModelProvider(this).get(OrdersViewModel.class);
 
         return root;
     }
@@ -53,28 +44,5 @@ public class UserFragment extends Fragment implements FirebaseInterface {
         navController = Navigation.findNavController(view);
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.user_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.navigation_edit:
-                break;
-            case R.id.navigation_sign_out:
-                listener.onSignOut();
-                AuthUI.getInstance().signOut(getContext());
-                break;
-        }
-        return true;
-    }
-
-
-    @Override
-    public void onDataReceived(CustomerInfoModel customerInfoModel) {
-        binding.setCustomer(customerInfoModel);
-    }
 }

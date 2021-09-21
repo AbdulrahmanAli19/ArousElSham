@@ -5,111 +5,145 @@
 
     <data>
 
+        <variable
+            name="address"
+            type="com.example.arouselsham.pojo.model.UserAddress" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/addressName"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Address Name" />
+            android:layout_margin="10dp"
+            app:cardCornerRadius="9dp">
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/addressName"
-            app:layout_constraintTop_toBottomOf="@+id/addressName">
-
-            <TextView
-                android:id="@+id/apartmentNumber"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp">
 
-                android:textSize="12sp"
-                tools:text="19, " />
+                <TextView
+                    android:id="@+id/addressName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Address Info"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/floorNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/addressName"
+                    app:layout_constraintTop_toBottomOf="@+id/addressName">
 
-                android:textSize="12sp"
-                tools:text="5, " />
+                    <TextView
+                        android:id="@+id/aptNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{address.aptNumber+`, `}"
+                        android:textSize="12sp"
+                        tools:text="19, " />
 
-            <TextView
-                android:id="@+id/buildingNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                    <TextView
+                        android:id="@+id/floorNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{address.floorNumber+`, `}"
+                        android:textSize="12sp"
+                        tools:text="5, " />
 
-                android:textSize="12sp"
-                tools:text="104, " />
+                    <TextView
+                        android:id="@+id/buildingNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{address.buildingNumber+`, `}"
+                        android:textSize="12sp"
+                        tools:text="104, " />
 
-            <TextView
-                android:id="@+id/streetName"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/streetName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{address.streetName+`, `}"
+                        android:textSize="12sp"
+                        tools:text="El-hanger, " />
 
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                tools:text="El-hanger, " />
+                    <TextView
+                        android:id="@+id/area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{address.area+`, `}"
+                        android:textSize="12sp"
+                        tools:text="Kattmeya, " />
 
-            <TextView
-                android:id="@+id/area"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/office"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{address.buildingType+`, `}"
+                        android:textSize="12sp"
+                        tools:text="office, " />
 
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                tools:text="Kattmeya, " />
-
-            <TextView
-                android:id="@+id/office"
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                tools:text="office, " />
-
-            <TextView
-                android:id="@+id/landmark"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                tools:text="landmark." />
+                    <TextView
+                        android:id="@+id/landmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{address.landMark}"
+                        android:textSize="12sp"
+                        tools:text="landmark." />
 
 
-        </LinearLayout>
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/mobile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout5"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-            tools:text="Mobile: (+20) 111 772 1727" />
+                <TextView
+                    android:id="@+id/mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="@{`Mobile: `+address.phoneNumber}"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+                    tools:text="Mobile: (+20) 111 772 1727" />
 
-        <TextView
-            android:id="@+id/landLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout5"
-            app:layout_constraintTop_toBottomOf="@+id/mobile"
-            tools:text="Land line: (+20) 27 57 5128" />
+                <TextView
+                    android:id="@+id/landLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="@{`Land line: `+address.landLineNumber}"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/mobile"
+                    tools:text="Land line: (+20) 27 57 5128" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/btnDelete"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:src="@drawable/delete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 </layout>

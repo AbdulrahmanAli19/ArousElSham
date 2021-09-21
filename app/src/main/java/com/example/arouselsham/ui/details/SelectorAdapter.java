@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
+import com.example.arouselsham.pojo.Sort;
 import com.example.arouselsham.pojo.model.maleModels.PriceOption;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class SelectorAdapter extends RecyclerView.Adapter<SelectorAdapter.Select
         this.mContext = mContext;
         this.list = priceOption;
         this.mOnClickListener = mOnClickListener;
+        Sort.bubbleSort(priceOption);
     }
 
     @NonNull

@@ -44,6 +44,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
         cartViewModel.getCartList().observe(getViewLifecycleOwner(), carts -> {
             adapter.setCart(carts);
             binding.setTotalPrice(0.0);
+            isListEmpty();
             getTotalPrice(carts);
         });
 
@@ -77,6 +78,13 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
         return root;
     }
 
+    private void isListEmpty() {
+        if (adapter.getItemCount() == 0)
+            binding.emptyList.setVisibility(View.VISIBLE);
+        else
+            binding.emptyList.setVisibility(View.GONE);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -85,14 +93,16 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
 
     @Override
     public void onItemClick(int position) {
-        NavDirections direction = CartFragmentDirections.actionNavigationOrdersToAddAddressFragment();
-        navController.navigate(direction);
+        ///TODO: go to deiteals fragment
+        /*NavDirections direction = CartFragmentDirections.actionNavigationOrdersToAddAddressFragment();
+        navController.navigate(direction);*/
     }
 
     @Override
     public void onRemoveItem(int position) {
         cartViewModel.removeOneCart(adapter.getCurrentCart(position));
         adapter.removeCartAt(position);
+        isListEmpty();
     }
 
     @Override

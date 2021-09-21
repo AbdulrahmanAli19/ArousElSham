@@ -21,6 +21,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private SettingsViewModel settingsViewModel;
     private NavController navController;
 
+    private SigningOutListener listener;
+
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
@@ -33,8 +35,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         binding.txtSelectedLanguage.setText(R.string.english);
         binding.accountInfo.setOnClickListener(this);
         binding.savedAddresses.setOnClickListener(this);
-        binding.changeEmail.setOnClickListener(this);
         binding.logout.setOnClickListener(this);
+        listener = (SigningOutListener) getActivity();
 
         return root;
     }
@@ -48,24 +50,16 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         NavDirections navDirections;
-        switch (v.getId()) {
-            case R.id.accountInfo:
-                navDirections = SettingsFragmentDirections.actionNavigationSettingsToAccountInfoFragment();
-                navController.navigate(navDirections);
-                break;
-            case R.id.changeEmail:
-                navDirections = SettingsFragmentDirections.actionNavigationSettingsToChangeEmailFragment();
-                navController.navigate(navDirections);
-                break;
-            case R.id.savedAddresses:
-                navDirections = SettingsFragmentDirections.actionNavigationSettingsToSavedAddressesFragment();
-                navController.navigate(navDirections);
-                break;
-            case R.id.logout:
-                AuthUI.getInstance().signOut(getContext());
-                break;
-
-
+        int id = v.getId();
+        if (id == R.id.accountInfo) {
+            navDirections = SettingsFragmentDirections.actionNavigationSettingsToAccountInfoFragment();
+            navController.navigate(navDirections);
+        } else if (id == R.id.savedAddresses) {
+            navDirections = SettingsFragmentDirections.actionNavigationSettingsToSavedAddressesFragment();
+            navController.navigate(navDirections);
+        } else if (id == R.id.logout) {
+            listener.onSignOut();
+            AuthUI.getInstance().signOut(getContext());
         }
     }
 }

@@ -39,14 +39,14 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
 
     private static final String TAG = "DetailsFragment";
 
-    private String selectedItem = Common.priceByOne;
+    private String selectedItem = Common.PRICE_BY_ONE;
     private DetailsViewModel detailsViewModel;
     private DetailsFragmentBinding binding;
     private Meal meal;
     private KeyValue prices;
     private SelectorAdapter selectorAdapter;
-    private List<PriceOption> priceOptions = new ArrayList<>();
 
+    private List<PriceOption> priceOptions = new ArrayList<>();
     private List<MenuTopping> selectedToppings = new ArrayList<>();
 
     public static DetailsFragment newInstance() {
@@ -102,7 +102,7 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
         binding.setMainPrice(prices.getValue().get(0));
         priceOptions.clear();
 
-        if (prices.getValue().size() > 0 && !prices.getKey().get(0).equals(Common.priceByOne)) {
+        if (prices.getValue().size() > 0 && !prices.getKey().get(0).equals(Common.PRICE_BY_ONE)) {
             for (int i = 0; i < prices.getValue().size(); i++) {
                 priceOptions.add(new PriceOption(prices.getKey().get(i),
                         prices.getValue().get(i)));
@@ -168,7 +168,7 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
                 Double price = (binding.getMainPrice() + binding.getToppingsPrice()) * binding.getNumberOfItems();
                 Cart cart;
 
-                if (meal.getPrice().get(Common.priceByOne) != null)
+                if (meal.getPrice().get(Common.PRICE_BY_ONE) != null)
                     cart = new Cart(meal.getId(), meal.getEnName(), price, binding.getNumberOfItems(),
                             meal.getImageUrl(), selectedToppings);
                 else

@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="@string/sign_in_with_google"
+            android:textColor="@color/black"
             app:icon="@drawable/googleg_standard_color_18" />
 
         <Button
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="@string/sign_in_with_phone"
+            android:textColor="@color/black"
             app:icon="@drawable/ic_baseline_local_phone_24" />
     </LinearLayout>
 
