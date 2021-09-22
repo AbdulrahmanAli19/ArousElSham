@@ -32,6 +32,10 @@ public class FavoriteFragment extends Fragment implements MealAdapter.OnItemClic
     private List<Favorite> favorites;
     private final List<Meal> meals = new ArrayList<>();
 
+    public static FavoriteFragment getInstance() {
+        return new FavoriteFragment();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         favoriteViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
         binding = FavoriteFragmentBinding.inflate(inflater, container, false);

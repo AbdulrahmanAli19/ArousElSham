@@ -30,6 +30,10 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
     private CartAdapter adapter;
     private NavController navController;
 
+    public static CartFragment getInstance() {
+        return new CartFragment();
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

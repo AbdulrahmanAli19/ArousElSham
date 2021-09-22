@@ -38,6 +38,10 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnItemCl
     private MenuSection section;
     private SharedPreferences.Editor prefEditor;
 
+    public static HomeFragment getInstance(){
+        return new HomeFragment();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         SharedPreferences preferences = getContext()

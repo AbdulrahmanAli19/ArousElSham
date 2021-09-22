@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.UserFragmentBinding;
+import com.example.arouselsham.ui.home.HomeFragment;
 
 public class OrdersFragment extends Fragment {
     private static final String TAG = "UserFragment";
@@ -25,6 +26,9 @@ public class OrdersFragment extends Fragment {
     private NavController navController;
     private OrdersViewModel ordersViewModel;
 
+    public static OrdersFragment getInstance(){
+        return new OrdersFragment();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
