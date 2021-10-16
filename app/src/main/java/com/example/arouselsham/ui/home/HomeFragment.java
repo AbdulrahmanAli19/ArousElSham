@@ -25,7 +25,7 @@ import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.HomeFragmentBinding;
 import com.example.arouselsham.pojo.db.entities.Menu;
 import com.example.arouselsham.pojo.db.entities.MenuTags;
-import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+import com.example.arouselsham.pojo.model.male.MenuSection;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -13,11 +13,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
-import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.FavoriteFragmentBinding;
 import com.example.arouselsham.pojo.db.entities.Favorite;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.model.male.Meal;
 import com.example.arouselsham.ui.section.MealAdapter;
 
 import java.util.ArrayList;
@@ -36,12 +34,14 @@ public class FavoriteFragment extends Fragment implements MealAdapter.OnItemClic
         return new FavoriteFragment();
     }
 
+    private MealAdapter adapter;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         favoriteViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
         binding = FavoriteFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        MealAdapter adapter = new MealAdapter(getContext(), this);
+        adapter = new MealAdapter(getContext(), this);
         binding.favoriteRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.favoriteRecyclerView.setAdapter(adapter);
 
@@ -55,16 +55,28 @@ public class FavoriteFragment extends Fragment implements MealAdapter.OnItemClic
                     e.printStackTrace();
                 }
                 adapter.setMeals(meals);
-                if (adapter.getItemCount() == 0) {
-                    binding.emptyList.setVisibility(View.VISIBLE);
-                } else {
-                    binding.emptyList.setVisibility(View.GONE);
-                }
+                showEmptyLayoutIdList0();
             }
         });
 
 
         return root;
+    }
+
+    private void showEmptyLayoutIdList0() {
+        if (adapter.getItemCount() == 0) {
+            binding.emptyList.setVisibility(View.VISIBLE);
+        } else {
+            binding.emptyList.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter.getItemCount() == 0)
+            binding.image.playAnimation();
+
     }
 
     @Override

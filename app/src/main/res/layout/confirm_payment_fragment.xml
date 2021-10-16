@@ -3,149 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <include
+            android:id="@+id/loading_layout"
+            layout="@layout/loading_snippet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true">
+            android:visibility="gone">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/address_item" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".ui.confirmPayment.ConfirmPaymentFragment">
-
-                <com.jaredrummler.materialspinner.MaterialSpinner
-                    android:id="@+id/paymentSpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="20dp"
-                    android:hint="Payment Method"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/addressInput"
-                    android:layout_width="0dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    app:layout_constraintEnd_toEndOf="@+id/paymentSpinner"
-                    app:layout_constraintStart_toStartOf="@+id/paymentSpinner"
-                    app:layout_constraintTop_toBottomOf="@+id/paymentSpinner"
-                    app:startIconDrawable="@drawable/address">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:inputType="textPostalAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phoneNumberInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-                    app:layout_constraintEnd_toEndOf="@+id/addressInput"
-                    app:layout_constraintStart_toStartOf="@+id/addressInput"
-                    app:layout_constraintTop_toBottomOf="@+id/addressInput"
-                    app:startIconDrawable="@drawable/phone">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Phone number"
-                        android:inputType="phone" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/personNameInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-                    app:layout_constraintEnd_toEndOf="@+id/phoneNumberInput"
-                    app:layout_constraintStart_toStartOf="@+id/phoneNumberInput"
-                    app:layout_constraintTop_toBottomOf="@+id/phoneNumberInput"
-                    app:startIconDrawable="@drawable/name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Name"
-                        android:inputType="textPersonName" />
-                </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/gold"
+                app:cardCornerRadius="9dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="49dp"
-                    android:text="Total (EGP)"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/personNameInput" />
-
-                <TextView
-                    android:id="@+id/txtShowDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Show details"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                    app:layout_constraintStart_toEndOf="@+id/textView6" />
-
-                <TextView
-                    android:id="@+id/totalPriceTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                    app:layout_constraintEnd_toEndOf="@+id/personNameInput"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/txtShowDetails"
-                    app:layout_constraintTop_toTopOf="@+id/textView6"
-                    tools:text="500 E£" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/confirmCard"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/gold"
-                    app:cardCornerRadius="9dp"
-                    app:layout_constraintEnd_toEndOf="@+id/personNameInput"
-                    app:layout_constraintTop_toBottomOf="@+id/totalPriceTxt">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:text="Confirm" />
-                </androidx.cardview.widget.CardView>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
-    </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Next" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

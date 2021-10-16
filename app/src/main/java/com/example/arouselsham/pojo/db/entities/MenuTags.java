@@ -3,7 +3,7 @@ package com.example.arouselsham.pojo.db.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+import com.example.arouselsham.pojo.model.male.MenuSection;
 
 @Entity(tableName = "menu_tags_table")
 public class MenuTags {

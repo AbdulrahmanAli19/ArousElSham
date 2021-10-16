@@ -1,8 +1,7 @@
-package com.example.arouselsham.pojo.model.addMeals;
+package com.example.arouselsham.pojo.utilities.addMeals;
 
-import com.example.arouselsham.R;
-import com.example.arouselsham.pojo.model.maleModels.MenuTags;
-import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
+import com.example.arouselsham.pojo.model.male.MenuTags;
+import com.example.arouselsham.pojo.model.male.MenuTopping;
 
 import java.util.ArrayList;
 import java.util.List;

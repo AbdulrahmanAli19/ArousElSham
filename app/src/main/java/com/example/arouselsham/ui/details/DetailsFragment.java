@@ -1,6 +1,5 @@
 package com.example.arouselsham.ui.details;
 
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,13 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.DetailsFragmentBinding;
-import com.example.arouselsham.pojo.Common;
+import com.example.arouselsham.pojo.utilities.Common;
 import com.example.arouselsham.pojo.db.entities.Cart;
 import com.example.arouselsham.pojo.db.entities.Favorite;
-import com.example.arouselsham.pojo.model.maleModels.KeyValue;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
-import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
-import com.example.arouselsham.pojo.model.maleModels.PriceOption;
+import com.example.arouselsham.pojo.model.male.KeyValue;
+import com.example.arouselsham.pojo.model.male.Meal;
+import com.example.arouselsham.pojo.model.male.MenuTopping;
+import com.example.arouselsham.pojo.model.male.PriceOption;
 import com.google.android.material.snackbar.Snackbar;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
@@ -32,7 +31,6 @@ import java.util.List;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.annotations.Nullable;
-
 
 public class DetailsFragment extends Fragment implements SelectorAdapter.ListItemClickListener,
         ToppingAdapter.ItemClickListener, OnLikeListener, View.OnClickListener {
@@ -119,11 +117,6 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
 
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
 
     @Override
     public void onItemClick(int position, double price) {
@@ -199,7 +192,6 @@ public class DetailsFragment extends Fragment implements SelectorAdapter.ListIte
                     break;
                 }
             }
-            return;
         });
         Favorite favorite = new Favorite(meal.getId());
         detailsViewModel.insertToFavorite(favorite);

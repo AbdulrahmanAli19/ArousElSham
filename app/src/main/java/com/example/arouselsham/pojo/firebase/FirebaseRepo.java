@@ -1,6 +1,6 @@
 package com.example.arouselsham.pojo.firebase;
 
-import static com.example.arouselsham.pojo.Common.CUSTOMER_INFO_REFERENCE;
+import static com.example.arouselsham.pojo.utilities.Common.CUSTOMER_INFO_REFERENCE;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.arouselsham.pojo.model.Customer;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
-import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+import com.example.arouselsham.pojo.model.male.Meal;
+import com.example.arouselsham.pojo.model.male.MenuSection;
 import com.example.arouselsham.ui.accountInfo.FirebaseInterface;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.database.DataSnapshot;

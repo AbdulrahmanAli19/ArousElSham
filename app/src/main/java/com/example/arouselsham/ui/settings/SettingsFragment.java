@@ -55,7 +55,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             navDirections = SettingsFragmentDirections.actionNavigationSettingsToAccountInfoFragment();
             navController.navigate(navDirections);
         } else if (id == R.id.savedAddresses) {
-            navDirections = SettingsFragmentDirections.actionNavigationSettingsToSavedAddressesFragment();
+            navDirections = SettingsFragmentDirections.actionNavigationSettingsToSavedAddressesFragment(false);
             navController.navigate(navDirections);
         } else if (id == R.id.logout) {
             listener.onSignOut();

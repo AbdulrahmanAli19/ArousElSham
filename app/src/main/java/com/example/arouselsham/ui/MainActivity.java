@@ -18,8 +18,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.ActivityMainBinding;
-import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.model.Customer;
+import com.example.arouselsham.pojo.utilities.Common;
 import com.example.arouselsham.ui.auth.AuthFragment;
 import com.example.arouselsham.ui.home.HomeFragment;
 import com.example.arouselsham.ui.register.Register;
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.SetV
         listener = myFirebase -> {
             FirebaseUser user = myFirebase.getCurrentUser();
             if (user != null) {
+                binding.frame.setVisibility(View.GONE);
                 FirebaseMessaging.getInstance().getToken()
                         .addOnSuccessListener(s -> {
                             Log.d(TAG, "init: onSuccess " + s);

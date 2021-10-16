@@ -1,6 +1,6 @@
-package com.example.arouselsham.pojo.model.maleModels;
+package com.example.arouselsham.pojo.model.male;
 
-import com.example.arouselsham.pojo.Common;
+import com.example.arouselsham.pojo.utilities.Common;
 
 public class PriceOption {
    private String option;

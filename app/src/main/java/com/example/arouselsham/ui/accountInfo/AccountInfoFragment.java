@@ -1,6 +1,6 @@
 package com.example.arouselsham.ui.accountInfo;
 
-import static com.example.arouselsham.pojo.Common.CUSTOMER_INFO_REFERENCE;
+import static com.example.arouselsham.pojo.utilities.Common.CUSTOMER_INFO_REFERENCE;
 import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
@@ -43,7 +43,6 @@ public class AccountInfoFragment extends Fragment implements FirebaseInterface {
 
 
     private AccountInfoViewModel accountInfoViewModel;
-    private NavController navController;
     private AccountInfoFragmentBinding binding;
 
     private FirebaseInterface firebaseInterface;
@@ -127,15 +126,11 @@ public class AccountInfoFragment extends Fragment implements FirebaseInterface {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        navController = Navigation.findNavController(view);
-    }
-
 
     @Override
     public void onDataReceived(Customer customer, DataSnapshot snapshot) {
+        binding.loadingScreen.setVisibility(View.GONE);
+        binding.linearUserInfo.setVisibility(View.VISIBLE);
         if (customer.getGender() != null)
             if (customer.getGender().contentEquals(binding.btnFemale.getText())) {
                 binding.btnFemale.setChecked(true);

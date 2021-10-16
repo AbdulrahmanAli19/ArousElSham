@@ -26,6 +26,10 @@ public class FavoriteRepository {
         new InsertAsyncTask(favoriteDao).execute(favorite);
     }
 
+    public void deleteById(String id) {
+        new DeleteByIdAsyncTask(favoriteDao).execute(id);
+    }
+
     public void delete(Favorite favorite) {
         new DeleteAsyncTask(favoriteDao).execute(favorite);
     }
@@ -45,6 +49,20 @@ public class FavoriteRepository {
         @Override
         protected Void doInBackground(Favorite... favorites) {
             favoriteDao.insert(favorites[0]);
+            return null;
+        }
+    }
+    private static class DeleteByIdAsyncTask extends AsyncTask<String, Void, Void> {
+
+        private FavoriteDao favoriteDao;
+
+        public DeleteByIdAsyncTask(FavoriteDao favoriteDao) {
+            this.favoriteDao = favoriteDao;
+        }
+
+        @Override
+        protected Void doInBackground(String... id) {
+            favoriteDao.deleteById(id[0]);
             return null;
         }
     }

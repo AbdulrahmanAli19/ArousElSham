@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
+import com.example.arouselsham.pojo.model.male.MenuTopping;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,12 +1,12 @@
-package com.example.arouselsham.pojo.model.addMeals;
+package com.example.arouselsham.pojo.utilities.addMeals;
 
 import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.arouselsham.pojo.Common;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.utilities.Common;
+import com.example.arouselsham.pojo.model.male.Meal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;

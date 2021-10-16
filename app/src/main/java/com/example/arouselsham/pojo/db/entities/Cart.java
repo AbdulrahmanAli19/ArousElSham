@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
+import com.example.arouselsham.pojo.model.male.MenuTopping;
 
 import java.util.List;
 

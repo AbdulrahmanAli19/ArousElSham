@@ -16,7 +16,7 @@
         <service
             android:name=".services.SaveToDataBaseService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
 
         <uses-library
             android:name="com.google.android.wearable"

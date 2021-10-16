@@ -2,9 +2,9 @@ package com.example.arouselsham.pojo.db;
 
 import androidx.room.TypeConverter;
 
-import com.example.arouselsham.pojo.model.maleModels.Meal;
-import com.example.arouselsham.pojo.model.maleModels.MenuTags;
-import com.example.arouselsham.pojo.model.maleModels.MenuTopping;
+import com.example.arouselsham.pojo.model.male.Meal;
+import com.example.arouselsham.pojo.model.male.MenuTags;
+import com.example.arouselsham.pojo.model.male.MenuTopping;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 

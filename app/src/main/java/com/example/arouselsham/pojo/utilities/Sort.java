@@ -1,6 +1,6 @@
-package com.example.arouselsham.pojo;
+package com.example.arouselsham.pojo.utilities;
 
-import com.example.arouselsham.pojo.model.maleModels.PriceOption;
+import com.example.arouselsham.pojo.model.male.PriceOption;
 
 import java.util.List;
 import java.util.Random;

@@ -48,7 +48,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
         cartViewModel.getCartList().observe(getViewLifecycleOwner(), carts -> {
             adapter.setCart(carts);
             binding.setTotalPrice(0.0);
-            isListEmpty();
+            showEmptyIfList0();
             getTotalPrice(carts);
         });
 
@@ -74,15 +74,16 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
         binding.cardProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections navDirections = CartFragmentDirections.actionNavigationOrdersToConfirmPaymentFragment();
+                NavDirections navDirections = CartFragmentDirections.actionNavigationCartToSavedAddressesFragment2(true);
                 navController.navigate(navDirections);
+                Toast.makeText(getContext(), "cli", Toast.LENGTH_SHORT).show();
             }
         });
 
         return root;
     }
 
-    private void isListEmpty() {
+    private void showEmptyIfList0() {
         if (adapter.getItemCount() == 0) {
             binding.emptyList.setVisibility(View.VISIBLE);
             binding.cardProceed.setVisibility(View.GONE);
@@ -92,6 +93,13 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
             binding.cardProceed.setVisibility(View.VISIBLE);
             binding.toatlPriceLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter.getItemCount() == 0)
+            binding.image.playAnimation();
     }
 
     @Override
@@ -111,7 +119,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnItemClickLis
     public void onRemoveItem(int position) {
         cartViewModel.removeOneCart(adapter.getCurrentCart(position));
         adapter.removeCartAt(position);
-        isListEmpty();
+        showEmptyIfList0();
     }
 
     @Override

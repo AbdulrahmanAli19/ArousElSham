@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.arouselsham.databinding.SectionFragmentBinding;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.model.male.Meal;
 
 import java.util.ArrayList;
 import java.util.List;

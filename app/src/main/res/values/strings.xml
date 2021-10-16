@@ -67,4 +67,16 @@
     <string name="email_null">Email can\'t be empty</string>
     <string name="add_address">Add address</string>
     <string name="cant_be_empty">this field can\'t be empty!</string>
+    <string name="estimated_time">Estimated time</string>
+    <string name="order_number">Order number</string>
+    <string name="order_placed">Order Placed</string>
+    <string name="we_have_placed_your_order">We have placed your order</string>
+    <string name="order_is_cooking">Order is cooking</string>
+    <string name="we_are_now_getting_your_order_ready">We are now getting your order ready</string>
+    <string name="order_is_delivering">Order is delivering</string>
+    <string name="your_order_is_ready_to_be_delivered">Your order is ready to be delivered</string>
+    <string name="previous_order_s">Previous order\'s</string>
+    <string name="cahs_on_delivery">Cash on delivery</string>
+    <string name="paypal">Paypal</string>
+    <string name="cradited_card">CreditedCard</string>
 </resources>

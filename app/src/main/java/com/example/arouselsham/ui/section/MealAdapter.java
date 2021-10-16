@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.pojo.Common;
-import com.example.arouselsham.pojo.model.maleModels.KeyValue;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.utilities.Common;
+import com.example.arouselsham.pojo.model.male.KeyValue;
+import com.example.arouselsham.pojo.model.male.Meal;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;

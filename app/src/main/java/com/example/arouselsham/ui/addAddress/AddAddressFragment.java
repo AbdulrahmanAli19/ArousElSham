@@ -1,12 +1,11 @@
 package com.example.arouselsham.ui.addAddress;
 
-import static com.example.arouselsham.pojo.Common.CUSTOMER_INFO_REFERENCE;
+import static com.example.arouselsham.pojo.utilities.Common.CUSTOMER_INFO_REFERENCE;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

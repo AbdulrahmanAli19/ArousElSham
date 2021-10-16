@@ -10,7 +10,7 @@ import com.example.arouselsham.pojo.db.entities.Favorite;
 import com.example.arouselsham.pojo.db.entities.Menu;
 import com.example.arouselsham.pojo.db.repositories.FavoriteRepository;
 import com.example.arouselsham.pojo.db.repositories.MenuRepository;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.model.male.Meal;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

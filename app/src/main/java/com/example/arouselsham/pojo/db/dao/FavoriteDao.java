@@ -19,6 +19,9 @@ public interface FavoriteDao {
     @Delete
     void delete(Favorite meal);
 
+    @Query("DELETE FROM favorite_table WHERE firebaseID = :id")
+    void deleteById(String id);
+
     @Query("SELECT * FROM favorite_table")
     LiveData<List<Favorite>> selectAll();
 

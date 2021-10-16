@@ -19,7 +19,7 @@
 
         <variable
             name="meal"
-            type="com.example.arouselsham.pojo.model.maleModels.Meal" />
+            type="com.example.arouselsham.pojo.model.male.Meal" />
     </data>
 
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"

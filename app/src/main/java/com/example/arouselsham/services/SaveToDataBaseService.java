@@ -7,7 +7,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.arouselsham.pojo.db.entities.MenuTags;
-import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+import com.example.arouselsham.pojo.model.male.MenuSection;
 
 public class SaveToDataBaseService extends IntentService {
 

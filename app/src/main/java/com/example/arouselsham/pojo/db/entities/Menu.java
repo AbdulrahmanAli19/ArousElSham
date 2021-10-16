@@ -5,8 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.arouselsham.pojo.model.maleModels.KeyValue;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
+import com.example.arouselsham.pojo.model.male.KeyValue;
+import com.example.arouselsham.pojo.model.male.Meal;
 
 @Entity(tableName = "menu_table")
 public class Menu {

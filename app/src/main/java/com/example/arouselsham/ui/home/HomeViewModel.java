@@ -11,8 +11,8 @@ import com.example.arouselsham.pojo.db.entities.MenuTags;
 import com.example.arouselsham.pojo.db.repositories.MenuRepository;
 import com.example.arouselsham.pojo.db.repositories.MenuTagsRepository;
 import com.example.arouselsham.pojo.firebase.FirebaseRepo;
-import com.example.arouselsham.pojo.model.maleModels.Meal;
-import com.example.arouselsham.pojo.model.maleModels.MenuSection;
+import com.example.arouselsham.pojo.model.male.Meal;
+import com.example.arouselsham.pojo.model.male.MenuSection;
 
 import java.util.List;
 

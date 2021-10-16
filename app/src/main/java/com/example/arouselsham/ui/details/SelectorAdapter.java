@@ -11,8 +11,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
-import com.example.arouselsham.pojo.Sort;
-import com.example.arouselsham.pojo.model.maleModels.PriceOption;
+import com.example.arouselsham.pojo.utilities.Sort;
+import com.example.arouselsham.pojo.model.male.PriceOption;
 
 import java.util.ArrayList;
 import java.util.List;

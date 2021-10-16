@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arouselsham.R;
 import com.example.arouselsham.databinding.CartRecyclerLayoutBinding;
-import com.example.arouselsham.pojo.Common;
 import com.example.arouselsham.pojo.db.entities.Cart;
 
 import java.util.ArrayList;

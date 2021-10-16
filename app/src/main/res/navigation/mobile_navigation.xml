@@ -73,7 +73,7 @@
         tools:layout="@layout/details_fragment">
         <argument
             android:name="meal"
-            app:argType="com.example.arouselsham.pojo.model.maleModels.Meal" />
+            app:argType="com.example.arouselsham.pojo.model.male.Meal" />
     </fragment>
 
     <fragment
@@ -129,19 +129,8 @@
         android:label="@string/title_cart"
         tools:layout="@layout/cart_fragment">
         <action
-            android:id="@+id/action_navigation_orders_to_addAddressFragment"
-            app:destination="@id/addAddressFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_navigation_orders_to_confirmPaymentFragment"
-            app:destination="@id/confirmPaymentFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_navigation_cart_to_savedAddressesFragment2"
+            app:destination="@id/savedAddressesFragment" />
     </fragment>
 
     <fragment
@@ -166,7 +155,15 @@
         android:id="@+id/confirmPaymentFragment"
         android:name="com.example.arouselsham.ui.confirmPayment.ConfirmPaymentFragment"
         android:label="Confirm Payment"
-        tools:layout="@layout/confirm_payment_fragment" />
+        tools:layout="@layout/confirm_payment_fragment">
+        <argument
+            android:name="order"
+            app:argType="com.example.arouselsham.pojo.model.Order"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/accountInfoFragment"
@@ -186,7 +183,37 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="isItSelectAddress"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_savedAddressesFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="com.example.arouselsham.ui.paymentMethod.PaymentMethodFragment"
+        android:label="PaymentMethodFragment"
+        tools:layout="@layout/payment_method_fragment">
+        <argument
+            android:name="order"
+            app:argType="com.example.arouselsham.pojo.model.Order"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_confirmPaymentFragment"
+            app:destination="@id/confirmPaymentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
